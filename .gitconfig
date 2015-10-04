@@ -1,0 +1,15 @@
+[user]
+	name = Roman Blanco
+[push]
+	default = simple
+[pull]
+  rebase = true
+[core]
+	excludesfile = /home/rblanco/.gitignore
+	editor = vim
+[alias]
+  fixup = "!HASH=$([ $1 ] && echo $1 || echo `git rev-parse HEAD`) && git commit --fixup=$HASH && EDITOR=: git rebase -i --autosquash $HASH~1 && echo"
+  ghpr = "!git fetch git://github.com/$1.git $2 && git checkout FETCH_HEAD && git checkout -b $2 -- && echo"
+  f = "!git fetch upstream && git checkout master && git merge upstream/master --ff-only"
+  fap = fetch --all --prune
+	unstage = reset HEAD --

@@ -1,0 +1,119 @@
+servers = (
+  {
+    address = "chat.freenode.net";
+    chatnet = "Freenode";
+    port = "6667";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.freenode.net";
+    chatnet = "Freenode";
+    port = "6667";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.twice-irc.de";
+    chatnet = "TwiceIRC";
+    port = "6667";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.gitter.im";
+    chatnet = "Gitter";
+    port = "6667";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.eng.brq.redhat.com";
+    chatnet = "RHAT";
+    port = "6667";
+  },
+  { 
+    address = "irc.devel.redhat.com";
+    chatnet = "RHAT";
+    port = "6667";
+  }
+);
+
+chatnets = {
+  Freenode = {
+    type = "IRC";
+    nick = "rblanco";
+    max_kicks = "1";
+    max_msgs = "4";
+    max_whois = "1";
+  };
+  TwiceIRC = {
+    type = "IRC";
+    nick = "rblanco";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+  RHAT = {
+    type = "IRC";
+    nick = "rblanco";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+  Gitter = {
+    type = "IRC";
+    nick = "romanblanco";
+    max_kicks = "1";
+    max_msgs = "3";
+    max_whois = "30";
+  };
+};
+
+channels = (
+  { name = "#manageiq"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#oh-my-zsh"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#i3"; chatnet = "TwiceIRC"; autojoin = "yes"; },
+  { name = "#cfme-brno"; chatnet = "RHAT"; autojoin = "yes"; },
+  { name = "#cfme-ui"; chatnet = "RHAT"; autojoin = "yes"; },
+  { name = "#cfme-eng"; chatnet = "RHAT"; autojoin = "yes"; },
+  { name = "#cloudforms"; chatnet = "RHAT"; autojoin = "yes"; },
+  { name = "#brno"; chatnet = "RHAT"; autojoin = "yes"; },
+  { name = "#brno-football"; chatnet = "RHAT"; autojoin = "yes"; },
+  { name = "#brno-volleyball"; chatnet = "RHAT"; autojoin = "yes"; },
+  { name = "#openttd.brq"; chatnet = "RHAT"; autojoin = "yes"; }
+);
+
+settings = {
+  core = {
+    real_name = "Roman Blanco";
+    user_name = "rblanco";
+    nick = "rblanco";
+  };
+  "fe-text" = { actlist_sort = "refnum"; term_force_colors = "yes"; };
+  "fe-common/core" = {
+    bell_beeps = "yes";
+    beep_when_away = "yes";
+    beep_when_window_active = "yes";
+    beep_msg_level = "HILIGHT INVITES MSGS NOTICES CTCPS DCC DCCMSGS";
+    autolog = "yes";
+  };
+  "perl/core/scripts" = { awl_shared_sbar = "OFF"; awl_viewer = "no"; };
+};
+
+aliases = {
+  W = "window";
+  WC = "window close";
+  WA = "window goto active";
+  Q = "QUERY";
+};
+
+hilights = ( { text = "roman"; nick = "yes"; word = "yes"; } );
+statusbar = {
+  default = {
+    awl_0 = {
+      items = {
+        barstart = { priority = "100"; };
+        awl_0 = { };
+        barend = { priority = "100"; alignment = "right"; };
+      };
+    };
+  };
+};
+logs = { };

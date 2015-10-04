@@ -1,0 +1,5 @@
+# /
+.ssh/
+.vim/
+.ruby-version
+devel/manageiq/config/environments/development.rb
