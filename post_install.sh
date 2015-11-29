@@ -52,9 +52,6 @@ HOME=/home/$USER_NAME
   chsh -s `which zsh` $USER_NAME
   usermod -s `which zsh` $USER_NAME
 
-# base16
-  git clone https://github.com/chriskempson/base16-shell.git .config/base16-shell
-
 # dotfiles
   cd etc
   FILES=("`ls -A`")

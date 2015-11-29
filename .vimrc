@@ -18,7 +18,6 @@
         NeoBundle 'tpope/vim-fugitive'
         NeoBundle 'rking/ag.vim'
         NeoBundle 'kshenoy/vim-signature'
-        NeoBundle 'chriskempson/base16-vim'
     call neobundle#end()
     filetype plugin indent on
     NeoBundleCheck
@@ -26,10 +25,6 @@
 
 " APPEARANCE {{{
     syntax enable
-    set background=dark
-    set cursorline
-    let base16colorspace=256
-    colorscheme base16-default
 " }}}
 
 " GENERAL {{{

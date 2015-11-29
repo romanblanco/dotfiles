@@ -6,9 +6,6 @@ plugins=(fedora git ruby rails rbenv gem bundler rake python pep8 pip tmux \
          sudo history zsh_reload)
 source $ZSH/oh-my-zsh.sh
 
-BASE16_SHELL="$HOME/.config/base16-shell/base16-default.dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
 extract () {
   if [ -f $1 ] ; then
     case $1 in
