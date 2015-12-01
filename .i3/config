@@ -151,7 +151,7 @@ bar {
         status_command i3status -c ~/.i3/status
         wheel_up_cmd nop
         wheel_down_cmd nop
-        tray_output primary
+        tray_output eDP1
 }
 
 #.......................
@@ -188,7 +188,6 @@ assign [class="URxvt" instance="^top$"] → 10
 #..........
 
 exec_always --no-startup-id setxkbmap -option ctrl:nocaps
-exec_always --no-startup-id xrandr --auto
 exec --no-startup-id xrdb -load $HOME/.Xresources
 exec --no-startup-id xsetroot -solid "#000000"
 exec --no-startup-id i3-sensible-terminal -name scratchpad
