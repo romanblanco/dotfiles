@@ -26,16 +26,16 @@ workspace 4 output DP2-3
 #.........
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+colon move right
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -62,13 +62,13 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # move focused workspace to monitor
-bindsym $sup+Shift+h move workspace to output left
-bindsym $sup+Shift+l move workspace to output right
+bindsym $sup+Shift+j move workspace to output left
+bindsym $sup+Shift+colon move workspace to output right
 
 # split and fullscreen
-bindsym $mod+g split h
+bindsym $mod+h split h
 bindsym $mod+v split v
-bindsym $mod+f fullscreen
+bindsym $mod+f fullscreen toggle
 
 # change container layout
 bindsym $mod+s layout stacking
@@ -93,10 +93,10 @@ bindsym $mod+q focus child
 # resize window
 bindsym $mod+r mode "resize"
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
