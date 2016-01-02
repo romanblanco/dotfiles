@@ -1,10 +1,5 @@
-ZSH=$HOME/.oh-my-zsh
-UPDATE_ZSH_DAYS=14
-HIST_STAMPS="dd.mm.yyyy"
-ZSH_THEME="lambda"
-plugins=(fedora git ruby rails rbenv gem bundler rake python pep8 pip tmux \
-         sudo history zsh_reload)
-source $ZSH/oh-my-zsh.sh
+source $HOME/.git-prompt.sh
+PS1='\w/$(__git_ps1 " \e[0;32m%s\e[0m") '
 
 extract () {
   if [ -f $1 ] ; then

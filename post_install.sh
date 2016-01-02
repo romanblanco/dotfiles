@@ -17,7 +17,7 @@ HOME=/home/$USER_NAME
     ctags \
     gcc gcc-c++ cmake make \
     tar unzip p7zip ncompress \
-    htop zsh alsa-utils alsa-lib sudo scrot the_silver_searcher curl wget tmux \
+    htop alsa-utils alsa-lib sudo scrot the_silver_searcher curl wget tmux \
     mesa-vdpau-drivers xbacklight redshift i3 i3status i3lock rxvt-unicode-256color \
     network-manager-applet \
     python python3 python-devel python-pip python3-pip \
@@ -47,11 +47,6 @@ HOME=/home/$USER_NAME
   git clone https://github.com/sstephenson/rbenv.git .rbenv
   git clone https://github.com/sstephenson/ruby-build.git .rbenv/plugins/ruby-build
 
-# zsh and oh-my-zsh
-  git clone git://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh
-  chsh -s `which zsh` $USER_NAME
-  usermod -s `which zsh` $USER_NAME
-
 # dotfiles
   cd etc
   FILES=("`ls -A`")
@@ -65,6 +60,10 @@ HOME=/home/$USER_NAME
     fi
   done
   cd ..
+
+# git-prompt
+  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > .git-prompt.sh
+  chmod +x .git-prompt.sh
 
 # neobundle
   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
