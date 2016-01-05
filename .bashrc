@@ -1,5 +1,5 @@
 source $HOME/.git-prompt.sh
-PS1='\w/$(__git_ps1 " \e[0;32m%s\e[0m") '
+PS1='\w/$(__git_ps1 " \[\e[0;32m\]%s\[\e[0m\]") '
 
 extract () {
   if [ -f $1 ] ; then
