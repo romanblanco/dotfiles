@@ -19,6 +19,7 @@ URxvt.url-launcher: firefox
 
 URxvt*scrollBar: false
 URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer: true
 URxvt*scrollTtyKeypress: true
 URxvt*secondaryScroll: true
 URxvt*saveLines: 65535
@@ -26,5 +27,5 @@ URxvt*saveLines: 65535
 ! colors
 
 *.foreground:  #d8d8d8
-*.background:  #181818
+*.background:  #000000
 *.cursorColor: #d8d8d8

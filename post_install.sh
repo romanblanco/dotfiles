@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# TODO:
-  # install spotify
-
 # install:
 #   $ git clone https://github.com/romanblanco/dotfiles.git etc
 #   $ sudo etc/post_install.sh
@@ -25,23 +22,16 @@ HOME=/home/$USER_NAME
     fuse fuse-ntfs-3g dkms gparted \
     texlive-collection-langczechslovak texlive texlive-latex texlive-xetex texlive-graphicx-psmin ImageMagick \
     kernel-modules-extra \
-    gimp
 
-# rpmfusion repo, copr
+# rpmfusion repo, copr, etc
   dnf -y install dnf-plugins-core
   dnf -y install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
                               http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install unrar steam vlc
   dnf -y copr enable rommon/telegram
   dnf -y install telegram-desktop
-
-# python packages
-  pip install livestreamer
-  pip install pep8
-
-# ruby packages
-  gem install 'pry'
-  gem install 'pry-byebug'
+  dnf config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
+  dnf install spotify-client
 
 # rbenv
   git clone https://github.com/sstephenson/rbenv.git .rbenv
@@ -70,9 +60,9 @@ HOME=/home/$USER_NAME
   vim +NeoBundleInstall +qall
 
 rm -r Desktop Documents Music Pictures Public Templates Videos
-mkdir tmp bin devel
+mkdir tmp devel
 
-chown $USER_NAME:$USER_NAME -R etc tmp bin devel .*
+chown $USER_NAME:$USER_NAME -R etc tmp devel .*
 chmod 600 .ssh/config
 
 git config --global core.excludesfile .gitignore

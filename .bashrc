@@ -40,5 +40,8 @@ reload_monitor_configuration () {
 alias diff='diff -s'
 alias df='df -h'
 alias cal='cal -m -3'
+alias grep='grep --color=auto'
+alias egrep='egrep --color'
+alias ls='ls --color'
 
 eval "$(rbenv init -)"

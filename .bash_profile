@@ -13,6 +13,7 @@ export PATH
 export TERM=rxvt-unicode-256color
 export TERMINAL=urxvt256c
 export HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoredups
 export PROMPT_COMMAND='history -a'
 export PAGER='less'
 export EDITOR='vim'
@@ -25,3 +26,5 @@ ssh_files=(~/.ssh/*)
 for identification in ${ssh_files[@]} ; do
   ssh-add ${identification%.*} &> /dev/null
 done
+
+source $HOME/.bashrc

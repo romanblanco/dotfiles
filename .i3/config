@@ -50,6 +50,7 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+bindsym $mod+b workspace back_and_forth
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -140,6 +141,7 @@ bindsym $sup+Right exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 bindsym Print exec scrot -e 'mv $f ~/tmp/'
+bindsym Shift+Print exec scrot -s -e 'mv $f ~/tmp/'
 
 # other
 bindsym XF86Tools exec gnome-control-center
@@ -153,7 +155,7 @@ bar {
         status_command i3status -c ~/.i3/status
         wheel_up_cmd nop
         wheel_down_cmd nop
-        tray_output eDP1
+        tray_output primary
 }
 
 #.......................
@@ -195,5 +197,5 @@ exec --no-startup-id xsetroot -solid "#000000"
 exec --no-startup-id i3-sensible-terminal -name scratchpad
 exec --no-startup-id nm-applet
 exec --no-startup-id redshift -l 49.2:16.6
-exec telegram -startintray
-exec i3-sensible-terminal -name top -e htop +t
+exec --no-startup-id telegram -startintray
+exec --no-startup-id i3-sensible-terminal -name top -e htop +t

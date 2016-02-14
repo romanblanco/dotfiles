@@ -25,12 +25,15 @@
 
 " APPEARANCE {{{
     syntax enable
+    colorscheme ron
+    set colorcolumn=79
 " }}}
 
 " GENERAL {{{
     set encoding=utf-8
     set fileencodings=utf-8,latin2
     set lazyredraw
+    set mouse=
     set number
     set laststatus=2
     set ruler
@@ -70,14 +73,12 @@
     map <silent><leader><space> :nohlsearch<CR>
     map <silent><C-t> :NERDTreeToggle<CR>
     map <silent><C-g> :TagbarToggle<CR>
-    map <C-h> <C-w>h
-    map <C-j> <C-w>j
-    map <C-k> <C-w>k
-    map <C-l> <C-w>l
     inoremap jj <ESC>
 " }}}
 
 " PLUGINS {{{
+    " Remove whitespaces on save
+    autocmd BufWritePre * :%s/\s\+$//e
     " Remember last position in file
     :au BufReadPost * if line("'\"") > 0 | if line("'\"") <= line("$") | exe("norm '\"") | else | exe("norm $") | endif | endif
     " Exit window with NerdTree after closing last file
