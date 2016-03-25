@@ -1,5 +1,16 @@
-source $HOME/.git-prompt.sh
-PS1='\w/$(__git_ps1 " \[\e[0;32m\]%s\[\e[0m\]") '
+shopt -s checkwinsize
+[ -z "$PS1" ] && return
+[ -f $HOME/.git-prompt.sh ] && source $HOME/.git-prompt.sh
+
+__prompt_command () {
+  local EXIT="$?"
+  if [ $EXIT != 0 ] ; then
+    PS1="\[\e[0;31m\]•\[\e[0m\] "
+  else
+    PS1="\[\e[0;32m\]•\[\e[0m\] "
+  fi
+  PS1+='\w/$(__git_ps1 " \[\e[0;32m\]%s\[\e[0m\]") '
+}
 
 extract () {
   if [ -f $1 ] ; then
