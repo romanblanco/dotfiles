@@ -51,9 +51,11 @@ HOME=/home/$USER_NAME
   done
   cd ..
 
-# git-prompt
-  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh > .git-prompt.sh
+# git-prompt and completion
+  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o .git-prompt.sh
+  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o .git-completion.bash
   chmod +x .git-prompt.sh
+  chmod +x .git-completion.bash
 
 # neobundle
   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh

@@ -1,5 +1,6 @@
 shopt -s checkwinsize
 [ -z "$PS1" ] && return
+[ -f $HOME/.git-completion.bash ] && source $HOME/.git-completion.bash
 [ -f $HOME/.git-prompt.sh ] && source $HOME/.git-prompt.sh
 
 __prompt_command () {
