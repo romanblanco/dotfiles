@@ -12,23 +12,11 @@ servers = (
     autoconnect = "yes";
   },
   {
-    address = "irc.twice-irc.de";
-    chatnet = "TwiceIRC";
-    port = "6667";
-    autoconnect = "yes";
-  },
-  {
-    address = "irc.gitter.im";
-    chatnet = "Gitter";
-    port = "6667";
-    autoconnect = "yes";
-  },
-  {
     address = "irc.eng.brq.redhat.com";
     chatnet = "RHAT";
     port = "6667";
   },
-  { 
+  {
     address = "irc.devel.redhat.com";
     chatnet = "RHAT";
     port = "6667";
@@ -43,23 +31,9 @@ chatnets = {
     max_msgs = "4";
     max_whois = "1";
   };
-  TwiceIRC = {
-    type = "IRC";
-    nick = "rblanco";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
   RHAT = {
     type = "IRC";
     nick = "rblanco";
-    max_kicks = "1";
-    max_msgs = "3";
-    max_whois = "30";
-  };
-  Gitter = {
-    type = "IRC";
-    nick = "romanblanco";
     max_kicks = "1";
     max_msgs = "3";
     max_whois = "30";
@@ -68,8 +42,7 @@ chatnets = {
 
 channels = (
   { name = "#manageiq"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#oh-my-zsh"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#i3"; chatnet = "TwiceIRC"; autojoin = "yes"; },
+  { name = "#patternfly"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#cfme-brno"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#cfme-ui"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#cfme-eng"; chatnet = "RHAT"; autojoin = "yes"; },
@@ -77,6 +50,7 @@ channels = (
   { name = "#brno"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#brno-football"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#brno-volleyball"; chatnet = "RHAT"; autojoin = "yes"; },
+  { name = "#brno-TPB"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#openttd.brq"; chatnet = "RHAT"; autojoin = "yes"; }
 );
 
@@ -94,7 +68,6 @@ settings = {
     beep_msg_level = "HILIGHT INVITES MSGS NOTICES CTCPS DCC DCCMSGS";
     autolog = "yes";
   };
-  "perl/core/scripts" = { awl_shared_sbar = "OFF"; awl_viewer = "no"; };
 };
 
 aliases = {
@@ -104,16 +77,9 @@ aliases = {
   Q = "QUERY";
 };
 
-hilights = ( { text = "roman"; nick = "yes"; word = "yes"; } );
-statusbar = {
-  default = {
-    awl_0 = {
-      items = {
-        barstart = { priority = "100"; };
-        awl_0 = { };
-        barend = { priority = "100"; alignment = "right"; };
-      };
-    };
-  };
-};
+hilights = (
+  { text = "roman"; nick = "yes"; word = "yes"; }
+  { text = "blanco"; nick = "yes"; word = "yes"; }
+  { text = "rblanco"; nick = "yes"; word = "yes"; }
+);
 logs = { };
