@@ -21,6 +21,7 @@ HOME=/home/$USER_NAME
     ruby gem \
     fuse fuse-ntfs-3g dkms gparted \
     texlive-collection-langczechslovak texlive texlive-latex texlive-xetex texlive-graphicx-psmin ImageMagick \
+    texlive-blindtext texlive-appendix \
     kernel-modules-extra \
 
 # rpmfusion repo, copr, etc
