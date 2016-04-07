@@ -20,9 +20,9 @@ export BROWSER='firefox'
 export LANG=en_US.UTF-8
 export HISTCONTROL=ignoreboth
 export HISTCONTROL=ignoredups
+export HISTSIZE=-1
+export HISTFILESIZE=-1
 export PROMPT_COMMAND=__prompt_command
-unset HISTSIZE
-unset HISTFILESIZE
 shopt -s histappend
 
 eval `ssh-agent -s` &> /dev/null
