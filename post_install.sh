@@ -62,6 +62,13 @@ HOME=/home/$USER_NAME
   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
   vim +NeoBundleInstall +qall
 
+# font
+  wget https://github.com/andreberg/Meslo-Font/blob/master/dist/v1.2.1/Meslo%20LG%20DZ%20v1.2.1.zip?raw=true -O fonts.zip
+  unzip fonts.zip -d fonts
+  mkdir .fonts
+  mv fonts/Meslo\ LG\ DZ\ v1.2.1/MesloLGSDZ-Regular.ttf .fonts
+  rm -fr fonts fonts.zip
+
 rm -r Desktop Documents Music Pictures Public Templates Videos
 mkdir tmp devel
 
