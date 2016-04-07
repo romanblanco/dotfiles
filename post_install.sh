@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# install:
-#   $ git clone https://github.com/romanblanco/dotfiles.git etc
-#   $ sudo etc/post_install.sh
-
 USER_NAME=`who | awk '{print $1}'`
 HOME=/home/$USER_NAME
 
