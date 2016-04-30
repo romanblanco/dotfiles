@@ -4,6 +4,7 @@ if defined?(PryByebug)
   Pry.commands.alias_command 'n', 'next'
   Pry.commands.alias_command 'f', 'finish'
   Pry.commands.alias_command "@", "whereami"
+  Pry.commands.alias_command "#", "show-source"
 end
 
 # TODO: Pry.config.commands.alias_command 'caller', 'caller.select { |path| path if path !~ /\.rbenv/ }'
