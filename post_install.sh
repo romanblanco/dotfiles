@@ -7,7 +7,7 @@ HOME=/home/$USER_NAME
   dnf -y check-update
   dnf -y upgrade
   dnf -y install \
-    ctags \
+    vim ctags \
     gcc gcc-c++ cmake make \
     tar unzip p7zip ncompress \
     htop alsa-utils alsa-lib sudo scrot the_silver_searcher curl wget tmux \
@@ -24,20 +24,21 @@ HOME=/home/$USER_NAME
   dnf -y install dnf-plugins-core
   dnf -y install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
                               http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-  dnf -y install unrar steam vlc
+  dnf -y install vlc
   dnf -y copr enable rommon/telegram
   dnf -y install telegram-desktop
-  dnf config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
-  dnf install spotify-client
+  dnf -y config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
+  dnf -y install spotify-client
 
 # rbenv
   git clone https://github.com/sstephenson/rbenv.git .rbenv
   git clone https://github.com/sstephenson/ruby-build.git .rbenv/plugins/ruby-build
 
 # dotfiles
+  rm .ssh -r
   cd etc
   FILES=("`ls -A`")
-  IGNORED=(".git" ".gitignore" "`basename $0`")
+  IGNORED=(".git" ".gitignore" "screenshot.png" "README.md" "LICENSE" "`basename $0`")
   for file in ${FILES[@]/$IGNORED} ; do
     ln -s `pwd`/$file ../$file &> /dev/null
     if [[ $? -ne 0 ]]
