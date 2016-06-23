@@ -124,7 +124,7 @@ bindsym $mod+grave [instance="scratchpad"] scratchpad show
 bindsym $sup+l exec i3lock -d -c 000000
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -fn '-*terminus-medium-*-normal--14-*-*-*-*-*-*-*' -nb '#2D2D2D' -nf '#888888' -sb '#285577' -sf '#DEDEDE' -i"
+bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -fn 'MesloLGSDZ-9' -nb '#2D2D2D' -nf '#888888' -sb '#285577' -sf '#DEDEDE' -i"
 
 # audio
 bindsym $sup+Up exec amixer set Master 10%+ unmute
