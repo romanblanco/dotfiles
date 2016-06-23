@@ -145,7 +145,7 @@ bindsym Shift+Print exec scrot -s -e 'mv $f ~/tmp/'
 
 # other
 bindsym XF86Tools exec gnome-control-center
-bindsym XF86Explorer exec i3-sensible-terminal -e ranger
+bindsym XF86Explorer exec nautilus
 
 #...........
 # Status bar
