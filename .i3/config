@@ -176,13 +176,13 @@ for_window [class="Spotify"] border none
 assign [class="Firefox"] → 1
 assign [class="Skype"] → 2
 assign [class="(?i)telegram"] → 2
-assign [class="Vlc"] → 5
+assign [class="(?i)vlc"] → 5
 assign [class="Evince"] → 5
 assign [class="Transmission"] → 5
 assign [class="(?i)libreoffice*"] → 5
 assign [class="Gimp"] → 5
 assign [class="Steam"] → 5
-assign [class="Spotify"] → 5
+assign [class="(?i)Spotify"] → 5
 assign [class="^(?i)google-chrome*" window_role="browser"] → 8
 assign [class="^(?i)google-chrome*" window_role="pop-up" ] → 9
 assign [class="URxvt" instance="^top$"] → 10
