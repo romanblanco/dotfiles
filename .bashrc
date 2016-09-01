@@ -47,16 +47,17 @@ manageiq () {
   tmux -2 attach-session -t manageiq
 }
 
-reload_monitor_configuration () {
+dock_toggle () {
   local dp2_1="`xrandr | grep '^DP2-1 connected'`"
   local dp2_2="`xrandr | grep '^DP2-2 connected'`"
   if [ -z "$dp2_1" ] && [ -z "$dp2_2" ] ; then
-    xrandr --output `xrandr | sed -n 2p | cut -f1 -d$' '` --auto --primary
+    xrandr --auto --output eDP1 --primary
   else
-    xrandr --output eDP1 --auto \
-           --output DP2-1 --auto --rotation left --right-of eDP1 --primary \
-           --output DP2-2 --auto --rotation left --right-of DP2-1
+    xrandr --output eDP1  --crtc 0 --auto --rotation normal \
+           --output DP2-1 --crtc 1 --auto --rotation left --right-of eDP1 --primary \
+           --output DP2-2 --crtc 2 --auto --rotation left --right-of DP2-1
   fi
+  setxkbmap -option ctrl:nocaps
 }
 
 alias diff='diff -s'
