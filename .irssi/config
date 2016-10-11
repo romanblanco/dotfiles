@@ -41,17 +41,11 @@ chatnets = {
 };
 
 channels = (
-  { name = "#manageiq"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#patternfly"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#cfme-brno"; chatnet = "RHAT"; autojoin = "yes"; },
-  { name = "#cfme-ui"; chatnet = "RHAT"; autojoin = "yes"; },
-  { name = "#cfme-eng"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#cloudforms"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#brno"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#brno-football"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#brno-volleyball"; chatnet = "RHAT"; autojoin = "yes"; },
-  { name = "#brno-TPB"; chatnet = "RHAT"; autojoin = "yes"; },
-  { name = "#openttd.brq"; chatnet = "RHAT"; autojoin = "yes"; }
 );
 
 settings = {
