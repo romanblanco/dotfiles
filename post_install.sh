@@ -19,14 +19,16 @@ HOME=/home/$USER_NAME
     texlive-collection-langczechslovak texlive texlive-latex texlive-xetex texlive-graphicx-psmin ImageMagick \
     texlive-blindtext texlive-appendix \
     kernel-modules-extra \
-
-# rpmfusion repo, copr, etc
+  # rpmfusion repo (vlc, steam)
   dnf -y install dnf-plugins-core
   dnf -y install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
                               http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install vlc
+  # copr repo (telegram, xrectsel)
   dnf -y copr enable rommon/telegram
-  dnf -y install telegram-desktop
+  dnf -y copr enable stbenjam/xrectsel
+  dnf -y install xrectsel byzanz telegram-desktop
+  # negativo17 repo (spotify)
   dnf -y config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
   dnf -y install spotify-client
 
