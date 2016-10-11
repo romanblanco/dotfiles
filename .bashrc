@@ -47,20 +47,7 @@ manageiq () {
   tmux -2 attach-session -t manageiq
 }
 
-dock_toggle () {
-  local dp2_1="`xrandr | grep '^DP2-1 connected'`"
-  local dp2_2="`xrandr | grep '^DP2-2 connected'`"
-  if [ -z "$dp2_1" ] && [ -z "$dp2_2" ] ; then
-    xrandr --auto --output eDP1 --primary
-  else
-    xrandr --output eDP1  --crtc 0 --auto --rotation normal \
-           --output DP2-1 --crtc 1 --auto --rotation left --right-of eDP1 --primary \
-           --output DP2-2 --crtc 2 --auto --rotation left --right-of DP2-1
-  fi
-  setxkbmap -option ctrl:nocaps
-}
-
-alias diff='diff -s'
+alias diff='diff -s -u --color'
 alias df='df -h'
 alias cal='cal -m -3'
 alias grep='grep --color=auto'

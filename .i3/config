@@ -14,9 +14,9 @@ floating_modifier $mod
 # Workspace screens
 #..................
 
-workspace 8 output eDP1
-workspace 1 output DP2-1
 workspace 3 output DP2-1
+workspace 8 output DP2-1
+workspace 1 output DP2-2
 workspace 2 output DP2-2
 workspace 4 output DP2-2
 workspace 5 output DP2-2
@@ -60,7 +60,7 @@ bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
+
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
@@ -100,6 +100,15 @@ mode "resize" {
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
         bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# dock toggle
+bindsym $mod+m mode "dock toggle: (d)ock (u)ndock"
+mode "dock toggle: (d)ock (u)ndock" {
+        bindsym d exec xrandr --output eDP1  --crtc 0 --off --output DP2-1 --crtc 1 --auto --rotation left --right-of eDP1 --primary --output DP2-2 --crtc 2 --auto --rotation left --right-of DP2-1, mode "default"
+        bindsym u exec xrandr --auto, mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
