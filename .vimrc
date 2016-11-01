@@ -18,6 +18,7 @@
         NeoBundle 'tpope/vim-fugitive'
         NeoBundle 'rking/ag.vim'
         NeoBundle 'kshenoy/vim-signature'
+        NeoBundle 'sjl/gundo.vim'
     call neobundle#end()
     filetype plugin indent on
     NeoBundleCheck
@@ -74,9 +75,11 @@
     map <silent><C-t> :NERDTreeToggle<CR>
     map <silent><C-g> :TagbarToggle<CR>
     inoremap jj <ESC>
+    nnoremap <silent><leader>u :GundoToggle<CR>
 " }}}
 
 " PLUGINS {{{
+    let g:gundo_preview_bottom=1
     " Remove whitespaces on save
     autocmd BufWritePre * :%s/\s\+$//e
     " Remember last position in file
