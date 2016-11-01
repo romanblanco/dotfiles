@@ -7,14 +7,14 @@ HOME=/home/$USER_NAME
   dnf -y check-update
   dnf -y upgrade
   dnf -y install \
-    vim ctags \
+    vim ctags tig \
     gcc gcc-c++ cmake make \
     tar unzip p7zip ncompress \
     htop alsa-utils alsa-lib sudo scrot the_silver_searcher curl wget tmux \
     mesa-vdpau-drivers xbacklight redshift i3 i3status i3lock rxvt-unicode-256color \
     network-manager-applet \
     python python3 python-devel python-pip python3-pip \
-    ruby gem \
+    ruby gem openssl-devel readline-devel zlib-devel \
     fuse fuse-ntfs-3g dkms gparted \
     texlive-collection-langczechslovak texlive texlive-latex texlive-xetex texlive-graphicx-psmin ImageMagick \
     texlive-blindtext texlive-appendix \
