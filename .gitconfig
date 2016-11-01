@@ -9,6 +9,5 @@
 	filemode = false
 	editor = vim
 [alias]
-	fixup = "!HASH=$([ $1 ] && echo $1 || echo `git rev-parse HEAD`) && git commit --fixup=$HASH && EDITOR=: git rebase -i --autosquash $HASH~1 && echo"
 	ghpr = "!git fetch upstream pull/$1/head && git checkout FETCH_HEAD && git checkout -b pr$1 -- && echo"
 	f = "!git fetch --all --prune && git checkout master && git merge upstream/master --ff-only && git push && echo 'flush_all' | nc localhost 11211"
