@@ -149,8 +149,7 @@ bindsym $sup+Left exec xbacklight -dec 10
 bindsym $sup+Right exec xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym Print exec scrot -e 'mv $f ~/tmp/'
-bindsym Shift+Print exec scrot -s -e 'mv $f ~/tmp/'
+bindsym Print exec gnome-screenshot -i
 
 # other
 bindsym XF86Tools exec gnome-control-center

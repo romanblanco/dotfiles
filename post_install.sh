@@ -10,7 +10,7 @@ HOME=/home/$USER_NAME
     vim ctags tig \
     gcc gcc-c++ cmake make \
     tar unzip p7zip ncompress \
-    htop alsa-utils alsa-lib sudo scrot the_silver_searcher curl wget tmux \
+    htop alsa-utils alsa-lib sudo the_silver_searcher curl wget tmux \
     mesa-vdpau-drivers xbacklight redshift i3 i3status i3lock rxvt-unicode-256color \
     network-manager-applet \
     python python3 python-devel python-pip python3-pip \
