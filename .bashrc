@@ -42,6 +42,7 @@ manageiq () {
   tmux new-window  -t manageiq:2 -n worker    'cd ~/devel/manageiq; bash -i '
   tmux new-window  -t manageiq:3 -n console   'cd ~/devel/manageiq; bash -i'
   tmux new-window  -t manageiq:4 -n ssui      'cd ~/devel/manageiq-ui-service; bash -i'
+  tmux new-window  -t manageiq:5 -n master    'cd ~/devel/manageiq-master; bash -i'
 
   tmux select-window -t manageiq:1
   tmux -2 attach-session -t manageiq
