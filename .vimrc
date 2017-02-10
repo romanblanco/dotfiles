@@ -19,6 +19,7 @@
         NeoBundle 'rking/ag.vim'
         NeoBundle 'kshenoy/vim-signature'
         NeoBundle 'sjl/gundo.vim'
+        NeoBundle 'HerringtonDarkholme/yats.vim'
     call neobundle#end()
     filetype plugin indent on
     NeoBundleCheck
