@@ -58,7 +58,7 @@ code () {
   tmux -2 attach-session -t code
 }
 
-alias diff='diff -s -u --color'
+alias diff='diff -s -u'
 alias df='df -h'
 alias cal='cal -m -3'
 alias grep='grep --color=auto'
