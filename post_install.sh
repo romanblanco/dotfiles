@@ -36,6 +36,10 @@ HOME=/home/$USER_NAME
   git clone https://github.com/sstephenson/rbenv.git .rbenv
   git clone https://github.com/sstephenson/ruby-build.git .rbenv/plugins/ruby-build
 
+# fzf
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  $HOME/.fzf/install
+
 # dotfiles
   rm .ssh -r
   cd etc

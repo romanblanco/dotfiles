@@ -38,7 +38,7 @@ extract () {
 }
 
 term () {
-  tmux new-session -s term   -n server -d 'cd ~/devel/manageiq; bash -i'
+  tmux -2 new-session -s term   -n server -d 'cd ~/devel/manageiq; bash -i'
   tmux new-window  -t term:2 -n worker    'cd ~/devel/manageiq; bash -i '
   tmux new-window  -t term:3 -n console   'cd ~/devel/manageiq; bash -i'
   tmux new-window  -t term:4 -n ssui      'cd ~/devel/manageiq-ui-service; bash -i'
@@ -49,7 +49,7 @@ term () {
 }
 
 code () {
-  tmux new-session -s code   -n manageiq -d 'cd ~/devel/manageiq; bash -i'
+  tmux -2 new-session -s code   -n manageiq -d 'cd ~/devel/manageiq; bash -i'
   tmux new-window  -t code:2 -n classic     'cd ~/devel/manageiq/plugins/manageiq-ui-classic; bash -i '
   tmux new-window  -t code:3 -n service     'cd ~/devel/manageiq-ui-service; bash -i'
   tmux new-window  -t code:4 -n components  'cd ~/devel/ui-components; bash -i'
@@ -66,3 +66,7 @@ alias egrep='egrep --color'
 alias ls='ls --color'
 
 eval "$(rbenv init -)"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+bind -x '"\C-g": vim $(fzf);'
