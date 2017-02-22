@@ -179,14 +179,16 @@ for_window [instance="scratchpad"] move scratchpad
 for_window [window_role="pop-up"] floating enable
 for_window [class="Nautilus"] floating enable border normal
 for_window [class="Firefox" window_role="browser"] border none layout tabbed
-for_window [class="^(?i)google-chrome*" window_role="browser"] border none layout tabbed
-for_window [class="^(?i)google-chrome*" window_role="pop-up" title="^Developer Tools - *"] floating disable
+for_window [class="*Developer Edition" window_role="browser"] border none layout tabbed
+for_window [class="*Developer Edition" window_role="toolbox" title="^Developer Tools - *"] border none floating disable
 for_window [class="(?i)telegram"] layout tabbed
 for_window [class="Skype"] layout tabbed
 for_window [class="Eog"] floating enable border normal
 for_window [class="Spotify"] border none
 for_window [class="(?i)bluejeans"] border none
 
+assign [class="*Developer Edition" window_role="browser"] → 8
+assign [class="*Developer Edition" window_role="toolbox" ] → 9
 assign [class="Firefox"] → 1
 assign [class="Skype"] → 2
 assign [class="(?i)telegram"] → 2
@@ -198,8 +200,6 @@ assign [class="Gimp"] → 5
 assign [class="Steam"] → 5
 assign [class="(?i)bluejeans"] → 5
 assign [class="(?i)Spotify"] → 5
-assign [class="^(?i)google-chrome*" window_role="browser"] → 8
-assign [class="^(?i)google-chrome*" window_role="pop-up" ] → 9
 assign [class="URxvt" instance="^top$"] → 10
 
 #..........
