@@ -20,6 +20,7 @@
         NeoBundle 'kshenoy/vim-signature'
         NeoBundle 'sjl/gundo.vim'
         NeoBundle 'HerringtonDarkholme/yats.vim'
+        NeoBundle 'morhetz/gruvbox'
     call neobundle#end()
     filetype plugin indent on
     NeoBundleCheck
@@ -27,7 +28,9 @@
 
 " APPEARANCE {{{
     syntax enable
-    colorscheme ron
+    colorscheme gruvbox
+    let g:gruvbox_contrast_dark='hard'
+    let g:gruvbox_italic=0
     set colorcolumn=79
 " }}}
 

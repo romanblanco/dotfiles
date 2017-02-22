@@ -13,7 +13,7 @@ PATH=$PATH:/usr/local/sbin
 PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/.rbenv/bin
 export PATH
-export TERM=rxvt-unicode-256color
+export TERM=screen-256color
 export TERMINAL=urxvt256c
 export PROMPT_COMMAND='history -a'
 export PAGER='less'
