@@ -1,3 +1,6 @@
+# do not blank screen after inactivity
+xset s off -dpms
+
 # user configuration
 
 PATH=""

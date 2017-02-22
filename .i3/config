@@ -132,7 +132,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 bindsym $mod+grave [instance="scratchpad"] scratchpad show
-bindsym $sup+l exec i3lock -d -c 000000 -I 5 -u
+bindsym $sup+l exec sleep 1 && xset dpms force off && i3lock -d -c 000000 -I 5 -u
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -fn 'MesloLGSDZ-9' -nb '#2D2D2D' -nf '#888888' -sb '#285577' -sf '#DEDEDE' -i"
