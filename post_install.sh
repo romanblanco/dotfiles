@@ -7,7 +7,7 @@ HOME=/home/$USER_NAME
   dnf -y check-update
   dnf -y upgrade
   dnf -y install \
-    vim ctags tig \
+    neovim ctags tig \
     gcc gcc-c++ cmake make \
     tar unzip p7zip ncompress \
     htop alsa-utils alsa-lib sudo the_silver_searcher curl wget tmux \
@@ -63,7 +63,7 @@ HOME=/home/$USER_NAME
 
 # neobundle
   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
-  vim +NeoBundleInstall +qall
+  nvim +NeoBundleInstall +qall
 
 # font
   wget https://github.com/andreberg/Meslo-Font/blob/master/dist/v1.2.1/Meslo%20LG%20DZ%20v1.2.1.zip?raw=true -O fonts.zip
@@ -79,6 +79,6 @@ chown $USER_NAME:$USER_NAME -R etc tmp devel .*
 chmod 600 .ssh/config
 
 git config --global core.excludesfile .gitignore
-git config --global core.editor vim
+git config --global core.editor nvim
 
 exit 0

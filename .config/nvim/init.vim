@@ -12,15 +12,14 @@
         NeoBundle 'majutsushi/tagbar'
         NeoBundle 'ciaranm/detectindent'
         NeoBundle 'airblade/vim-gitgutter'
-        NeoBundle 'scrooloose/nerdtree'
-        NeoBundle 'Xuyuanp/nerdtree-git-plugin'
         NeoBundle 'tpope/vim-git'
         NeoBundle 'tpope/vim-fugitive'
         NeoBundle 'rking/ag.vim'
         NeoBundle 'kshenoy/vim-signature'
         NeoBundle 'sjl/gundo.vim'
         NeoBundle 'HerringtonDarkholme/yats.vim'
-        NeoBundle 'morhetz/gruvbox'
+        NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+        NeoBundle 'junegunn/fzf.vim'
     call neobundle#end()
     filetype plugin indent on
     NeoBundleCheck
@@ -28,9 +27,7 @@
 
 " APPEARANCE {{{
     syntax enable
-    colorscheme gruvbox
-    let g:gruvbox_contrast_dark='hard'
-    let g:gruvbox_italic=0
+    colorscheme ron
     set colorcolumn=79
 " }}}
 
@@ -49,7 +46,6 @@
     set title
     set showcmd
     set showmode
-    set antialias
     set wildignore=*.swp,*.pdf,*.jpg,*.png,*.o
     set backupdir=~/tmp
     set directory=~/tmp
@@ -76,7 +72,6 @@
 
 " MAP SHORTCUTS {{{
     map <silent><leader><space> :nohlsearch<CR>
-    map <silent><C-t> :NERDTreeToggle<CR>
     map <silent><C-g> :TagbarToggle<CR>
     inoremap jj <ESC>
     nnoremap <silent><leader>u :GundoToggle<CR>
@@ -88,8 +83,5 @@
     autocmd BufWritePre * :%s/\s\+$//e
     " Remember last position in file
     :au BufReadPost * if line("'\"") > 0 | if line("'\"") <= line("$") | exe("norm '\"") | else | exe("norm $") | endif | endif
-    " Exit window with NerdTree after closing last file
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-    " Show hidden files in NerdTree
-    let NERDTreeShowHidden=1
+    command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 " }}}

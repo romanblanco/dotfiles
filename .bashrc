@@ -67,4 +67,4 @@ eval "$(rbenv init -)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-bind -x '"\C-g": vim $(fzf);'
+bind -x '"\C-g": nvim $(fzf);'
