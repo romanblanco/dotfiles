@@ -16,8 +16,6 @@ HOME=/home/$USER_NAME
     python python3 python-devel python-pip python3-pip \
     ruby gem openssl-devel readline-devel zlib-devel \
     fuse fuse-ntfs-3g dkms gparted \
-    texlive-collection-langczechslovak texlive texlive-latex texlive-xetex texlive-graphicx-psmin ImageMagick \
-    texlive-blindtext texlive-appendix \
     kernel-modules-extra \
   # rpmfusion repo (vlc, steam)
   dnf -y install dnf-plugins-core
