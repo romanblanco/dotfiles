@@ -109,7 +109,7 @@ mode "resize" {
 # dock toggle
 bindsym $mod+m mode "dock toggle: (d)ock (u)ndock"
 mode "dock toggle: (d)ock (u)ndock" {
-        bindsym d exec xrandr --output eDP1 --crtc 0 --off --output DP2-1 --crtc 1 --auto --rotation left --right-of eDP1 --primary --output DP2-2 --crtc 2 --auto --rotation left --right-of DP2-1, mode "default"
+        bindsym d exec xrandr --output eDP1 --off --output DP2-2 --auto --rotation left --primary, mode "default"
         bindsym u exec xrandr --output eDP1 --auto --rotation normal --primary --output DP2-1 --off --output DP2-2 --off, mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
