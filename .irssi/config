@@ -1,17 +1,5 @@
 servers = (
   {
-    address = "chat.freenode.net";
-    chatnet = "Freenode";
-    port = "6667";
-    autoconnect = "yes";
-  },
-  {
-    address = "irc.freenode.net";
-    chatnet = "Freenode";
-    port = "6667";
-    autoconnect = "yes";
-  },
-  {
     address = "irc.eng.brq.redhat.com";
     chatnet = "RHAT";
     port = "6667";
@@ -24,13 +12,6 @@ servers = (
 );
 
 chatnets = {
-  Freenode = {
-    type = "IRC";
-    nick = "rblanco";
-    max_kicks = "1";
-    max_msgs = "4";
-    max_whois = "1";
-  };
   RHAT = {
     type = "IRC";
     nick = "rblanco";
@@ -42,10 +23,9 @@ chatnets = {
 
 channels = (
   { name = "#cfme-brno"; chatnet = "RHAT"; autojoin = "yes"; },
+  { name = "#cfme-qe"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#cloudforms"; chatnet = "RHAT"; autojoin = "yes"; },
   { name = "#brno"; chatnet = "RHAT"; autojoin = "yes"; },
-  { name = "#brno-football"; chatnet = "RHAT"; autojoin = "yes"; },
-  { name = "#brno-volleyball"; chatnet = "RHAT"; autojoin = "yes"; },
 );
 
 settings = {
