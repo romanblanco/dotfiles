@@ -13,7 +13,6 @@ HOME=/home/$USER_NAME
     htop alsa-utils alsa-lib sudo ripgrep curl wget tmux \
     mesa-vdpau-drivers xbacklight redshift i3 i3status i3lock rxvt-unicode-256color \
     network-manager-applet \
-    python python3 python-devel python-pip python3-pip \
     ruby gem openssl-devel readline-devel zlib-devel \
     fuse fuse-ntfs-3g dkms gparted \
     kernel-modules-extra \
