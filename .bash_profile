@@ -28,6 +28,7 @@ export HISTFILESIZE=-1
 export PROMPT_COMMAND=__prompt_command
 shopt -s histappend
 
+eval "$(hub alias -s)"
 eval `ssh-agent -s` &> /dev/null
 ssh_files=(~/.ssh/*)
 for identification in ${ssh_files[@]} ; do

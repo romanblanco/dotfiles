@@ -7,7 +7,7 @@ HOME=/home/$USER_NAME
   dnf -y check-update
   dnf -y upgrade
   dnf -y install \
-    neovim ctags tig \
+    neovim ctags tig hub \
     gcc gcc-c++ cmake make \
     tar unzip p7zip ncompress \
     htop alsa-utils alsa-lib sudo ripgrep curl wget tmux \
