@@ -150,10 +150,11 @@ bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
 # screen
-bindsym $sup+Left exec xbacklight -dec 10
-bindsym $sup+Right exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+
+bindsym $sup+Left exec brightnessctl set 10%-
+bindsym $sup+Right exec brightnessctl set 10%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 bindsym Print exec gnome-screenshot -i
 
 # other

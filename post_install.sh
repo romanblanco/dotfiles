@@ -11,7 +11,7 @@ HOME=/home/$USER_NAME
     gcc gcc-c++ cmake make \
     tar unzip p7zip ncompress \
     htop alsa-utils alsa-lib sudo ripgrep curl wget tmux \
-    mesa-vdpau-drivers xbacklight redshift i3 i3status i3lock rxvt-unicode-256color \
+    mesa-vdpau-drivers brightnessctl redshift i3 i3status i3lock rxvt-unicode-256color \
     network-manager-applet \
     ruby gem openssl-devel readline-devel zlib-devel \
     fuse fuse-ntfs-3g dkms gparted \
