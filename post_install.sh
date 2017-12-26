@@ -10,12 +10,12 @@ HOME=/home/$USER_NAME
     neovim ctags tig hub \
     gcc gcc-c++ cmake make \
     tar unzip p7zip ncompress \
-    htop alsa-utils alsa-lib sudo ripgrep curl wget tmux \
+    htop alsa-utils alsa-lib sudo curl wget tmux \
     mesa-vdpau-drivers brightnessctl redshift i3 i3status i3lock rxvt-unicode-256color \
     network-manager-applet \
     ruby gem openssl-devel readline-devel zlib-devel \
     fuse fuse-ntfs-3g dkms gparted \
-    kernel-modules-extra \
+    kernel-modules-extra
   # rpmfusion repo (vlc, steam)
   dnf -y install dnf-plugins-core
   dnf -y install --nogpgcheck http://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
@@ -24,10 +24,13 @@ HOME=/home/$USER_NAME
   # copr repo (telegram, xrectsel)
   dnf -y copr enable rommon/telegram
   dnf -y copr enable stbenjam/xrectsel
+  dnf -y copr enable carlwgeorge/ripgrep
   dnf -y install xrectsel byzanz telegram-desktop
   # negativo17 repo (spotify)
   dnf -y config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
   dnf -y install spotify-client
+  dnf -y install steam
+  dnf -y ripgrep
 
 # rbenv
   git clone https://github.com/sstephenson/rbenv.git .rbenv
