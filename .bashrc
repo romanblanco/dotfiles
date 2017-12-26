@@ -61,6 +61,7 @@ alias cal='cal -m -3'
 alias grep='grep --color=auto'
 alias egrep='egrep --color'
 alias ls='ls --color'
+alias git='hub'
 
 eval "$(rbenv init -)"
 
