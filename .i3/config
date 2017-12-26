@@ -16,14 +16,14 @@ floating_modifier $mod
 # Workspace screens
 #..................
 
-workspace 1 output DP2-1
-workspace 3 output DP2-1
-workspace 4 output DP2-1
-workspace 9 output DP2-1
-workspace 2 output DP2-2
-workspace 5 output DP2-2
-workspace 8 output DP2-2
-workspace 10 output DP2-2
+workspace 1 output DP-3-1
+workspace 2 output DP-3-1
+workspace 3 output DP-3-1
+workspace 4 output eDP-1
+workspace 5 output DP-3-1
+workspace 8 output DP-3-1
+workspace 9 output DP-3-1
+workspace 10 output DP-3-1
 
 #.........
 # Keybinds
@@ -187,6 +187,7 @@ for_window [class="Eog"] floating enable border normal
 for_window [class="Spotify"] border none
 for_window [class="(?i)bluejeans"] border none
 
+assign [class="Thunderbird"] → 2
 assign [title=".*Mozilla*"] → 1
 assign [class="(?i)telegram"] → 2
 assign [class="(?i)vlc"] → 5
