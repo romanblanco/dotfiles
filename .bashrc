@@ -38,21 +38,20 @@ extract () {
 }
 
 term () {
-  tmux -2 new-session -s term   -n server -d 'cd ~/devel/manageiq; bash -i'
-  tmux new-window  -t term:2 -n worker    'cd ~/devel/manageiq; bash -i '
-  tmux new-window  -t term:3 -n console   'cd ~/devel/manageiq; bash -i'
-  tmux new-window  -t term:4 -n ssui      'cd ~/devel/manageiq-ui-service; bash -i'
-  tmux new-window  -t term:5 -n master    'cd ~/devel/manageiq-master; bash -i'
+  tmux -2 new-session -s term   -n server -d  'cd ~/devel/manageiq; bash -i'
+  tmux new-window  -t term:2 -n worker        'cd ~/devel/manageiq; bash -i '
+  tmux new-window  -t term:3 -n components    'cd ~/devel/ui-components; bash -i'
   tmux select-window -t term:1
   tmux -2 attach-session -t term
 }
 
 code () {
   tmux -2 new-session -s code   -n manageiq -d 'cd ~/devel/manageiq; bash -i'
-  tmux new-window  -t code:2 -n classic     'cd ~/devel/manageiq/plugins/manageiq-ui-classic; bash -i '
-  tmux new-window  -t code:3 -n service     'cd ~/devel/manageiq-ui-service; bash -i'
-  tmux new-window  -t code:4 -n components  'cd ~/devel/ui-components; bash -i'
-  tmux select-window -t code:1
+  tmux new-window  -t code:2 -n classic        'cd ~/devel/manageiq-ui-classic; bash -i '
+  tmux new-window  -t code:3 -n components     'cd ~/devel/ui-components; bash -i'
+  tmux new-window  -t code:4 -n service        'cd ~/devel/manageiq-ui-service; bash -i'
+  tmux new-window  -t code:5 -n console        'cd ~/devel/manageiq; bash -i'
+  tmux select-window -t code:2
   tmux -2 attach-session -t code
 }
 
