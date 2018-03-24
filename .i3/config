@@ -159,7 +159,8 @@ bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 bindsym Print exec gnome-screenshot -i
 
 # other
-bindsym XF86Tools exec gnome-control-center
+
+bindsym XF86Tools exec env XDG_CURRENT_DESKTOP=GNOME gnome-control-center
 bindsym XF86Explorer exec nautilus
 
 #...........
