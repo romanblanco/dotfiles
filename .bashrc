@@ -41,6 +41,7 @@ term () {
   tmux -2 new-session -s term   -n server -d  'cd ~/devel/manageiq; bash -i'
   tmux new-window  -t term:2 -n worker        'cd ~/devel/manageiq; bash -i '
   tmux new-window  -t term:3 -n components    'cd ~/devel/ui-components; bash -i'
+  tmux new-window  -t term:4 -n service       'cd ~/devel/manageiq-ui-service; bash -i'
   tmux select-window -t term:1
   tmux -2 attach-session -t term
 }
