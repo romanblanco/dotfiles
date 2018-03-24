@@ -40,7 +40,6 @@
     set laststatus=2
     set ruler
     set wildmenu
-    set autochdir
     set noshowmode
     set showmatch
     set title
@@ -83,5 +82,4 @@
     autocmd BufWritePre * :%s/\s\+$//e
     " Remember last position in file
     :au BufReadPost * if line("'\"") > 0 | if line("'\"") <= line("$") | exe("norm '\"") | else | exe("norm $") | endif | endif
-    command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 " }}}
