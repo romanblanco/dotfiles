@@ -14,7 +14,7 @@ PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/.rbenv/bin
 export PATH
 export TERM=screen-256color
-export TERMINAL=urxvt256c
+export TERMINAL=alacritty
 export PROMPT_COMMAND='history -a'
 export PAGER='less'
 export EDITOR='vim'
@@ -36,3 +36,5 @@ for identification in ${ssh_files[@]} ; do
 done
 
 source $HOME/.bashrc
+
+export PATH="$HOME/.cargo/bin:$PATH"
