@@ -26,7 +26,7 @@ cpu_temperature 0 {
 volume master {
         format = "VOL %volume"
         format_muted = "MUT  0%%"
-        device = "default"
+        device = "hw:0"
         mixer = "Master"
         mixer_idx = 0
 }
