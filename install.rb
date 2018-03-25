@@ -1,0 +1,52 @@
+def main
+  dotfiles.each { |file| try_linking(file) }
+end
+
+def dotfiles
+  [
+    "agignore",
+    "bash_profile",
+    "bashrc",
+    "config/nvim/init.vim",
+    "gitconfig",
+    "gitignore",
+    "i3/config",
+    "i3/status",
+    "irbrc",
+    "pryrc",
+    "ssh/config",
+    "tmux.conf",
+    "Xresources",
+  ]
+end
+
+def try_linking(file)
+  if File.exist?(target(file))
+    puts "skipping #{ target(file) }: #{ skip_reason(target(file)) }"
+  else
+    puts "linking #{ target(file) }"
+    File.symlink(source(file), target(file))
+  end
+end
+
+def source(file)
+  File.expand_path("~/etc/#{ file }")
+end
+
+def target(file)
+  File.expand_path("~/.#{ file }")
+end
+
+def skip_reason(file)
+  if File.symlink?(file)
+    "already linked"
+  else
+    "file already exists. delete or move before reinstalling."
+  end
+end
+
+def path_for(file)
+  File.expand_path(file)
+end
+
+main

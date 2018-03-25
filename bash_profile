@@ -12,6 +12,7 @@ PATH=$PATH:/usr/sbin
 PATH=$PATH:/usr/local/sbin
 PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/.rbenv/bin
+PATH=$PATH:$HOME/.cargo/bin
 export PATH
 export TERM=screen-256color
 export TERMINAL=alacritty
@@ -37,4 +38,3 @@ done
 
 source $HOME/.bashrc
 
-export PATH="$HOME/.cargo/bin:$PATH"

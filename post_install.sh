@@ -42,18 +42,7 @@ HOME=/home/$USER_NAME
 
 # dotfiles
   rm .ssh -r
-  cd etc
-  FILES=("`ls -A`")
-  IGNORED=(".git" ".gitignore" "screenshot.png" "README.md" "LICENSE" "`basename $0`")
-  for file in ${FILES[@]/$IGNORED} ; do
-    ln -s `pwd`/$file ../$file &> /dev/null
-    if [[ $? -ne 0 ]]
-    then
-      rm ../$file
-      ln -s `pwd`/$file ../$file
-    fi
-  done
-  cd ..
+  ruby install.rb
 
 # git-prompt and completion
   curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o .git-prompt.sh
