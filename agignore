@@ -1,2 +1,11 @@
-*.log
-assets/javascripts/locale
+locale
+log
+vendor
+tmp
+doc
+coverage
+public/assets
+*.sql
+TAGS
+*.pot
+*.po
