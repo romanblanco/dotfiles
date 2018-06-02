@@ -4,12 +4,13 @@ end
 
 def dotfiles
   [
-    "agignore",
+    "rgignore",
     "bash_profile",
     "bashrc",
     "config/nvim/init.vim",
     "gitconfig",
     "gitignore",
+    "gitmessage",
     "i3/config",
     "i3/status",
     "irbrc",
@@ -23,6 +24,10 @@ end
 def try_linking(file)
   if File.exist?(target(file))
     puts "skipping #{ target(file) }: #{ skip_reason(target(file)) }"
+  elsif File.symlink?(target(file))
+    puts "rewriting #{ target(file) }"
+    File.delete(target(file))
+    File.symlink(source(file), target(file))
   else
     puts "linking #{ target(file) }"
     File.symlink(source(file), target(file))
