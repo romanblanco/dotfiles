@@ -4,7 +4,6 @@ if defined?(PryByebug)
   Pry.commands.alias_command 'n', 'next'
   Pry.commands.alias_command 'f', 'finish'
   Pry.commands.alias_command "@", "whereami"
-  Pry.commands.alias_command "#", "show-source"
 end
 
 # Hit Enter to repeat last command
