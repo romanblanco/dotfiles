@@ -22,10 +22,11 @@ HOME=/home/$USER_NAME
                               http://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install vlc
   # copr repo (telegram, xrectsel)
+  dnf -y copr enable heliocastro/hack-fonts
   dnf -y copr enable rommon/telegram
   dnf -y copr enable stbenjam/xrectsel
   dnf -y copr enable carlwgeorge/ripgrep
-  dnf -y install xrectsel byzanz telegram-desktop
+  dnf -y install xrectsel byzanz telegram-desktop hack-fonts
   # negativo17 repo (spotify)
   dnf -y config-manager --add-repo=http://negativo17.org/repos/fedora-spotify.repo
   dnf -y install spotify-client
@@ -53,13 +54,6 @@ HOME=/home/$USER_NAME
 # neobundle
   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
   nvim +NeoBundleInstall +qall
-
-# font
-  wget https://github.com/andreberg/Meslo-Font/blob/master/dist/v1.2.1/Meslo%20LG%20DZ%20v1.2.1.zip?raw=true -O fonts.zip
-  unzip fonts.zip -d fonts
-  mkdir .fonts
-  mv fonts/Meslo\ LG\ DZ\ v1.2.1/MesloLGSDZ-Regular.ttf .fonts
-  rm -fr fonts fonts.zip
 
 rm -r Desktop Documents Music Pictures Public Templates Videos
 mkdir tmp devel

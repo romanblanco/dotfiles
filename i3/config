@@ -2,7 +2,7 @@
 # Windows
 #........
 
-font pango:MesloLGSDZ 12px
+font pango:Hack 12px
 focus_follows_mouse no
 mouse_warping none
 hide_edge_borders smart
@@ -136,7 +136,7 @@ bindsym $mod+grave [instance="scratchpad"] scratchpad show
 bindsym $sup+l exec sleep 1 && xset dpms force off && i3lock -d -c 000000 -I 5 -u
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -fn 'MesloLGSDZ-9' -nb '#2D2D2D' -nf '#888888' -sb '#285577' -sf '#DEDEDE' -i"
+bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -fn 'Hack-9' -nb '#2D2D2D' -nf '#888888' -sb '#285577' -sf '#DEDEDE' -i"
 
 # audio
 bindsym $sup+Up exec amixer -D hw:0 set Master 10%+ unmute
