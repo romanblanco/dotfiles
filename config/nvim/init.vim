@@ -14,12 +14,13 @@
         NeoBundle 'airblade/vim-gitgutter'
         NeoBundle 'tpope/vim-git'
         NeoBundle 'tpope/vim-fugitive'
-        NeoBundle 'rking/ag.vim'
+        NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+        NeoBundle 'junegunn/fzf.vim'
         NeoBundle 'kshenoy/vim-signature'
         NeoBundle 'sjl/gundo.vim'
         NeoBundle 'HerringtonDarkholme/yats.vim'
-        NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-        NeoBundle 'junegunn/fzf.vim'
+        NeoBundle 'junegunn/goyo.vim'
+        NeoBundle 'mileszs/ack.vim'
     call neobundle#end()
     filetype plugin indent on
     NeoBundleCheck
@@ -56,6 +57,7 @@
     set ignorecase
     set smartcase
     set incsearch
+    command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 " }}}
 
 " INDENT {{{
@@ -82,4 +84,8 @@
     autocmd BufWritePre * :%s/\s\+$//e
     " Remember last position in file
     :au BufReadPost * if line("'\"") > 0 | if line("'\"") <= line("$") | exe("norm '\"") | else | exe("norm $") | endif | endif
+    " User ripgrep for ack.vim
+    if executable('rg')
+      let g:ackprg = 'rg --vimgrep'
+    endif
 " }}}
