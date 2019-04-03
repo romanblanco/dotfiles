@@ -171,7 +171,7 @@ bindsym XF86Explorer exec nautilus
 #...........
 
 bar {
-        status_command i3status -c ~/.i3/status
+        status_command i3status -c ~/.config/i3/status
         bindsym button4 nop
         bindsym button5 nop
         tray_output primary
