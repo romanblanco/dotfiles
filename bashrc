@@ -15,6 +15,7 @@ __prompt_command () {
 
 extract () {
   if [ -f $1 ] ; then
+    shopt -s nocasematch
     case $1 in
       *.tar.bz2) tar xvjf $1 ;;
       *.tar.gz)  tar xvzf $1 ;;
@@ -28,8 +29,11 @@ extract () {
       *.gz)      gunzip -c $1 > `echo $1 | cut -d'.' --complement -f2-` ;;
       *.7z)      7za e $1 ;;
       *.Z)       uncompress $1 ;;
-      *)         echo "'$1' cannot be extracted by extract()" ; return 1 ;;
+      *)         echo "'$1' cannot be extracted by extract()" ;
+                 shopt -u nocasematch ;
+                 return 1 ;;
     esac
+    shopt -u nocasematch
     return 0
   else
     echo "'$1' is not a valid file"
