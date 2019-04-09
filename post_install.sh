@@ -25,13 +25,10 @@ HOME=/home/$USER_NAME
   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
   nvim +NeoBundleInstall +qall
 
-rm -r Desktop Documents Music Pictures Public Templates Videos
-mkdir tmp devel
+rm -fr Desktop Documents Music Pictures Public Templates Videos
+mkdir tmp devel bin data
 
-chown $USER_NAME:$USER_NAME -R etc tmp devel .*
+chown $USER_NAME:$USER_NAME -R etc tmp devel bin data .*
 chmod 600 .ssh/config
-
-git config --global core.excludesfile .gitignore
-git config --global core.editor nvim
 
 exit 0
