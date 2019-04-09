@@ -41,31 +41,8 @@ extract () {
   fi
 }
 
-term () {
-
-  tmux -2 new-session -A -s term -n server -d    'cd ~/devel/manageiq; bash -i'
-  # SKIP_TEST_RESET=true SKIP_AUTOMATE_RESET=true bin/update ;
-  # bundle exec rails s -b hostname -p 3000
-  tmux new-window  -t term:2 -n worker           'cd ~/devel/manageiq; bash -i '
-  # bundle exec rails console ;
-  # enable_console_sql_logging ; simulate_queue_worker
-  tmux new-window  -t term:3 -n components       'cd ~/devel/ui-components; bash -i'
-  # yarn build ;
-  # yarn start
-  tmux new-window  -t term:4 -n service          'cd ~/devel/manageiq-ui-service; bash -i'
-  # yarn start
-  tmux select-window -t term:1
-  tmux -2 attach-session -t term
-}
-
 code () {
-  tmux -2 new-session -A -s code -n manageiq -d   'cd ~/devel/manageiq; bash -i'
-  tmux new-window  -t code:2 -n classic           'cd ~/devel/manageiq-ui-classic; bash -i '
-  tmux new-window  -t code:3 -n components        'cd ~/devel/ui-components; bash -i'
-  tmux new-window  -t code:4 -n service           'cd ~/devel/manageiq-ui-service; bash -i'
-  tmux new-window  -t code:5 -n api               'cd ~/devel/manageiq-api; bash -i'
-  tmux new-window  -t code:6 -n console           'cd ~/devel/manageiq; bash -i'
-  tmux select-window -t code:2
+  tmux -2 new-session -A -s code -n code -d   'cd ~/devel; bash -i'
   tmux -2 attach-session -t code
 }
 
