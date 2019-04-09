@@ -11,6 +11,8 @@ HOME=/home/$USER_NAME
 
 # dotfiles
   rm .ssh -r
+  rm .bash_profile .bashrc
+  mkdir .ssh .config/nvim .config/i3
   ruby install.rb
 
 # git-prompt and completion

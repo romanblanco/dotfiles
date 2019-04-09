@@ -38,6 +38,8 @@ end
 
 def target(file)
   File.expand_path("~/.#{ file }")
+  # FIXME: https://i3wm.org/downloads/RELEASE-NOTES-4.16.txt
+  # prefer $XDG_CONFIG_HOME/i3/config over ~/.i3/config
 end
 
 def skip_reason(file)
