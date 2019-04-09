@@ -96,6 +96,16 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+# dock toggle
+bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
+mode "dock toggle: (d)ock (e)xtended (u)ndock" {
+        bindsym d exec xrandr --output LVDS-1 --off --output VGA-1 --auto --primary, mode "default"
+        bindsym e exec xrandr --output LVDS-1 --auto --right-of VGA-1 --output VGA-1 --auto --primary, mode "default"
+        bindsym u exec xrandr --output LVDS-1 --auto --rotation normal --primary --output VGA-1 --off, mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
 # exit i3
 bindsym $mod+Shift+e mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff"
 mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
@@ -136,7 +146,6 @@ bindsym $sup+Right exec brightnessctl set 10%+
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 
-
 #...........
 # Status bar
 #...........
@@ -162,6 +171,7 @@ assign [title=".*Mozilla*"] → 1
 assign [class="(?i)telegram"] → 2
 assign [class="(?i)vlc"] → 5
 assign [class="(?i)libreoffice*"] → 5
+assign [class="Steam"] → 5
 assign [class="(?i)Spotify"] → 5
 assign [class="*Developer Edition" window_role="toolbox" ] → 9
 assign [class="top" instance="^top$"] → 10
@@ -174,3 +184,5 @@ exec_always --no-startup-id setxkbmap -option ctrl:nocaps
 exec --no-startup-id xrdb -load $HOME/.Xresources
 exec --no-startup-id xsetroot -solid "#000000"
 exec --no-startup-id i3-sensible-terminal -t scratchpad
+exec --no-startup-id redshift -l 49.2:16.6 -t 5500K:2000K # brno
+#exec --no-startup-id redshift -l 12.1:-86.2 -t 5500K:2000K # managua

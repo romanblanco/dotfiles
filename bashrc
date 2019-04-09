@@ -56,7 +56,7 @@ sys () {
 }
 
 alias diff='diff -s -u'
-alias df='df -h'
+alias df='df'
 alias cal='cal -m -3'
 alias grep='grep --color=auto'
 alias egrep='egrep --color'
