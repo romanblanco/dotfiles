@@ -25,6 +25,7 @@ extract () {
       *.tgz)     tar xzf $1 ;;
       *.bz2)     bunzip2 -k $1 ;;
       *.zip)     unzip $1 ;;
+      *.kmz)     unzip $1 ;;
       *.rar)     unrar e $1 ;;
       *.gz)      gunzip -c $1 > `echo $1 | cut -d'.' --complement -f2-` ;;
       *.7z)      7za e $1 ;;
@@ -48,11 +49,8 @@ code () {
 
 sys () {
   tmux -2 new-session -A -s sys -n top -d 'htop'
-  tmux new-window -t sys:2 -n perkeep  'camlistored --openbrowser=false'
+  tmux new-window -t sys:2 -n ipfs  'ipfs daemon'
   tmux new-window -t sys:3 -n graffiti 'cd ~/devel/graffiti ; bundle exec ruby map.rb -o 0.0.0.0'
-  tmux new-window -t sys:4 -n kaktus 'cd ~/devel/KaktusBOT ; python3 kaktus.py'
-  tmux split-window 'nvim ~/devel/KaktusBOT/kaktus.py'
-
   tmux select-window -t sys:1
   tmux -2 attach-session -t sys
 }
@@ -62,8 +60,8 @@ alias df='df -h'
 alias cal='cal -m -3'
 alias grep='grep --color=auto'
 alias egrep='egrep --color'
-alias ls='ls --color -h'
-alias git='hub'
+alias ls='ls --color'
+alias feh='feh --auto-zoom --scale-down --image-bg "#000000"'
 
 eval "$(rbenv init -)"
 
