@@ -1,15 +1,3 @@
-Host brq
-  HostName file.brq.redhat.com
-  User rblanco
-
-Host shel6
-  HostName sh-el6.eng.rdu2.redhat.com
-  User rblanco
-
-Host kria
-  HostName kria.usersys.redhat.com
-  User root
-
 Host me.github.com
   HostName github.com
   PreferredAuthentications publickey

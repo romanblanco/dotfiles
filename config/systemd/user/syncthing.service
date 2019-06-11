@@ -1,0 +1,10 @@
+[Unit]
+Description=Syncthing
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/syncthing
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

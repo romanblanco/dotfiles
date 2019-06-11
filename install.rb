@@ -14,6 +14,10 @@ def dotfiles
     "config/sway/config",
     "config/sway/status",
     "config/sway/lock.sh",
+    "config/redshift/redshift.conf",
+    "config/systemd/user/redshift.service",
+    "config/systemd/user/ipfs.service",
+    "config/systemd/user/syncthing.service",
     "ssh/config",
     "tmux.conf",
   ]

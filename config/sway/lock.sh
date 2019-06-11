@@ -7,5 +7,3 @@ swayidle \
 swaylock -c000000
 # kill last background task
 kill %%
-
-# https://github.com/swaywm/swaylock/issues/49#issuecomment-462143402

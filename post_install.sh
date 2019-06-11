@@ -1,19 +1,27 @@
 #!/bin/bash
 
-USER_NAME=`who | awk '{print $1}'`
+USER_NAME=`who | grep 'tty1' | awk '{print $1}'`
 HOME=/home/$USER_NAME
 
 # TODO basic packages
 
 # fzf
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
   $HOME/.fzf/install
 
 # dotfiles
-  rm .ssh -r
+  rm .ssh -r  # FIXME: nofirst
   rm .bash_profile .bashrc
   mkdir .ssh .config/nvim .config/sway
   ruby install.rb
+
+# systemd
+  systemctl --user enable redshift.service
+  systemctl --user start redshift.service
+  systemctl --user enable ipfs.service
+  systemctl --user start ipfs.service
+  systemctl --user enable syncthing.service
+  systemctl --user start syncthing.service
 
 # git-prompt and completion
   curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o .git-prompt.sh

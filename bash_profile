@@ -8,12 +8,11 @@ PATH=$PATH:/sbin
 PATH=$PATH:/usr/sbin
 PATH=$PATH:/usr/local/sbin
 PATH=$PATH:$HOME/bin
-PATH=$PATH:$HOME/.rbenv/bin
 PATH=$PATH:$HOME/.cargo/bin
+PATH=$PATH:$HOME/.gem/ruby/2.6.0/bin
 export PATH
 export TERM=screen-256color
 export TERMINAL=alacritty
-export PROMPT_COMMAND='history -a'
 export PAGER='less'
 export EDITOR='nvim'
 export VISUAL='nvim'

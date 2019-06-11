@@ -42,19 +42,6 @@ extract () {
   fi
 }
 
-code () {
-  tmux -2 new-session -A -s code -n code -d   'cd ~/devel; bash -i'
-  tmux -2 attach-session -t code
-}
-
-sys () {
-  tmux -2 new-session -A -s sys -n top -d 'htop'
-  tmux new-window -t sys:2 -n ipfs  'ipfs daemon'
-  tmux new-window -t sys:3 -n graffiti 'cd ~/devel/graffiti ; bundle exec ruby map.rb -o 0.0.0.0'
-  tmux select-window -t sys:1
-  tmux -2 attach-session -t sys
-}
-
 alias diff='diff -s -u'
 alias df='df'
 alias cal='cal -m -3'
@@ -62,8 +49,6 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color'
 alias ls='ls --color'
 alias feh='feh --auto-zoom --scale-down --image-bg "#000000"'
-
-eval "$(rbenv init -)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'

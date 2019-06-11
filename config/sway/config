@@ -1,4 +1,34 @@
+# lock script
 set $lock ~/.config/sway/lock.sh
+
+# modifiers
+set $mod Mod1
+set $sup Mod4
+floating_modifier $mod
+
+#.......
+# Inputs
+#.......
+
+# swaymsg -t get_inputs
+
+input 1:1:AT_Translated_Set_2_keyboard {
+        xkb_layout us
+        xkb_options ctrl:nocaps
+}
+
+input 1130:17:HID_046a:0011 {
+        xkb_layout us
+        xkb_options ctrl:nocaps
+}
+
+#........
+# Outputs
+#........
+
+# swaymsg -t get_outputs
+
+output LVDS-1 bg '#000000' solid_color
 
 #........
 # Windows
@@ -8,13 +38,6 @@ font pango:Hack 12px
 focus_follows_mouse no
 mouse_warping none
 hide_edge_borders smart
-
-# modifiers
-set $mod Mod1
-set $sup Mod4
-floating_modifier $mod
-
-# default window border
 default_border pixel
 
 #.........
@@ -112,18 +135,16 @@ mode "dock toggle: (d)ock (e)xtended (u)ndock" {
 bindsym $mod+Shift+e mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff"
 mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
         bindsym l exit
-        bindsym s exec $lock && systemctl suspend, mode "default" # FIXME: dpms off & on
+        bindsym s exec $lock && systemctl suspend, mode "default"
         bindsym r exec systemctl reboot
         bindsym p exec systemctl poweroff
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
-# reload the configuration file
 bindsym $mod+Shift+c reload
-
-bindsym $mod+grave [instance="scratchpad"] scratchpad show
-# TODO: https://github.com/swaywm/swaylock/issues/49#issuecomment-462143402
+bindsym $mod+Shift+grave move scratchpad
+bindsym $mod+grave scratchpad show
 bindsym $sup+l exec $lock
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
@@ -155,12 +176,12 @@ bar {
 # Specific apps settings
 #.......................
 
-for_window [title="scratchpad"] move scratchpad
+for_window [title="scratchpad"] move scratchpad # FIXME: doesn't work
 for_window [window_role="pop-up"] floating enable
 for_window [class=".*Tor Browser"] floating enable
-for_window [class="Firefox" window_role="browser"] border none layout tabbed
+for_window [class="Firefox" window_role="browser"] layout tabbed
 for_window [class="(?i)telegram"] layout tabbed
-for_window [class="Spotify"] border none
+for_window [class="Spotify"] layout tabbed
 
 assign [title=".*Mozilla*"] → 1
 assign [class="(?i)telegram"] → 2
@@ -170,17 +191,3 @@ assign [class="Steam"] → 5
 assign [class="(?i)Spotify"] → 5
 assign [class=".*Developer Edition" window_role="toolbox" ] → 9
 assign [class="top" instance="^top$"] → 10
-
-#..........
-# Autostart
-#..........
-
-input 1:1:AT_Translated_Set_2_keyboard {
-  xkb_layout us
-  xkb_options ctrl:nocaps
-}
-
-output LVDS-1 bg '#000000' solid_color
-# TODO: https://github.com/swaywm/sway/issues/2700
-exec --no-startup-id redshift -l 49.2:16.6 -t 5500K:2000K # brno
-#exec --no-startup-id redshift -l 12.1:-86.2 -t 5500K:2000K # managua
