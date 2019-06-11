@@ -1,6 +1,3 @@
-# do not blank screen after inactivity
-xset s off -dpms
-
 # user configuration
 
 PATH=""
@@ -38,5 +35,5 @@ done
 source $HOME/.bashrc
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-  startx
+  exec sway
 fi

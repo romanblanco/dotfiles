@@ -12,7 +12,7 @@ HOME=/home/$USER_NAME
 # dotfiles
   rm .ssh -r
   rm .bash_profile .bashrc
-  mkdir .ssh .config/nvim .config/i3
+  mkdir .ssh .config/nvim .config/sway
   ruby install.rb
 
 # git-prompt and completion
@@ -25,10 +25,8 @@ HOME=/home/$USER_NAME
   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
   nvim +NeoBundleInstall +qall
 
-rm -fr Desktop Documents Music Pictures Public Templates Videos
-mkdir tmp devel bin data
-
-chown $USER_NAME:$USER_NAME -R etc tmp devel bin data .*
+chown $USER_NAME -R etc tmp devel bin data .*
 chmod 600 .ssh/config
+chmod +x .config/sway/lock.sh
 
 exit 0

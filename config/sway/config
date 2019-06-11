@@ -1,3 +1,5 @@
+set $lock ~/.config/sway/lock.sh
+
 #........
 # Windows
 #........
@@ -13,7 +15,7 @@ set $sup Mod4
 floating_modifier $mod
 
 # default window border
-new_window pixel
+default_border pixel
 
 #.........
 # Keybinds
@@ -29,7 +31,7 @@ bindsym $mod+semicolon focus right
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
-bindsym $mod+Shift+colon move right
+bindsym $mod+Shift+semicolon move right
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -58,7 +60,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # move focused workspace to monitor
 bindsym $sup+Shift+j move workspace to output left
-bindsym $sup+Shift+colon move workspace to output right
+bindsym $sup+Shift+semicolon move workspace to output right
 
 # split and fullscreen
 bindsym $mod+h split h
@@ -96,7 +98,7 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-# dock toggle
+# FIXME: dock toggle
 bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
 mode "dock toggle: (d)ock (e)xtended (u)ndock" {
         bindsym d exec xrandr --output LVDS-1 --off --output VGA-1 --auto --primary, mode "default"
@@ -110,7 +112,7 @@ mode "dock toggle: (d)ock (e)xtended (u)ndock" {
 bindsym $mod+Shift+e mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff"
 mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
         bindsym l exit
-        bindsym s exec i3lock -d -c 000000 -I 5 -u && systemctl suspend, mode "default"
+        bindsym s exec $lock && systemctl suspend, mode "default" # FIXME: dpms off & on
         bindsym r exec systemctl reboot
         bindsym p exec systemctl poweroff
         bindsym Return mode "default"
@@ -119,39 +121,31 @@ mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
 
 bindsym $mod+grave [instance="scratchpad"] scratchpad show
-bindsym $sup+l exec sleep 1 && xset dpms force off && i3lock -d -c 000000 -I 5 -u
+# TODO: https://github.com/swaywm/swaylock/issues/49#issuecomment-462143402
+bindsym $sup+l exec $lock
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # audio
-bindsym $sup+Up exec amixer -D hw:0 set Master 10%+ unmute
-bindsym $sup+Down exec amixer -D hw:0 set Master 10%-
-bindsym $sup+m exec $(amixer -D hw:0 get Master | grep off > /dev/null && amixer -D hw:0 -q set Master unmute) || amixer -D hw:0 -q set Master mute
-bindsym XF86AudioRaiseVolume exec amixer -D hw:0 set Master 10%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -D hw:0 set Master 10%-
-bindsym XF86AudioMute exec $(amixer -D hw:0 get Master | grep off > /dev/null && amixer -D hw:0 -q set Master unmute) || amixer -D hw:0 -q set Master mute
-bindsym XF86AudioMicMute exec amixer set Capture toggle
+bindsym $sup+Up exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym $sup+Down exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym $sup+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +10%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -10%
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-
-# screen
-
-bindsym $sup+Left exec brightnessctl set 10%-
-bindsym $sup+Right exec brightnessctl set 10%+
-bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
-bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
 
 #...........
 # Status bar
 #...........
 
 bar {
-        status_command i3status -c ~/.config/i3/status
+        status_command i3status -c ~/.config/sway/status
         bindsym button4 nop
         bindsym button5 nop
         tray_output primary
@@ -161,8 +155,9 @@ bar {
 # Specific apps settings
 #.......................
 
-for_window [instance="scratchpad"] move scratchpad
+for_window [title="scratchpad"] move scratchpad
 for_window [window_role="pop-up"] floating enable
+for_window [class=".*Tor Browser"] floating enable
 for_window [class="Firefox" window_role="browser"] border none layout tabbed
 for_window [class="(?i)telegram"] layout tabbed
 for_window [class="Spotify"] border none
@@ -173,16 +168,19 @@ assign [class="(?i)vlc"] → 5
 assign [class="(?i)libreoffice*"] → 5
 assign [class="Steam"] → 5
 assign [class="(?i)Spotify"] → 5
-assign [class="*Developer Edition" window_role="toolbox" ] → 9
+assign [class=".*Developer Edition" window_role="toolbox" ] → 9
 assign [class="top" instance="^top$"] → 10
 
 #..........
 # Autostart
 #..........
 
-exec_always --no-startup-id setxkbmap -option ctrl:nocaps
-exec --no-startup-id xrdb -load $HOME/.Xresources
-exec --no-startup-id xsetroot -solid "#000000"
-exec --no-startup-id i3-sensible-terminal -t scratchpad
+input 1:1:AT_Translated_Set_2_keyboard {
+  xkb_layout us
+  xkb_options ctrl:nocaps
+}
+
+output LVDS-1 bg '#000000' solid_color
+# TODO: https://github.com/swaywm/sway/issues/2700
 exec --no-startup-id redshift -l 49.2:16.6 -t 5500K:2000K # brno
 #exec --no-startup-id redshift -l 12.1:-86.2 -t 5500K:2000K # managua

@@ -11,11 +11,11 @@ def dotfiles
     "gitconfig",
     "gitignore",
     "gitmessage",
-    "config/i3/config",
-    "config/i3/status",
+    "config/sway/config",
+    "config/sway/status",
+    "config/sway/lock.sh",
     "ssh/config",
     "tmux.conf",
-    "Xresources",
   ]
 end
 
