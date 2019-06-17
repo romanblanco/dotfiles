@@ -1,5 +1,5 @@
 # do not blank screen after inactivity
-xset s off -dpms
+[[ ! -z "$DISPLAY" ]] && xset s off -dpms
 
 # user configuration
 
@@ -29,12 +29,14 @@ export HISTFILESIZE=-1
 export PROMPT_COMMAND=__prompt_command
 shopt -s histappend
 
-eval "$(hub alias -s)"
 eval `ssh-agent -s` &> /dev/null
-ssh_files=(~/.ssh/*)
+ssh_files=($HOME/.ssh/*)
 for identification in ${ssh_files[@]} ; do
   ssh-add ${identification%.*} &> /dev/null
 done
 
 source $HOME/.bashrc
 
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]] ; then
+  startx
+fi

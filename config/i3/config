@@ -112,8 +112,8 @@ mode "resize" {
 # dock toggle
 bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
 mode "dock toggle: (d)ock (e)xtended (u)ndock" {
-        bindsym d exec xrandr --output eDP-1 --off --output DP-3-1 --auto --rotation left --primary, mode "default"
-        bindsym e exec xrandr --output eDP-1 --auto --left-of DP-3-1 --output DP-3-1 --auto --rotation left --primary, mode "default"
+        bindsym d exec xrandr --output eDP-1 --off --crtc 0 --output DP-3-1 --mode 1920x1080 --crtc 1 --rotation left --primary, mode "default"
+        bindsym e exec xrandr --output eDP-1 --auto --crtc 0 --left-of DP-3-1 --output DP-3-1 --mode 19 --rotation left --primary, mode "default"
         bindsym u exec xrandr --output eDP-1 --auto --rotation normal --primary --output DP-3-1 --off --output DP-3-1 --off, mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -134,12 +134,12 @@ mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
-
-bindsym $mod+grave [instance="scratchpad"] scratchpad show
+bindsym $mod+Shift+grave move scratchpad
+bindsym $mod+grave scratchpad show
 bindsym $sup+l exec sleep 1 && xset dpms force off && i3lock -d -c 000000 -I 5 -u
-bindsym $mod+Return exec i3-sensible-terminal
+# FIXME: move to config: https://github.com/jwilm/alacritty/commit/dba3cccf6948fb993e02d03ca8891fbc7f6cd3e6#diff-4ac32a78649ca5bdd8e0ba38b7006a1eR48
+bindsym $mod+Return exec WINIT_HIDPI_FACTOR=1 alacritty
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec i3-dmenu-desktop --dmenu="dmenu -fn 'Hack-9' -nb '#2D2D2D' -nf '#888888' -sb '#285577' -sf '#DEDEDE' -i"
 
 # audio
 bindsym $sup+Up exec amixer -D hw:0 set Master 10%+ unmute
@@ -159,12 +159,6 @@ bindsym $sup+Left exec brightnessctl set 10%-
 bindsym $sup+Right exec brightnessctl set 10%+
 bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
 bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
-bindsym Print exec gnome-screenshot -i
-
-# other
-
-bindsym XF86Tools exec env XDG_CURRENT_DESKTOP=GNOME gnome-control-center
-bindsym XF86Explorer exec nautilus
 
 #...........
 # Status bar
@@ -181,7 +175,6 @@ bar {
 # Specific apps settings
 #.......................
 
-for_window [instance="scratchpad"] move scratchpad
 for_window [window_role="pop-up"] floating enable
 for_window [class="Gnome-control-center"] floating enable border none
 for_window [class="Nautilus"] floating enable border normal
@@ -214,5 +207,3 @@ assign [class="top" instance="^top$"] → 10
 exec_always --no-startup-id setxkbmap -option ctrl:nocaps
 exec --no-startup-id xrdb -load $HOME/.Xresources
 exec --no-startup-id xsetroot -solid "#000000"
-exec --no-startup-id i3-sensible-terminal -t scratchpad
-exec --no-startup-id redshift -l 49.2:16.6 -t 5500K:2000K

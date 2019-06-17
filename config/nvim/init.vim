@@ -19,8 +19,8 @@
         NeoBundle 'kshenoy/vim-signature'
         NeoBundle 'sjl/gundo.vim'
         NeoBundle 'HerringtonDarkholme/yats.vim'
-        NeoBundle 'junegunn/goyo.vim'
         NeoBundle 'mileszs/ack.vim'
+        NeoBundle 'junegunn/limelight.vim', { 'on': 'Limelight' }
     call neobundle#end()
     filetype plugin indent on
     NeoBundleCheck
@@ -30,6 +30,9 @@
     syntax enable
     colorscheme ron
     set colorcolumn=79
+    let g:limelight_conceal_ctermfg = 'gray'
+    let g:limelight_priority = 0
+    autocmd VimEnter * Limelight
 " }}}
 
 " GENERAL {{{

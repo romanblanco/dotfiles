@@ -5,10 +5,10 @@
 [pull]
 	rebase = true
 [core]
-	excludesfile = /home/rblanco/.gitignore
+	excludesfile = .gitignore
 	filemode = false
 	editor = nvim
 [alias]
-	f = "!git fetch --all --prune && git checkout master && git merge upstream/master --ff-only && git push && echo 'flush_all' | nc localhost 11211"
+	f = "!git fetch --all --prune && git checkout master && git merge upstream/master --ff-only && git push"
 [commit]
 	template = /home/rblanco/.gitmessage

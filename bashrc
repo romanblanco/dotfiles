@@ -42,42 +42,51 @@ extract () {
 }
 
 term () {
-
-  tmux -2 new-session -A -s term -n server -d    'cd ~/devel/manageiq; bash -i'
-  # SKIP_TEST_RESET=true SKIP_AUTOMATE_RESET=true bin/update ;
-  # bundle exec rails s -b hostname -p 3000
-  tmux new-window  -t term:2 -n worker           'cd ~/devel/manageiq; bash -i '
-  # bundle exec rails console ;
-  # enable_console_sql_logging ; simulate_queue_worker
-  tmux new-window  -t term:3 -n components       'cd ~/devel/ui-components; bash -i'
-  # yarn build ;
-  # yarn start
-  tmux new-window  -t term:4 -n service          'cd ~/devel/manageiq-ui-service; bash -i'
-  # yarn start
-  tmux select-window -t term:1
-  tmux -2 attach-session -t term
+  tmux has-session -t term &> /dev/null
+  if [ $? -eq 0 ] ; then
+    tmux -2 attach-session -t term -d
+  else
+    tmux -2 new-session -A -s term -n server -d 'cd ~/devel/manageiq; bash -i'
+    # SKIP_TEST_RESET=true SKIP_AUTOMATE_RESET=true bin/update ;
+    # bundle exec rails s -b hostname -p 3000
+    tmux new-window  -t term:2 -n worker 'cd ~/devel/manageiq; bash -i '
+    # bundle exec rails console ;
+    # > enable_console_sql_logging ; simulate_queue_worker
+    tmux new-window  -t term:3 -n components 'cd ~/devel/ui-components; bash -i'
+    # rm -fr node_modules/ ; rm yarn.lock ; yarn ; yarn build ; yarn start
+    tmux split-window 'cd ~/devel/manageiq-ui-classic; bash -i'
+    # bin/webpack --watch
+    tmux select-window -t term:1
+    tmux -2 attach-session -t term
+  fi
 }
 
 code () {
-  tmux -2 new-session -A -s code -n manageiq -d   'cd ~/devel/manageiq; bash -i'
-  tmux new-window  -t code:2 -n classic           'cd ~/devel/manageiq-ui-classic; bash -i '
-  tmux new-window  -t code:3 -n components        'cd ~/devel/ui-components; bash -i'
-  tmux new-window  -t code:4 -n service           'cd ~/devel/manageiq-ui-service; bash -i'
-  tmux new-window  -t code:5 -n api               'cd ~/devel/manageiq-api; bash -i'
-  tmux new-window  -t code:6 -n console           'cd ~/devel/manageiq; bash -i'
-  tmux select-window -t code:2
-  tmux -2 attach-session -t code
+  tmux has-session -t code &> /dev/null
+  if [ $? -eq 0 ] ; then
+    tmux -2 attach-session -t code -d
+  else
+    tmux -2 new-session -A -s code -n manageiq -d 'cd ~/devel/manageiq; bash -i'
+    tmux new-window -t code:2 -n classic 'cd ~/devel/manageiq-ui-classic; bash -i '
+    tmux new-window -t code:3 -n components 'cd ~/devel/ui-components; bash -i'
+    tmux new-window -t code:4 -n content 'cd ~/devel/manageiq-content; bash -i'
+    tmux new-window -t code:5 -n console 'cd ~/devel/manageiq; bash -i'
+    # bundle exec rails console
+    tmux select-window -t code:2
+    tmux -2 attach-session -t code
+  fi
 }
 
 sys () {
-  tmux -2 new-session -A -s sys -n top -d 'htop'
-  tmux new-window -t sys:2 -n perkeep  'camlistored --openbrowser=false'
-  tmux new-window -t sys:3 -n graffiti 'cd ~/devel/graffiti ; bundle exec ruby map.rb -o 0.0.0.0'
-  tmux new-window -t sys:4 -n kaktus 'cd ~/devel/KaktusBOT ; python3 kaktus.py'
-  tmux split-window 'nvim ~/devel/KaktusBOT/kaktus.py'
-
-  tmux select-window -t sys:1
-  tmux -2 attach-session -t sys
+  tmux has-session -t sys &> /dev/null
+  if [ $? -eq 0 ] ; then
+    tmux -2 attach-session -t sys -d
+  else
+    tmux -2 new-session -A -s sys -n htop -d 'htop'
+    tmux new-window -t sys:2 -n openvpn 'cd ~/data/openvpn; bash -i'
+    tmux select-window -t sys:1
+    tmux -2 attach-session -t sys
+  fi
 }
 
 alias diff='diff -s -u'
@@ -86,7 +95,7 @@ alias cal='cal -m -3'
 alias grep='grep --color=auto'
 alias egrep='egrep --color'
 alias ls='ls --color -h'
-alias git='hub'
+alias feh='feh --auto-zoom --scale-down --image-bg "#000000"'
 
 eval "$(rbenv init -)"
 
