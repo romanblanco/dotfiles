@@ -2,17 +2,25 @@ order += "volume master"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "ipv6"
-order += "path_exists VPN"
+order += "path_exists PROTON"
+order += "path_exists RH"
 order += "battery 0"
 order += "cpu_usage 0"
 order += "cpu_temperature 0"
 order += "tztime local"
 
-path_exists VPN {
+path_exists PROTON {
         # path exists when a VPN tunnel launched by nmcli/nm-applet is active
         # sudo nmcli connection up "vpn-name)"
         path = "/proc/sys/net/ipv4/conf/tun0"
-        format_down = "VPN: no"
+        format_down = "PROTON: no"
+}
+
+path_exists RH {
+        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+        # sudo nmcli connection up "vpn-name)"
+        path = "/proc/sys/net/ipv4/conf/redhat0"
+        format_down = "RH: no"
 }
 
 wireless _first_ {

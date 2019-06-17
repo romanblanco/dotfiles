@@ -42,6 +42,18 @@ extract () {
   fi
 }
 
+sys () {
+  tmux has-session -t sys &> /dev/null
+  if [ $? -eq 0 ] ; then
+    tmux -2 attach-session -t sys -d
+  else
+    tmux -2 new-session -A -s sys -n top -d 'htop'
+    tmux new-window -t sys:2 -n openvpn 'cd ~/data/openvpn; bash -i'
+    tmux select-window -t sys:1
+    tmux -2 attach-session -t sys
+  fi
+}
+
 alias diff='diff -s -u'
 alias df='df'
 alias cal='cal -m -3'

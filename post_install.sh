@@ -1,18 +1,18 @@
 #!/bin/bash
 
 USER_NAME=`who | grep 'tty1' | awk '{print $1}'`
-HOME=/home/$USER_NAME
+USER_HOME=/home/$USER_NAME
 
 # TODO basic packages
 
 # fzf
-  git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-  $HOME/.fzf/install
+  git clone --depth 1 https://github.com/junegunn/fzf.git $USER_HOME/.fzf
+  $USER_HOME/.fzf/install
 
 # dotfiles
   rm .ssh -r  # FIXME: nofirst
   rm .bash_profile .bashrc
-  mkdir .ssh .config/nvim .config/sway
+  mkdir .ssh .config .config/alacritty .config/nvim .config/redshift .config/sway .config/sway .config/systemd .config/systemd/user
   ruby install.rb
 
 # systemd
@@ -33,6 +33,7 @@ HOME=/home/$USER_NAME
   curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
   nvim +NeoBundleInstall +qall
 
+mkdir $USER_HOME/etc $USER_HOME/tmp $USER_HOME/devel $USER_HOME/bin $USER_HOME/data
 chown $USER_NAME -R etc tmp devel bin data .*
 chmod 600 .ssh/config
 chmod +x .config/sway/lock.sh

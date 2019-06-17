@@ -131,7 +131,7 @@ mode "dock toggle: (d)ock (e)xtended (u)ndock" {
         bindsym Escape mode "default"
 }
 
-# exit i3
+# exit sway
 bindsym $mod+Shift+e mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff"
 mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
         bindsym l exit

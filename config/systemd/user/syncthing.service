@@ -3,7 +3,7 @@ Description=Syncthing
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/syncthing
+ExecStart=/usr/bin/syncthing -no-browser
 Restart=on-failure
 
 [Install]

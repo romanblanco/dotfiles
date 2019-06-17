@@ -1,3 +1,6 @@
+# do not blank screen after inactivity
+[[ ! -z "$DISPLAY" ]] && xset s off -dpms
+
 # user configuration
 
 PATH=""
@@ -26,7 +29,7 @@ export PROMPT_COMMAND=__prompt_command
 shopt -s histappend
 
 eval `ssh-agent -s` &> /dev/null
-ssh_files=(~/.ssh/*)
+ssh_files=($HOME/.ssh/*)
 for identification in ${ssh_files[@]} ; do
   ssh-add ${identification%.*} &> /dev/null
 done

@@ -8,6 +8,7 @@ def dotfiles
     "bash_profile",
     "bashrc",
     "config/nvim/init.vim",
+    "config/alacritty/alacritty.yml",
     "gitconfig",
     "gitignore",
     "gitmessage",
