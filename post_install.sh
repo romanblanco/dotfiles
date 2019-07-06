@@ -23,6 +23,9 @@ USER_HOME=/home/$USER_NAME
   systemctl --user enable syncthing.service
   systemctl --user start syncthing.service
 
+  sudo systemctl start org.cups.cupsd.service
+  sudo systemctl enable org.cups.cupsd.service
+
 # git-prompt and completion
   curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o .git-prompt.sh
   curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o .git-completion.bash

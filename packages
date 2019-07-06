@@ -4,6 +4,7 @@ networkmanager
 networkmanager-openvpn
 openvpn
 openresolv
+resolvconf
 openssh
 syncthing
 go-ipfs
@@ -45,9 +46,13 @@ feh
 libreoffice
 gpsprune
 
+cups
+cups-pdf
+
 # https://github.com/swaywm/sway/issues/2700#issuecomment-500236109
 https://aur.archlinux.org/redshift-wlr-gamma-control-git.git
 https://aur.archlinux.org/spotify.git
 https://aur.archlinux.org/pdftk.git
 https://aur.archlinux.org/gcc6.git
 https://aur.archlinux.org/gcc-gcj-ecj.git
+https://aur.archlinux.org/openvpn-update-resolv-conf-git.git

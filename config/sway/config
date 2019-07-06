@@ -38,7 +38,7 @@ font pango:Hack 12px
 focus_follows_mouse no
 mouse_warping none
 hide_edge_borders smart
-default_border pixel
+default_border normal
 
 #.........
 # Keybinds
@@ -121,12 +121,12 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
-# FIXME: dock toggle
+# dock toggle
 bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
 mode "dock toggle: (d)ock (e)xtended (u)ndock" {
-        bindsym d exec xrandr --output LVDS-1 --off --output VGA-1 --auto --primary, mode "default"
-        bindsym e exec xrandr --output LVDS-1 --auto --right-of VGA-1 --output VGA-1 --auto --primary, mode "default"
-        bindsym u exec xrandr --output LVDS-1 --auto --rotation normal --primary --output VGA-1 --off, mode "default"
+        bindsym d exec swaymsg output LVDS-1 disable && swaymsg output VGA-1 enable bg '#000000' solid_color, mode "default"
+        bindsym e exec swaymsg output LVDS-1 enable bg '#000000' solid_color pos 0 0 && swaymsg output VGA-1 enable bg '#000000' solid_color pos 1366 0, mode "default"
+        bindsym u exec swaymsg output LVDS-1 enable bg '#000000' solid_color && swaymsg output VGA-1 disable, mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -135,7 +135,7 @@ mode "dock toggle: (d)ock (e)xtended (u)ndock" {
 bindsym $mod+Shift+e mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff"
 mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
         bindsym l exit
-        bindsym s exec $lock && systemctl suspend, mode "default"
+        bindsym s exec ($lock &) && systemctl suspend, mode "default"
         bindsym r exec systemctl reboot
         bindsym p exec systemctl poweroff
         bindsym Return mode "default"
