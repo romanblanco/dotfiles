@@ -16,6 +16,8 @@ def dotfiles
     "config/i3/status",
     "irbrc",
     "pryrc",
+    "yarnrc",
+    "npmrc",
     "ssh/config",
     "tmux.conf",
     "Xresources",

@@ -20,13 +20,13 @@ new_window pixel
 #..................
 
 workspace 1 output DP-3-1
-workspace 2 output DP-3-1
+workspace 2 output eDP-1
 workspace 3 output DP-3-1
 workspace 4 output DP-3-1
-workspace 5 output DP-3-1
+workspace 5 output eDP-1
 workspace 8 output eDP-1
 workspace 9 output DP-3-1
-workspace 10 output DP-3-1
+workspace 10 output eDP-1
 
 #.........
 # Keybinds
@@ -113,7 +113,7 @@ mode "resize" {
 bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
 mode "dock toggle: (d)ock (e)xtended (u)ndock" {
         bindsym d exec xrandr --output eDP-1 --off --crtc 0 --output DP-3-1 --mode 1920x1080 --crtc 1 --rotation left --primary, mode "default"
-        bindsym e exec xrandr --output eDP-1 --auto --crtc 0 --left-of DP-3-1 --output DP-3-1 --mode 19 --rotation left --primary, mode "default"
+        bindsym e exec xrandr --output eDP-1 --auto --rotation normal --crtc 0 --left-of DP-3-1 --output DP-3-1 --mode 1920x1080 --rotation left --primary, mode "default"
         bindsym u exec xrandr --output eDP-1 --auto --rotation normal --primary --output DP-3-1 --off --output DP-3-1 --off, mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -123,7 +123,7 @@ mode "dock toggle: (d)ock (e)xtended (u)ndock" {
 bindsym $mod+Shift+e mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff"
 mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
         bindsym l exit
-        bindsym s exec i3lock -d -c 000000 -I 5 -u && systemctl suspend, mode "default"
+        bindsym s exec i3lock -c 000000 -I 5 && systemctl suspend, mode "default"
         bindsym r exec systemctl reboot
         bindsym p exec systemctl poweroff
         bindsym Return mode "default"
@@ -136,7 +136,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+grave move scratchpad
 bindsym $mod+grave scratchpad show
-bindsym $sup+l exec sleep 1 && xset dpms force off && i3lock -d -c 000000 -I 5 -u
+bindsym $sup+l exec sleep 1 && xset dpms force off && i3lock -c 000000 -I 5
 # FIXME: move to config: https://github.com/jwilm/alacritty/commit/dba3cccf6948fb993e02d03ca8891fbc7f6cd3e6#diff-4ac32a78649ca5bdd8e0ba38b7006a1eR48
 bindsym $mod+Return exec WINIT_HIDPI_FACTOR=1 alacritty
 bindsym $mod+Shift+q kill

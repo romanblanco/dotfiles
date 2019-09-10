@@ -9,6 +9,8 @@ syncthing
 go-ipfs
 wget
 curl
+dnsutils
+net-tools
 
 xorg-xinit
 xorg-server

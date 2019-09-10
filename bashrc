@@ -53,7 +53,8 @@ term () {
     # bundle exec rails console ;
     # > enable_console_sql_logging ; simulate_queue_worker
     tmux new-window  -t term:3 -n components 'cd ~/devel/ui-components; bash -i'
-    # rm -fr node_modules/ ; rm yarn.lock ; yarn ; yarn build ; yarn start
+    # yarn cache clean; rm -fr node_modules/ ; rm yarn.lock ; yarn ; yarn build ; yarn start
+    tmux split-window 'cd ~/devel/react-ui-components; bash -i'
     tmux split-window 'cd ~/devel/manageiq-ui-classic; bash -i'
     # bin/webpack --watch
     tmux select-window -t term:1
@@ -69,8 +70,10 @@ code () {
     tmux -2 new-session -A -s code -n manageiq -d 'cd ~/devel/manageiq; bash -i'
     tmux new-window -t code:2 -n classic 'cd ~/devel/manageiq-ui-classic; bash -i '
     tmux new-window -t code:3 -n components 'cd ~/devel/ui-components; bash -i'
-    tmux new-window -t code:4 -n content 'cd ~/devel/manageiq-content; bash -i'
-    tmux new-window -t code:5 -n console 'cd ~/devel/manageiq; bash -i'
+    tmux new-window -t code:4 -n react 'cd ~/devel/react-ui-components; bash -i'
+    tmux new-window -t code:5 -n content 'cd ~/devel/manageiq-content; bash -i'
+    tmux new-window -t code:6 -n api 'cd ~/devel/manageiq-api; bash -i'
+    tmux new-window -t code:7 -n console 'cd ~/devel/manageiq; bash -i'
     # bundle exec rails console
     tmux select-window -t code:2
     tmux -2 attach-session -t code
@@ -84,6 +87,7 @@ sys () {
   else
     tmux -2 new-session -A -s sys -n htop -d 'htop'
     tmux new-window -t sys:2 -n openvpn 'cd ~/data/openvpn; bash -i'
+    tmux split-window 'cd ~/; bash -i'
     tmux select-window -t sys:1
     tmux -2 attach-session -t sys
   fi

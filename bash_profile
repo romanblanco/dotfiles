@@ -13,6 +13,7 @@ PATH=$PATH:/usr/local/sbin
 PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/.rbenv/bin
 PATH=$PATH:$HOME/.cargo/bin
+PATH=$PATH:/usr/local/go/bin
 export PATH
 export TERM=screen-256color
 export TERMINAL=alacritty
