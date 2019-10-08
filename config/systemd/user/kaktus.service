@@ -1,0 +1,11 @@
+[Unit]
+Description=KaktusBot for Telegram
+After=network.target
+
+[Service]
+WorkingDirectory=/home/rblanco/devel/KaktusBOT
+ExecStart=/usr/bin/python kaktus.py
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

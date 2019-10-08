@@ -19,6 +19,7 @@ def dotfiles
     "config/systemd/user/redshift.service",
     "config/systemd/user/ipfs.service",
     "config/systemd/user/syncthing.service",
+    "config/systemd/user/kaktus.service",
     "ssh/config",
     "tmux.conf",
   ]
