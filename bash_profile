@@ -17,6 +17,7 @@ PATH=$PATH:/usr/local/go/bin
 export PATH
 export TERM=screen-256color
 export TERMINAL=alacritty
+export GOPATH=$HOME/devel/go
 export PROMPT_COMMAND='history -a'
 export PAGER='less'
 export EDITOR='vim'

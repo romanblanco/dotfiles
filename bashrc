@@ -41,42 +41,66 @@ extract () {
   fi
 }
 
-term () {
-  tmux has-session -t term &> /dev/null
+manageiq () {
+  tmux has-session -t manageiq &> /dev/null
   if [ $? -eq 0 ] ; then
-    tmux -2 attach-session -t term -d
+    tmux -2 attach-session -t manageiq -d
   else
-    tmux -2 new-session -A -s term -n server -d 'cd ~/devel/manageiq; bash -i'
+    tmux -2 new-session -A -s manageiq -n manageiq -d 'cd ~/devel/manageiq; bash -i'
+    tmux new-window -t manageiq:2 -n classic 'cd ~/devel/manageiq-ui-classic; bash -i '
+    tmux new-window -t manageiq:3 -n components 'cd ~/devel/ui-components; bash -i'
+    tmux new-window -t manageiq:4 -n console 'cd ~/devel/manageiq; bash -i'
+    # bundle exec rails console
+    tmux new-window -t manageiq:5 -n server -d 'cd ~/devel/manageiq; bash -i'
     # SKIP_TEST_RESET=true SKIP_AUTOMATE_RESET=true bin/update ;
     # bundle exec rails s -b hostname -p 3000
-    tmux new-window  -t term:2 -n worker 'cd ~/devel/manageiq; bash -i '
+    tmux new-window -t manageiq:6 -n worker 'cd ~/devel/manageiq; bash -i '
     # bundle exec rails console ;
     # > enable_console_sql_logging ; simulate_queue_worker
-    tmux new-window  -t term:3 -n components 'cd ~/devel/ui-components; bash -i'
-    # yarn cache clean; rm -fr node_modules/ ; rm yarn.lock ; yarn ; yarn build ; yarn start
-    tmux split-window 'cd ~/devel/react-ui-components; bash -i'
+    tmux new-window  -t manageiq:7 -n javascript 'cd ~/devel/ui-components; bash -i'
+    # yarn cache clean ; rm -fr node_modules/ ; rm yarn.lock ; yarn ; yarn link ; yarn build ; yarn start
     tmux split-window 'cd ~/devel/manageiq-ui-classic; bash -i'
-    # bin/webpack --watch
-    tmux select-window -t term:1
-    tmux -2 attach-session -t term
+    # yarn cache clean ; rm -fr node_modules/ ; rm yarn.lock ; rake yarn:clobber ; yarn link @manageiq/ui-components ; bin/update ; bin/webpack --watch
+    tmux select-window -t manageiq:2
+    tmux -2 attach-session -t manageiq
   fi
 }
 
-code () {
-  tmux has-session -t code &> /dev/null
+galaxy () {
+  tmux has-session -t ansible &> /dev/null
   if [ $? -eq 0 ] ; then
-    tmux -2 attach-session -t code -d
+    tmux -2 attach-session -t ansible -d
   else
-    tmux -2 new-session -A -s code -n manageiq -d 'cd ~/devel/manageiq; bash -i'
-    tmux new-window -t code:2 -n classic 'cd ~/devel/manageiq-ui-classic; bash -i '
-    tmux new-window -t code:3 -n components 'cd ~/devel/ui-components; bash -i'
-    tmux new-window -t code:4 -n react 'cd ~/devel/react-ui-components; bash -i'
-    tmux new-window -t code:5 -n content 'cd ~/devel/manageiq-content; bash -i'
-    tmux new-window -t code:6 -n api 'cd ~/devel/manageiq-api; bash -i'
-    tmux new-window -t code:7 -n console 'cd ~/devel/manageiq; bash -i'
-    # bundle exec rails console
-    tmux select-window -t code:2
-    tmux -2 attach-session -t code
+    tmux -2 new-session -A -s ansible -n galaxy -d 'cd ~/devel/galaxy-dev; bash -i'
+    # docker ps ; sudo systemctl stop postgresql # port 5432
+    # git submodule update --init --remote
+    # cd pulp_ansible/ && git checkout 0.2.0b3 && cd ..
+    # sudo make docker/build
+    # sudo make docker/run-migrations
+    # sudo make docker/up
+    tmux new-window -t ansible:2 -n paths 'cd ~/devel/ansible-hub-ui/profiles/ ; bash -i -c "echo -e \"sudo SPANDX_CONFIG=./local-frontend-and-api.js bash ~/devel/insights-proxy/scripts/run.sh\"" ; bash -i'
+    # replace cloud.redhat.com data resource for localhost with local proxy
+    # sudo SPANDX_CONFIG=./local-frontend-and-api.js bash ~/devel/insights-proxy/scripts/run.sh
+    tmux new-window -t ansible:3 -n hub 'cd ~/devel/ansible-hub-ui/ ; bash -i  -c "echo -e \"npm install\nnpm run start\"" ; bash -i'
+    # data replacing cloud.redhat.com data resources
+    # npm install ; npm run start
+    tmux new-window -t ansible:4 -n proxy 'cd  ~/devel/insights-proxy/scripts/ ; bash -i -c "echo -e \"npm install\nsudo ./update.sh\"" ; bash -i'
+    tmux select-window -t ansible:1
+    # npm install ; sudo ./update.sh
+    tmux -2 attach-session -t ansible
+  fi
+}
+
+kafka () {
+  tmux has-session -t kafka &> /dev/null
+  if [ $? -eq 0 ] ; then
+    tmux -2 attach-session -t kafka -d
+  else
+    tmux -2 new-session -A -s kafka -n zookeeper -d 'cd ~/devel/kafka/kafka/ ; bin/zookeeper-server-start.sh config/zookeeper.properties'
+    tmux new-window  -t kafka:2 -n kafka 'cd ~/devel/kafka/kafka/ ; bin/kafka-server-start.sh config/server.properties'
+    tmux new-window  -t kafka:3 -n philote 'SECRET=roman LOGLEVEL=debug ~/bin/philote'
+    tmux select-window -t kafka:2
+    tmux -2 attach-session -t kafka
   fi
 }
 
@@ -85,9 +109,9 @@ sys () {
   if [ $? -eq 0 ] ; then
     tmux -2 attach-session -t sys -d
   else
-    tmux -2 new-session -A -s sys -n htop -d 'htop'
-    tmux new-window -t sys:2 -n openvpn 'cd ~/data/openvpn; bash -i'
-    tmux split-window 'cd ~/; bash -i'
+    tmux -2 new-session -A -s sys -n top -d 'htop'
+    tmux new-window -t sys:2 -n alsa 'alsamixer -c 0'
+    tmux new-window -t sys:3 -n openvpn 'cd ~/data/openvpn; bash -i -c "echo -e \"sudo openvpn --config redhat.ovpn\"" ; bash -i'
     tmux select-window -t sys:1
     tmux -2 attach-session -t sys
   fi
@@ -105,3 +129,7 @@ eval "$(rbenv init -)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
