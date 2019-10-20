@@ -40,6 +40,7 @@ ruby
 htop
 git
 tig
+tree
 ripgrep
 firefox
 keepass
@@ -67,7 +68,9 @@ curl
 cmake
 openssl
 npm
+libsass
 
 # https://gist.github.com/skateman/de4ac914776a5cb767319cf6f98c119e
 byzanz
 https://aur.archlinux.org/xrectsel.git
+https://aur.archlinux.org/packages/slack-desktop/

@@ -71,22 +71,20 @@ galaxy () {
   if [ $? -eq 0 ] ; then
     tmux -2 attach-session -t ansible -d
   else
-    tmux -2 new-session -A -s ansible -n galaxy -d 'cd ~/devel/galaxy-dev; bash -i'
-    # docker ps ; sudo systemctl stop postgresql # port 5432
-    # git submodule update --init --remote
-    # cd pulp_ansible/ && git checkout 0.2.0b3 && cd ..
-    # sudo make docker/build
-    # sudo make docker/run-migrations
-    # sudo make docker/up
-    tmux new-window -t ansible:2 -n paths 'cd ~/devel/ansible-hub-ui/profiles/ ; bash -i -c "echo -e \"sudo SPANDX_CONFIG=./local-frontend-and-api.js bash ~/devel/insights-proxy/scripts/run.sh\"" ; bash -i'
+    # sudo systemctl start docker ; docker ps ; sudo systemctl stop postgresql # port 5432
+    GALAXY_WINDOW_INIT='echo -e \"git submodule update --init --remote\ncd pulp_ansible/ && git checkout 0.2.0b3 && cd ..\ncd pulp_ansible/ && git checkout 0.2.0b3 && cd ..\nmake docker/run-migrations\nmake docker/up\nmake docker/logs\"'
+    API_WINDOW_INIT='echo -e \"      \"'
+    HUB_WINDOW_INIT='echo -e \"npm install\nnpm run start\"'
     # replace cloud.redhat.com data resource for localhost with local proxy
-    # sudo SPANDX_CONFIG=./local-frontend-and-api.js bash ~/devel/insights-proxy/scripts/run.sh
-    tmux new-window -t ansible:3 -n hub 'cd ~/devel/ansible-hub-ui/ ; bash -i  -c "echo -e \"npm install\nnpm run start\"" ; bash -i'
+    PATHS_WINDOW_INIT='echo -e \"sudo SPANDX_CONFIG=./local-frontend-and-api.js bash ~/devel/insights-proxy/scripts/run.sh\"'
     # data replacing cloud.redhat.com data resources
-    # npm install ; npm run start
-    tmux new-window -t ansible:4 -n proxy 'cd  ~/devel/insights-proxy/scripts/ ; bash -i -c "echo -e \"npm install\nsudo ./update.sh\"" ; bash -i'
+    PROXY_WINDOW_INIT='echo -e \"npm install\nsudo ./update.sh\"'
+    tmux -2 new-session -A -s ansible -n galaxy -d "cd ~/devel/galaxy-dev; bash -i -c \"${GALAXY_WINDOW_INIT}\" ; bash -i"
+    tmux new-window -t ansible:2 -n api "cd ~/devel/galaxy-api/ ; bash -i"
+    tmux new-window -t ansible:3 -n hub "cd ~/devel/ansible-hub-ui/ ; bash -i  -c \"${HUB_WINDOW_INIT}\" ; bash -i"
+    tmux new-window -t ansible:4 -n paths "cd ~/devel/ansible-hub-ui/profiles/ ; bash -i -c \"${PATHS_WINDOW_INIT}\" ; bash -i"
+    tmux new-window -t ansible:5 -n proxy "cd  ~/devel/insights-proxy/scripts/ ; bash -i -c \"${PROXY_WINDOW_INIT}\" ; bash -i"
     tmux select-window -t ansible:1
-    # npm install ; sudo ./update.sh
     tmux -2 attach-session -t ansible
   fi
 }
