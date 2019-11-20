@@ -107,9 +107,11 @@ sys () {
   if [ $? -eq 0 ] ; then
     tmux -2 attach-session -t sys -d
   else
-    tmux -2 new-session -A -s sys -n top -d 'htop'
-    tmux new-window -t sys:2 -n alsa 'alsamixer -c 0'
+    tmux -2 new-session -A -s sys -n top -d 'tmux setw remain-on-exit on ; htop'
+    tmux new-window -t sys:2 -n alsa 'tmux setw remain-on-exit on ; alsamixer -c 0'
     tmux new-window -t sys:3 -n openvpn 'cd ~/data/openvpn; bash -i -c "echo -e \"sudo openvpn --config redhat.ovpn\"" ; bash -i'
+    tmux split-window -v 'tmux setw remain-on-exit on ; watch nmcli'
+    tmux split-window -h 'bash -i'
     tmux select-window -t sys:1
     tmux -2 attach-session -t sys
   fi
