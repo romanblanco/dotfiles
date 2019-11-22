@@ -41,64 +41,26 @@ extract () {
   fi
 }
 
-manageiq () {
-  tmux has-session -t manageiq &> /dev/null
-  if [ $? -eq 0 ] ; then
-    tmux -2 attach-session -t manageiq -d
-  else
-    tmux -2 new-session -A -s manageiq -n manageiq -d 'cd ~/devel/manageiq; bash -i'
-    tmux new-window -t manageiq:2 -n classic 'cd ~/devel/manageiq-ui-classic; bash -i '
-    tmux new-window -t manageiq:3 -n components 'cd ~/devel/ui-components; bash -i'
-    tmux new-window -t manageiq:4 -n console 'cd ~/devel/manageiq; bash -i'
-    # bundle exec rails console
-    tmux new-window -t manageiq:5 -n server -d 'cd ~/devel/manageiq; bash -i'
-    # SKIP_TEST_RESET=true SKIP_AUTOMATE_RESET=true bin/update ;
-    # bundle exec rails s -b hostname -p 3000
-    tmux new-window -t manageiq:6 -n worker 'cd ~/devel/manageiq; bash -i '
-    # bundle exec rails console ;
-    # > enable_console_sql_logging ; simulate_queue_worker
-    tmux new-window  -t manageiq:7 -n javascript 'cd ~/devel/ui-components; bash -i'
-    # yarn cache clean ; rm -fr node_modules/ ; rm yarn.lock ; yarn ; yarn link ; yarn build ; yarn start
-    tmux split-window 'cd ~/devel/manageiq-ui-classic; bash -i'
-    # yarn cache clean ; rm -fr node_modules/ ; rm yarn.lock ; rake yarn:clobber ; yarn link @manageiq/ui-components ; bin/update ; bin/webpack --watch
-    tmux select-window -t manageiq:2
-    tmux -2 attach-session -t manageiq
-  fi
-}
-
 galaxy () {
   tmux has-session -t ansible &> /dev/null
   if [ $? -eq 0 ] ; then
     tmux -2 attach-session -t ansible -d
   else
     # sudo systemctl start docker ; docker ps ; sudo systemctl stop postgresql # port 5432
-    GALAXY_WINDOW_INIT='echo -e \"git submodule update --init --remote\ncd pulp_ansible/ && git checkout 0.2.0b3 && cd ..\ncd pulp_ansible/ && git checkout 0.2.0b3 && cd ..\nmake docker/run-migrations\nmake docker/up\nmake docker/logs\"'
-    API_WINDOW_INIT='echo -e \"      \"'
+    GALAXY_WINDOW_INIT='echo -e \"git submodule update --init --remote\ncd pulp_ansible/ && git checkout e8a9176cef73 && cd ..\nmake docker/run-migrations\nmake docker/up\nmake docker/logs\"'
     HUB_WINDOW_INIT='echo -e \"npm install\nnpm run start\"'
     # replace cloud.redhat.com data resource for localhost with local proxy
     PATHS_WINDOW_INIT='echo -e \"sudo SPANDX_CONFIG=./local-frontend-and-api.js bash ~/devel/insights-proxy/scripts/run.sh\"'
     # data replacing cloud.redhat.com data resources
     PROXY_WINDOW_INIT='echo -e \"npm install\nsudo ./update.sh\"'
     tmux -2 new-session -A -s ansible -n galaxy -d "cd ~/devel/galaxy-dev; bash -i -c \"${GALAXY_WINDOW_INIT}\" ; bash -i"
-    tmux new-window -t ansible:2 -n api "cd ~/devel/galaxy-api/ ; bash -i"
+    tmux new-window -t ansible:2 -n api "cd ~/devel/galaxy-dev/galaxy-api/ ; bash -i"
     tmux new-window -t ansible:3 -n hub "cd ~/devel/ansible-hub-ui/ ; bash -i  -c \"${HUB_WINDOW_INIT}\" ; bash -i"
+    tmux split-window 'cd ~/devel/ansible-hub-ui/ ; bash -i'
     tmux new-window -t ansible:4 -n paths "cd ~/devel/ansible-hub-ui/profiles/ ; bash -i -c \"${PATHS_WINDOW_INIT}\" ; bash -i"
     tmux new-window -t ansible:5 -n proxy "cd  ~/devel/insights-proxy/scripts/ ; bash -i -c \"${PROXY_WINDOW_INIT}\" ; bash -i"
     tmux select-window -t ansible:1
     tmux -2 attach-session -t ansible
-  fi
-}
-
-kafka () {
-  tmux has-session -t kafka &> /dev/null
-  if [ $? -eq 0 ] ; then
-    tmux -2 attach-session -t kafka -d
-  else
-    tmux -2 new-session -A -s kafka -n zookeeper -d 'cd ~/devel/kafka/kafka/ ; bin/zookeeper-server-start.sh config/zookeeper.properties'
-    tmux new-window  -t kafka:2 -n kafka 'cd ~/devel/kafka/kafka/ ; bin/kafka-server-start.sh config/server.properties'
-    tmux new-window  -t kafka:3 -n philote 'SECRET=roman LOGLEVEL=debug ~/bin/philote'
-    tmux select-window -t kafka:2
-    tmux -2 attach-session -t kafka
   fi
 }
 
