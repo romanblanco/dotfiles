@@ -53,8 +53,12 @@ galaxy () {
     PATHS_WINDOW_INIT='echo -e \"sudo SPANDX_CONFIG=./local-frontend-and-api.js bash ~/devel/insights-proxy/scripts/run.sh\"'
     # data replacing cloud.redhat.com data resources
     PROXY_WINDOW_INIT='echo -e \"npm install\nsudo ./update.sh\"'
+    # start mitproxy to get httpie working
+    API_WINDOW_INIT='echo -e \"HTTP_PROXY=127.0.0.1:8088 HTTPS_PROXY=127.0.0.1:8088 http --verbose --json --verify=no --follow POST http://127.0.0.1:5001/api/automation-hub/v3/namespaces/ name=rblanco group=partner-engineers\"'
     tmux -2 new-session -A -s ansible -n galaxy -d "cd ~/devel/galaxy-dev; bash -i -c \"${GALAXY_WINDOW_INIT}\" ; bash -i"
     tmux new-window -t ansible:2 -n api "cd ~/devel/galaxy-dev/galaxy-api/ ; bash -i"
+    tmux split-window -h 'tmux setw remain-on-exit on ; mitmweb -v --scripts ~/devel/add_x_rh_id_header.py --listen-port 8088 --web-port 8089 -k  --set ah_username=rblanco'
+    tmux split-window -v "cd ~/devel/galaxy-dev/galaxy-api/ ; bash -i -c \"${API_WINDOW_INIT}\" ; bash -i"
     tmux new-window -t ansible:3 -n hub "cd ~/devel/ansible-hub-ui/ ; bash -i  -c \"${HUB_WINDOW_INIT}\" ; bash -i"
     tmux split-window 'cd ~/devel/ansible-hub-ui/ ; bash -i'
     tmux new-window -t ansible:4 -n paths "cd ~/devel/ansible-hub-ui/profiles/ ; bash -i -c \"${PATHS_WINDOW_INIT}\" ; bash -i"
@@ -72,7 +76,7 @@ sys () {
     tmux -2 new-session -A -s sys -n top -d 'tmux setw remain-on-exit on ; htop'
     tmux new-window -t sys:2 -n alsa 'tmux setw remain-on-exit on ; alsamixer -c 0'
     tmux new-window -t sys:3 -n openvpn 'cd ~/data/openvpn; bash -i -c "echo -e \"sudo openvpn --config redhat.ovpn\"" ; bash -i'
-    tmux split-window -v 'tmux setw remain-on-exit on ; watch nmcli'
+    tmux split-window -v 'tmux setw remain-on-exit on ; watch nmcli d'
     tmux split-window -h 'bash -i'
     tmux select-window -t sys:1
     tmux -2 attach-session -t sys
