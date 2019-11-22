@@ -10,10 +10,11 @@ PATH=$PATH:/usr/local/bin
 PATH=$PATH:/sbin
 PATH=$PATH:/usr/sbin
 PATH=$PATH:/usr/local/sbin
-PATH=$PATH:$HOME/bin
-PATH=$PATH:$HOME/.rbenv/bin
-PATH=$PATH:$HOME/.cargo/bin
 PATH=$PATH:/usr/local/go/bin
+PATH=$PATH:$HOME/bin
+PATH=$PATH:$HOME/.local/bin
+PATH=$PATH:$HOME/.cargo/bin
+PATH=$PATH:$HOME/.pyenv/bin
 export PATH
 export TERM=screen-256color
 export TERMINAL=alacritty

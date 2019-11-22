@@ -87,7 +87,8 @@ alias egrep='egrep --color'
 alias ls='ls --color -h'
 alias feh='feh --auto-zoom --scale-down --image-bg "#000000"'
 
-eval "$(rbenv init -)"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
