@@ -19,7 +19,7 @@ extract () {
     case $1 in
       *.tar.bz2) tar xvjf $1 ;;
       *.tar.gz)  tar xvzf $1 ;;
-      *.tar.xz)  tar xvf $1 ;;
+      *.tar.xz)  tar xvJf $1 ;;
       *.tbz2)    tar xjf $1 ;;
       *.tar)     tar xf $1 ;;
       *.tgz)     tar xzf $1 ;;
@@ -41,43 +41,26 @@ extract () {
   fi
 }
 
-galaxy () {
-  tmux has-session -t ansible &> /dev/null
-  if [ $? -eq 0 ] ; then
-    tmux -2 attach-session -t ansible -d
-  else
-    # sudo systemctl start docker ; docker ps ; sudo systemctl stop postgresql # port 5432
-    GALAXY_WINDOW_INIT='echo -e \"git submodule update --init --remote\ncd pulp_ansible/ && git checkout e8a9176cef73 && cd ..\nmake docker/run-migrations\nmake docker/up\nmake docker/logs\"'
-    HUB_WINDOW_INIT='echo -e \"npm install\nnpm run start\"'
-    # replace cloud.redhat.com data resource for localhost with local proxy
-    PATHS_WINDOW_INIT='echo -e \"sudo SPANDX_CONFIG=./local-frontend-and-api.js bash ~/devel/insights-proxy/scripts/run.sh\"'
-    # data replacing cloud.redhat.com data resources
-    PROXY_WINDOW_INIT='echo -e \"npm install\nsudo ./update.sh\"'
-    # start mitproxy to get httpie working
-    API_WINDOW_INIT='echo -e \"HTTP_PROXY=127.0.0.1:8088 HTTPS_PROXY=127.0.0.1:8088 http --verbose --json --verify=no --follow POST http://127.0.0.1:5001/api/automation-hub/v3/namespaces/ name=rblanco group=partner-engineers\"'
-    tmux -2 new-session -A -s ansible -n galaxy -d "cd ~/devel/galaxy-dev; bash -i -c \"${GALAXY_WINDOW_INIT}\" ; bash -i"
-    tmux new-window -t ansible:2 -n api "cd ~/devel/galaxy-dev/galaxy-api/ ; bash -i"
-    tmux split-window -h 'tmux setw remain-on-exit on ; mitmweb -v --scripts ~/devel/add_x_rh_id_header.py --listen-port 8088 --web-port 8089 -k  --set ah_username=rblanco'
-    tmux split-window -v "cd ~/devel/galaxy-dev/galaxy-api/ ; bash -i -c \"${API_WINDOW_INIT}\" ; bash -i"
-    tmux new-window -t ansible:3 -n hub "cd ~/devel/ansible-hub-ui/ ; bash -i  -c \"${HUB_WINDOW_INIT}\" ; bash -i"
-    tmux split-window 'cd ~/devel/ansible-hub-ui/ ; bash -i'
-    tmux new-window -t ansible:4 -n paths "cd ~/devel/ansible-hub-ui/profiles/ ; bash -i -c \"${PATHS_WINDOW_INIT}\" ; bash -i"
-    tmux new-window -t ansible:5 -n proxy "cd  ~/devel/insights-proxy/scripts/ ; bash -i -c \"${PROXY_WINDOW_INIT}\" ; bash -i"
-    tmux select-window -t ansible:1
-    tmux -2 attach-session -t ansible
-  fi
-}
-
 sys () {
   tmux has-session -t sys &> /dev/null
   if [ $? -eq 0 ] ; then
     tmux -2 attach-session -t sys -d
   else
     tmux -2 new-session -A -s sys -n top -d 'tmux setw remain-on-exit on ; htop'
-    tmux new-window -t sys:2 -n alsa 'tmux setw remain-on-exit on ; alsamixer -c 0'
-    tmux new-window -t sys:3 -n openvpn 'cd ~/data/openvpn; bash -i -c "echo -e \"sudo openvpn --config redhat.ovpn\"" ; bash -i'
-    tmux split-window -v 'tmux setw remain-on-exit on ; watch nmcli d'
-    tmux split-window -h 'bash -i'
+    tmux new-window -t sys:2 -n alsa 'tmux setw remain-on-exit on ; alsamixer -c 0 -V all'
+    tmux new-window -t sys:3 -n network 'tmux setw remain-on-exit on ; watch nmcli d'
+    tmux split-window -h 'tmux setw remain-on-exit on ; watch ss -tupn'
+    tmux split-window -v 'tmux setw remain-on-exit on ; bash -i'
+    tmux select-pane -t 1
+    tmux split-window -v 'tmux setw remain-on-exit on ; ping -D -i 3 -W 2 1.1.1.1'
+    tmux new-window -t sys:4 -n hdd 'tmux setw remain-on-exit on ; watch lsblk'
+    tmux split-window -h 'tmux setw remain-on-exit on ; watch df -h'
+    tmux split-window -v 'tmux setw remain-on-exit on ; ncdu ~/'
+    tmux select-pane -t 1
+    tmux split-window -v 'tmux setw remain-on-exit on ; mc'
+    tmux new-window -t sys:5 -n devctl 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "dmesg - kernel logs" ; dmesg -w'
+    tmux split-window -v 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "journalctl - systemd journal" ; journalctl -f'
+    tmux split-window -h 'tmux setw remain-on-exit on ; systemctl list-units --user'
     tmux select-window -t sys:1
     tmux -2 attach-session -t sys
   fi
@@ -91,12 +74,5 @@ alias egrep='egrep --color'
 alias ls='ls --color -h'
 alias feh='feh --auto-zoom --scale-down --image-bg "#000000"'
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

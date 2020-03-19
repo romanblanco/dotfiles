@@ -1,31 +1,51 @@
+#.......
+# Inputs
+#.......
+
+# swaymsg -t get_inputs
+
+input 1:1:AT_Translated_Set_2_keyboard {
+        xkb_layout us
+        xkb_options ctrl:nocaps
+}
+
+#........
+# Outputs
+#........
+
+# https://www.mankier.com/5/sway-output#Commands
+# swaymsg -t get_outputs
+
+output eDP-1 bg '#000000' solid_color
+output DP-5 bg '#000000' solid_color
+
 #........
 # Windows
 #........
 
-font pango:Hack 12px
+font pango:JetBrains Mono 12px
 focus_follows_mouse no
 mouse_warping none
 hide_edge_borders smart
+default_border normal
 
+set $lock ~/.config/sway/lock.sh
 # modifiers
 set $mod Mod1
 set $sup Mod4
 floating_modifier $mod
 
-# default window border
-new_window pixel
-
 #..................
 # Workspace screens
 #..................
 
-workspace 1 output DP-3-1
+workspace 1 output DP-5
 workspace 2 output eDP-1
-workspace 3 output DP-3-1
-workspace 4 output DP-3-1
+workspace 3 output DP-5
+workspace 4 output DP-5
 workspace 5 output eDP-1
 workspace 8 output eDP-1
-workspace 9 output DP-3-1
+workspace 9 output DP-5
 workspace 10 output eDP-1
 
 #.........
@@ -42,7 +62,7 @@ bindsym $mod+semicolon focus right
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
-bindsym $mod+Shift+colon move right
+bindsym $mod+Shift+semicolon move right
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -71,7 +91,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # move focused workspace to monitor
 bindsym $sup+Shift+j move workspace to output left
-bindsym $sup+Shift+colon move workspace to output right
+bindsym $sup+Shift+semicolon move workspace to output right
 
 # split and fullscreen
 bindsym $mod+h split h
@@ -112,18 +132,18 @@ mode "resize" {
 # dock toggle
 bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
 mode "dock toggle: (d)ock (e)xtended (u)ndock" {
-        bindsym d exec xrandr --output eDP-1 --off --crtc 0 --output DP-3-1 --mode 1920x1080 --crtc 1 --rotation left --primary, mode "default"
-        bindsym e exec xrandr --output eDP-1 --auto --rotation normal --crtc 0 --left-of DP-3-1 --output DP-3-1 --mode 1920x1080 --rotation left --primary, mode "default"
-        bindsym u exec xrandr --output eDP-1 --auto --rotation normal --primary --output DP-3-1 --off --output DP-3-1 --off, mode "default"
+        bindsym d exec swaymsg output eDP-1 disable && swaymsg output DP-5 enable bg '#000000' solid_color && swaymsg output DP-5 transform 270, mode "default"
+        bindsym e exec swaymsg output eDP-1 enable bg '#000000' solid_color pos 0 0 && swaymsg output DP-5 enable bg '#000000' solid_color pos 1920 0 && swaymsg output DP-5 transform 270, mode "default"
+        bindsym u exec swaymsg output eDP-1 enable bg '#000000' solid_color && swaymsg output DP-5 disable, mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 
-# exit i3
+# exit sway
 bindsym $mod+Shift+e mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff"
 mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
         bindsym l exit
-        bindsym s exec i3lock -c 000000 -I 5 && systemctl suspend, mode "default"
+        bindsym s exec ($lock &) && systemctl suspend, mode "default"
         bindsym r exec systemctl reboot
         bindsym p exec systemctl poweroff
         bindsym Return mode "default"
@@ -132,22 +152,19 @@ mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
 bindsym $mod+Shift+grave move scratchpad
 bindsym $mod+grave scratchpad show
-bindsym $sup+l exec sleep 1 && xset dpms force off && i3lock -c 000000 -I 5
-# FIXME: move to config: https://github.com/jwilm/alacritty/commit/dba3cccf6948fb993e02d03ca8891fbc7f6cd3e6#diff-4ac32a78649ca5bdd8e0ba38b7006a1eR48
+bindsym $sup+l exec $lock
 bindsym $mod+Return exec WINIT_HIDPI_FACTOR=1 alacritty
 bindsym $mod+Shift+q kill
 
 # audio
-bindsym $sup+Up exec amixer -D hw:0 set Master 10%+ unmute
-bindsym $sup+Down exec amixer -D hw:0 set Master 10%-
-bindsym $sup+m exec $(amixer -D hw:0 get Master | grep off > /dev/null && amixer -D hw:0 -q set Master unmute) || amixer -D hw:0 -q set Master mute
-bindsym XF86AudioRaiseVolume exec amixer -D hw:0 set Master 10%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -D hw:0 set Master 10%-
-bindsym XF86AudioMute exec $(amixer -D hw:0 get Master | grep off > /dev/null && amixer -D hw:0 -q set Master unmute) || amixer -D hw:0 -q set Master mute
+bindsym $sup+Up exec amixer set Master 10%+ unmute
+bindsym $sup+Down exec amixer set Master 10%-
+bindsym $sup+m exec $(amixer get Master | grep off > /dev/null && amixer -q set Master unmute) || amixer -q set Master mute
+bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ unmute
+bindsym XF86AudioLowerVolume exec amixer set Master 10%-
+bindsym XF86AudioMute exec $(amixer get Master | grep off > /dev/null && amixer -q set Master unmute) || amixer -q set Master mute
 bindsym XF86AudioMicMute exec amixer set Capture toggle
 bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
@@ -155,17 +172,17 @@ bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 
 # screen
 
-bindsym $sup+Left exec brightnessctl set 10%-
-bindsym $sup+Right exec brightnessctl set 10%+
-bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
-bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+bindsym $sup+Left exec light -U 10
+bindsym $sup+Right exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
+bindsym XF86MonBrightnessUp exec light -A 10
 
 #...........
 # Status bar
 #...........
 
 bar {
-        status_command i3status -c ~/.config/i3/status
+        status_command i3status -c ~/.config/sway/status
         bindsym button4 nop
         bindsym button5 nop
         tray_output primary
@@ -175,35 +192,25 @@ bar {
 # Specific apps settings
 #.......................
 
-for_window [window_role="pop-up"] floating enable
-for_window [class="Gnome-control-center"] floating enable border none
-for_window [class="Nautilus"] floating enable border normal
-for_window [class="Firefox" window_role="browser"] border none layout tabbed
-for_window [class="*Developer Edition" window_role="browser"] border none layout tabbed
-for_window [class="*Developer Edition" window_role="toolbox" title="^Developer Tools - *"] border none floating disable
-for_window [class="(?i)telegram"] layout tabbed
-for_window [class="Eog"] floating enable border normal
-for_window [class="Spotify"] border none
+# swaymsg -t get_tree
 
+for_window [class="(?i)firefox"] border none
+for_window [class="(?i)firefox"] layout tabbed
+for_window [app_id="firefox"] border none
+for_window [app_id="firefox"] layout tabbed
+for_window [window_role="pop-up"] floating enable
+for_window [class="(?i)telegram"] layout tabbed
+for_window [class="Spotify"] border none
+for_window [class="Spotify"] layout tabbed
+
+assign [title=".*Mozilla*"] → 1
 assign [class="Thunderbird"] → 2
 assign [title=".*Mozilla*"] → 1
 assign [class="(?i)telegram"] → 2
-assign [class="Slack*"] → 2
 assign [class="(?i)vlc"] → 5
-assign [class="Evince"] → 5
 assign [class="Transmission"] → 5
 assign [class="(?i)libreoffice*"] → 5
 assign [class="Gimp"] → 5
 assign [class="Steam"] → 5
 assign [class="(?i)Spotify"] → 5
 assign [title=".*Firefox.*" window_role="browser"] → 8
-assign [class="*Developer Edition" window_role="toolbox" ] → 9
-assign [class="top" instance="^top$"] → 10
-
-#..........
-# Autostart
-#..........
-
-exec_always --no-startup-id setxkbmap -option ctrl:nocaps
-exec --no-startup-id xrdb -load $HOME/.Xresources
-exec --no-startup-id xsetroot -solid "#000000"
