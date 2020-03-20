@@ -36,15 +36,21 @@ ctags
 tmux
 ruby
 htop
+bmon
 git
 tig
 ripgrep
 firefox
-keepass
+keepassxc
+okular
+
+gnome-contacts
+evolution
 telegram-desktop
 feh
 libreoffice
 gpsprune
+jupyter-notebook
 
 cups
 cups-pdf
@@ -56,3 +62,4 @@ https://aur.archlinux.org/pdftk.git
 https://aur.archlinux.org/gcc6.git
 https://aur.archlinux.org/gcc-gcj-ecj.git
 https://aur.archlinux.org/openvpn-update-resolv-conf-git.git
+https://aur.archlinux.org/packages/slack-desktop/

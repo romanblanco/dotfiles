@@ -22,19 +22,39 @@ input 1130:17:HID_046a:0011 {
         xkb_options ctrl:nocaps
 }
 
+input 1118:219:Microsoft_Natural®_Ergonomic_Keyboard_4000 {
+        xkb_layout us
+        xkb_options ctrl:nocaps
+}
+
 #........
 # Outputs
 #........
 
+# https://www.mankier.com/5/sway-output#Commands
 # swaymsg -t get_outputs
 
 output LVDS-1 bg '#000000' solid_color
+output HDMI-A-3 bg '#000000' solid_color
+
+#..................
+# Workspace screens
+#..................
+
+workspace 1 output HDMI-A-3
+workspace 2 output LVDS-1
+workspace 3 output HDMI-A-3
+workspace 4 output HDMI-A-3
+workspace 5 output LVDS-1
+workspace 8 output HDMI-A-3
+workspace 9 output HDMI-A-3
+workspace 10 output LVDS-1
 
 #........
 # Windows
 #........
 
-font pango:Hack 12px
+font pango:JetBrains Mono 12px
 focus_follows_mouse no
 mouse_warping none
 hide_edge_borders smart
@@ -124,9 +144,9 @@ mode "resize" {
 # dock toggle
 bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
 mode "dock toggle: (d)ock (e)xtended (u)ndock" {
-        bindsym d exec swaymsg output LVDS-1 disable && swaymsg output VGA-1 enable bg '#000000' solid_color, mode "default"
-        bindsym e exec swaymsg output LVDS-1 enable bg '#000000' solid_color pos 0 0 && swaymsg output VGA-1 enable bg '#000000' solid_color pos 1366 0, mode "default"
-        bindsym u exec swaymsg output LVDS-1 enable bg '#000000' solid_color && swaymsg output VGA-1 disable, mode "default"
+        bindsym d exec swaymsg output LVDS-1 disable && swaymsg output HDMI-A-3 enable bg '#000000' solid_color && swaymsg output HDMI-A-3 transform 270, mode "default"
+        bindsym e exec swaymsg output LVDS-1 enable bg '#000000' solid_color pos 0 0 && swaymsg output HDMI-A-3 enable bg '#000000' solid_color pos 1366 0 && swaymsg output HDMI-A-3 transform 270, mode "default"
+        bindsym u exec swaymsg output LVDS-1 enable bg '#000000' solid_color && swaymsg output HDMI-A-3 disable, mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }

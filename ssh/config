@@ -1,7 +1,0 @@
-Host me.github.com
-  HostName github.com
-  PreferredAuthentications publickey
-
-Host work.github.com
-  HostName github.com
-  PreferredAuthentications publickey
