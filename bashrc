@@ -25,6 +25,7 @@ extract () {
       *.tgz)     tar xzf $1 ;;
       *.bz2)     bunzip2 -k $1 ;;
       *.zip)     unzip $1 ;;
+      *.kmz)     unzip $1 ;;
       *.rar)     unrar e $1 ;;
       *.gz)      gunzip -c $1 > `echo $1 | cut -d'.' --complement -f2-` ;;
       *.7z)      7za e $1 ;;
