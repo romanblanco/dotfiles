@@ -1,5 +1,3 @@
-# user configuration
-
 PATH=""
 PATH=$PATH:/bin
 PATH=$PATH:/usr/bin
@@ -33,7 +31,10 @@ for identification in ${ssh_files[@]} ; do
 done
 
 source $HOME/.bashrc
-sys &
+tmux has-session -t sys &> /dev/null
+if [ $? -ne 0 ] ; then
+  sys_session
+fi
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   exec sway
