@@ -43,23 +43,32 @@ extract () {
 }
 
 sys_session () {
-  tmux -2 new-session -A -s sys -n top -d 'tmux setw remain-on-exit on ; htop'
-  tmux new-window -t sys:2 -n alsa 'tmux setw remain-on-exit on ; alsamixer -c 0 -V all'
-  tmux new-window -t sys:3 -n network 'tmux setw remain-on-exit on ; watch --no-title --beep --color --interval 5 nmcli d'
-  tmux split-window -h 'tmux setw remain-on-exit on ; watch --no-title --beep --color --interval 5 ss -tupn'
-  tmux split-window -v 'tmux setw remain-on-exit on ; bash -i'
+  remain="tmux setw remain-on-exit on"
+  watch_cmd="watch --no-title --beep --color --interval 5"
+  window_name="printf '\033]2;%s\033\\'"
+  # prompt
+  tmux -2 new-session -d -A -s sys -n prompt "neofetch ; ${remain} ; bash -i"
+  # sound
+  tmux new-window -t sys:2 -n sound "${remain} ; alsamixer --card 0 --view all"
+  # 3: network
+  tmux new-window -t sys:3 -n network "${remain} ; ${watch_cmd} nmcli d"
+  tmux split-window -h "${remain} ; ${watch_cmd} netstat -tupn"
+  tmux split-window -v "${remain} ; bash -i"
   tmux select-pane -t 1
-  tmux split-window -v 'tmux setw remain-on-exit on ; ping -D -i 3 -W 2 1.1.1.1'
-  tmux new-window -t sys:4 -n hdd 'tmux setw remain-on-exit on ; watch --no-title --beep --color --interval 5 lsblk'
-  tmux split-window -h 'tmux setw remain-on-exit on ; watch --no-title --beep --color --interval 5 df -h'
-  tmux split-window -v 'tmux setw remain-on-exit on ; ncdu ~/'
+  tmux split-window -v "${remain} ; ping -D -i 3 -W 2 1.1.1.1"
+  # 4: hdd
+  tmux new-window -t sys:4 -n hdd "${remain} ; ${watch_cmd} lsblk"
+  tmux split-window -h "${remain} ; ${watch_cmd} df -h"
+  tmux split-window -v "${remain} ; ncdu ~/storage"
   tmux select-pane -t 1
-  tmux split-window -v 'tmux setw remain-on-exit on ; mc'
-  tmux new-window -t sys:5 -n devctl 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "dmesg - kernel logs" ; dmesg -w'
-  tmux split-window -v 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "journalctl - systemd journal" ; journalctl -f'
-  tmux split-window -h 'tmux setw remain-on-exit on ; systemctl list-units --user'
-  tmux new-window -t sys:6 -n prompt 'tmux setw remain-on-exit on ; bash -c \"neofetch\" -i ; bash -i'
-  tmux select-window -t sys:6
+  tmux split-window -v "${remain} ; mc"
+  # 5: devctl
+  tmux new-window -t sys:5 -n devctl "${remain} ; ${window_name} 'dmesg - kernel logs' ; dmesg --follow"
+  tmux split-window -v "${remain} ; ${window_name} 'journalctl - systemd journal' ; journalctl --follow"
+  tmux split-window -h "${remain} ; systemctl list-units --user"
+  # 6: top
+  tmux new-window -t sys:6 -n top "${remain} ; htop"
+  tmux select-window -t sys:1
 }
 
 sys () {
