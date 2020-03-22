@@ -42,27 +42,32 @@ extract () {
   fi
 }
 
+sys_session () {
+  tmux -2 new-session -A -s sys -n top -d 'tmux setw remain-on-exit on ; htop'
+  tmux new-window -t sys:2 -n alsa 'tmux setw remain-on-exit on ; alsamixer -c 0 -V all'
+  tmux new-window -t sys:3 -n network 'tmux setw remain-on-exit on ; watch --no-title --beep --color --interval 5 nmcli d'
+  tmux split-window -h 'tmux setw remain-on-exit on ; watch --no-title --beep --color --interval 5 ss -tupn'
+  tmux split-window -v 'tmux setw remain-on-exit on ; bash -i'
+  tmux select-pane -t 1
+  tmux split-window -v 'tmux setw remain-on-exit on ; ping -D -i 3 -W 2 1.1.1.1'
+  tmux new-window -t sys:4 -n hdd 'tmux setw remain-on-exit on ; watch --no-title --beep --color --interval 5 lsblk'
+  tmux split-window -h 'tmux setw remain-on-exit on ; watch --no-title --beep --color --interval 5 df -h'
+  tmux split-window -v 'tmux setw remain-on-exit on ; ncdu ~/'
+  tmux select-pane -t 1
+  tmux split-window -v 'tmux setw remain-on-exit on ; mc'
+  tmux new-window -t sys:5 -n devctl 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "dmesg - kernel logs" ; dmesg -w'
+  tmux split-window -v 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "journalctl - systemd journal" ; journalctl -f'
+  tmux split-window -h 'tmux setw remain-on-exit on ; systemctl list-units --user'
+  tmux new-window -t sys:6 -n prompt 'tmux setw remain-on-exit on ; bash -c \"neofetch\" -i ; bash -i'
+  tmux select-window -t sys:6
+}
+
 sys () {
   tmux has-session -t sys &> /dev/null
   if [ $? -eq 0 ] ; then
     tmux -2 attach-session -t sys -d
   else
-    tmux -2 new-session -A -s sys -n top -d 'tmux setw remain-on-exit on ; htop'
-    tmux new-window -t sys:2 -n alsa 'tmux setw remain-on-exit on ; alsamixer -c 0 -V all'
-    tmux new-window -t sys:3 -n network 'tmux setw remain-on-exit on ; watch nmcli d'
-    tmux split-window -h 'tmux setw remain-on-exit on ; watch ss -tupn'
-    tmux split-window -v 'tmux setw remain-on-exit on ; bash -i'
-    tmux select-pane -t 1
-    tmux split-window -v 'tmux setw remain-on-exit on ; ping -D -i 3 -W 2 1.1.1.1'
-    tmux new-window -t sys:4 -n hdd 'tmux setw remain-on-exit on ; watch lsblk'
-    tmux split-window -h 'tmux setw remain-on-exit on ; watch df -h'
-    tmux split-window -v 'tmux setw remain-on-exit on ; ncdu ~/'
-    tmux select-pane -t 1
-    tmux split-window -v 'tmux setw remain-on-exit on ; mc'
-    tmux new-window -t sys:5 -n devctl 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "dmesg - kernel logs" ; dmesg -w'
-    tmux split-window -v 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "journalctl - systemd journal" ; journalctl -f'
-    tmux split-window -h 'tmux setw remain-on-exit on ; systemctl list-units --user'
-    tmux select-window -t sys:1
+    sys_session
     tmux -2 attach-session -t sys
   fi
 }
