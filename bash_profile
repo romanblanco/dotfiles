@@ -1,6 +1,3 @@
-# do not blank screen after inactivity
-[[ ! -z "$DISPLAY" ]] && xset s off -dpms
-
 # user configuration
 
 PATH=""
@@ -36,6 +33,7 @@ for identification in ${ssh_files[@]} ; do
 done
 
 source $HOME/.bashrc
+sys &
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   exec sway

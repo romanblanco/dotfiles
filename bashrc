@@ -62,7 +62,8 @@ sys () {
     tmux new-window -t sys:5 -n devctl 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "dmesg - kernel logs" ; dmesg -w'
     tmux split-window -v 'tmux setw remain-on-exit on ; printf "\033]2;%s\033\\" "journalctl - systemd journal" ; journalctl -f'
     tmux split-window -h 'tmux setw remain-on-exit on ; systemctl list-units --user'
-    tmux select-window -t sys:1
+    tmux new-window -t sys:6 -n prompt 'tmux setw remain-on-exit on ; bash -c \"neofetch\" -i ; bash -i'
+    tmux select-window -t sys:6
     tmux -2 attach-session -t sys
   fi
 }
