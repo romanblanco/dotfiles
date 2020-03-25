@@ -88,6 +88,7 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color'
 alias ls='ls --color -h'
 alias feh='feh --auto-zoom --scale-down --image-bg "#000000"'
+alias ctop='docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
