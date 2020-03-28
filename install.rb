@@ -20,6 +20,8 @@ def dotfiles
     "config/systemd/user/ipfs.service",
     "config/systemd/user/syncthing.service",
     "config/systemd/user/kaktus.service",
+    "config/gqrx/bookmarks.csv",
+    "config/gqrx/default.conf",
     "ssh/config",
     "tmux.conf",
   ]

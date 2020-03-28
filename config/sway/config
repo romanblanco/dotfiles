@@ -202,10 +202,12 @@ for_window [class=".*Tor Browser"] floating enable
 for_window [class="Firefox" window_role="browser"] layout tabbed
 for_window [class="(?i)telegram"] layout tabbed
 for_window [class="Spotify"] layout tabbed
+for_window [title="Gqrx*"] layout tabbed
 
 assign [title=".*Mozilla*"] → 1
 assign [class="(?i)telegram"] → 2
 assign [class="(?i)vlc"] → 5
+assign [class="(?i)gqrx"] → 5
 assign [class="(?i)libreoffice*"] → 5
 assign [class="Steam"] → 5
 assign [class="(?i)Spotify"] → 5
