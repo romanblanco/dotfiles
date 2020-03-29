@@ -18,9 +18,11 @@ extract () {
     shopt -s nocasematch
     case $1 in
       *.tar.bz2) tar xvjf $1 ;;
+      *.tbz2)    tar xvjf $1 ;;
       *.tar.gz)  tar xvzf $1 ;;
+      *.tgz)     tar xvzf $1 ;;
       *.tar.xz)  tar xvJf $1 ;;
-      *.tbz2)    tar xjf $1 ;;
+      *.txz)     tar xvJf $1 ;;
       *.tar)     tar xf $1 ;;
       *.tgz)     tar xzf $1 ;;
       *.bz2)     bunzip2 -k $1 ;;
@@ -55,7 +57,7 @@ sys_session () {
   tmux split-window -h "${remain} ; ${watch_cmd} netstat -tupn"
   tmux split-window -v "${remain} ; bash -i"
   tmux select-pane -t 1
-  tmux split-window -v "${remain} ; ping -D -i 3 -W 2 1.1.1.1"
+  tmux split-window -v "${remain} ; ping -D -i 3 -W 2 1.1.1.1" # https://stackoverflow.com/a/22073328
   # 4: hdd
   tmux new-window -t sys:4 -n hdd "${remain} ; ${watch_cmd} lsblk"
   tmux split-window -h "${remain} ; ${watch_cmd} df -h"
