@@ -1,5 +1,6 @@
 [user]
 	name = Roman Blanco
+	email = roman.blanco@actimo.com
 [push]
 	default = simple
 [pull]

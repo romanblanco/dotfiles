@@ -1,3 +1,5 @@
+#!/bin/bash
+
 shopt -s checkwinsize
 [ -z "$PS1" ] && return
 [ -f $HOME/.git-completion.bash ] && source $HOME/.git-completion.bash
@@ -51,9 +53,9 @@ sys_session () {
   # sound
   tmux new-window -t sys:2 -n sound "${remain} ; alsamixer --card 0 --view all"
   # 3: network
-  tmux new-window -t sys:3 -n network "${remain} ; ${watch_cmd} nmcli d"
+  tmux new-window -t sys:3 -n network "${remain} ; ${watch_cmd} nmcli --colors yes device"
   tmux split-window -h "${remain} ; ${watch_cmd} netstat -tupn"
-  tmux split-window -v "${remain} ; bash -i"
+  tmux split-window -v "${remain} ; ${watch_cmd} nmcli --colors yes device wifi list"
   tmux select-pane -t 1
   tmux split-window -v "${remain} ; ping -D -i 3 -W 2 1.1.1.1"
   # 4: hdd
@@ -66,6 +68,8 @@ sys_session () {
   tmux new-window -t sys:5 -n devctl "${remain} ; ${window_name} 'dmesg - kernel logs' ; dmesg --follow"
   tmux split-window -v "${remain} ; ${window_name} 'journalctl - systemd journal' ; journalctl --follow"
   tmux split-window -h "${remain} ; systemctl list-units --user"
+  tmux select-pane -t 1
+  tmux split-window -v "${remain} ; kmon"
   # 6: top
   tmux new-window -t sys:6 -n top "${remain} ; htop"
   tmux select-window -t sys:1
@@ -89,6 +93,7 @@ alias egrep='egrep --color'
 alias ls='ls --color -h'
 alias feh='feh --auto-zoom --scale-down --image-bg "#000000"'
 alias ctop='docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest'
+alias gif='wf-recorder -g "$(slurp)" -f "rec-$(date +%Y-%m-%d_%H-%M-%S).mp4"'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'

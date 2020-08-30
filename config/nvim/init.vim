@@ -30,9 +30,9 @@
     syntax enable
     colorscheme ron
     set colorcolumn=79
-    let g:limelight_conceal_ctermfg = 'gray'
-    let g:limelight_priority = 0
-    autocmd VimEnter * Limelight
+    "let g:limelight_conceal_ctermfg = 'gray'
+    "let g:limelight_priority = 0
+    "autocmd VimEnter * Limelight
 " }}}
 
 " GENERAL {{{

@@ -9,6 +9,16 @@ input 1:1:AT_Translated_Set_2_keyboard {
         xkb_options ctrl:nocaps
 }
 
+
+input 1118:219:Microsoft_Natural___Ergonomic_Keyboard_4000 {
+        xkb_layout us
+        xkb_options ctrl:nocaps
+}
+
+input 16700:8467:Dell_KB216_Wired_Keyboard {
+        xkb_layout cz
+}
+
 #........
 # Outputs
 #........
@@ -17,7 +27,7 @@ input 1:1:AT_Translated_Set_2_keyboard {
 # swaymsg -t get_outputs
 
 output eDP-1 bg '#000000' solid_color
-output DP-5 bg '#000000' solid_color
+output DP-4 bg '#000000' solid_color
 
 #........
 # Windows
@@ -39,13 +49,13 @@ floating_modifier $mod
 # Workspace screens
 #..................
 
-workspace 1 output DP-5
+workspace 1 output DP-4
 workspace 2 output eDP-1
-workspace 3 output DP-5
-workspace 4 output DP-5
+workspace 3 output DP-4
+workspace 4 output DP-4
 workspace 5 output eDP-1
 workspace 8 output eDP-1
-workspace 9 output DP-5
+workspace 9 output DP-4
 workspace 10 output eDP-1
 
 #.........
@@ -132,11 +142,23 @@ mode "resize" {
 # dock toggle
 bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
 mode "dock toggle: (d)ock (e)xtended (u)ndock" {
-        bindsym d exec swaymsg output eDP-1 disable && swaymsg output DP-5 enable bg '#000000' solid_color && swaymsg output DP-5 transform 270, mode "default"
-        bindsym e exec swaymsg output eDP-1 enable bg '#000000' solid_color pos 0 0 && swaymsg output DP-5 enable bg '#000000' solid_color pos 1920 0 && swaymsg output DP-5 transform 270, mode "default"
-        bindsym u exec swaymsg output eDP-1 enable bg '#000000' solid_color && swaymsg output DP-5 disable, mode "default"
+        bindsym d exec swaymsg output eDP-1 disable && swaymsg output DP-4 enable bg '#000000' solid_color && swaymsg output DP-4 transform 270, mode "default"
+        bindsym e exec swaymsg output eDP-1 enable bg '#000000' solid_color pos 0 840 && swaymsg output DP-4 enable bg '#000000' solid_color pos 1920 0 && swaymsg output DP-4 transform 270, mode "default"
+        #  0:0           1920:0
+        #  +             +---------+
+        #                | DP-4    |
+        #                |         |
+        #  0:840         | 1920x   |
+        #  +-------------+ 1080    |
+        #  |            ||         |
+        #  |  eDP-1     || rotate: |
+        #  |  1920x1080 || 270     |
+        #  |            ||         |
+        #  +-----------------------+
+        bindsym u exec swaymsg output eDP-1 enable bg '#000000' solid_color && swaymsg output DP-4 disable, mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
+
 }
 
 # exit sway
@@ -158,6 +180,8 @@ bindsym $sup+l exec $lock
 bindsym $mod+Return exec WINIT_HIDPI_FACTOR=1 alacritty
 bindsym $mod+Shift+q kill
 
+# xev - X events (xorg-xev)
+
 # audio
 bindsym $sup+Up exec amixer set Master 10%+ unmute
 bindsym $sup+Down exec amixer set Master 10%-
@@ -171,11 +195,18 @@ bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2
 bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 
 # screen
-
 bindsym $sup+Left exec light -U 10
 bindsym $sup+Right exec light -A 10
 bindsym XF86MonBrightnessDown exec light -U 10
 bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86Display mode "dock toggle: (d)ock (e)xtended (u)ndock"
+
+
+# other
+# bindsym XF86Tools
+# bindsym XF86Search
+# bindsym XF86LaunchA
+# bindsym XF86Explorer
 
 #...........
 # Status bar
@@ -202,6 +233,7 @@ for_window [window_role="pop-up"] floating enable
 for_window [class="(?i)telegram"] layout tabbed
 for_window [class="Spotify"] border none
 for_window [class="Spotify"] layout tabbed
+for_window [title="Gqrx*"] layout tabbed
 
 assign [title=".*Mozilla*"] → 1
 assign [class="Thunderbird"] → 2
@@ -210,6 +242,7 @@ assign [class="(?i)telegram"] → 2
 assign [class="(?i)vlc"] → 5
 assign [class="Transmission"] → 5
 assign [class="(?i)libreoffice*"] → 5
+assign [class="(?i)gqrx"] → 5
 assign [class="Gimp"] → 5
 assign [class="Steam"] → 5
 assign [class="(?i)Spotify"] → 5

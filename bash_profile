@@ -1,4 +1,5 @@
 # user configuration
+export GOPATH=/home/rblanco/.go
 PATH=""
 PATH=$PATH:/bin
 PATH=$PATH:/usr/bin
@@ -11,10 +12,10 @@ PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$HOME/.cargo/bin
 PATH=$PATH:$HOME/.pyenv/bin
+PATH=$PATH:$GOPATH/bin
 export PATH
 export TERM=screen-256color
 export TERMINAL=alacritty
-export GOPATH=$HOME/devel/go
 export PROMPT_COMMAND='history -a'
 export PAGER='less'
 export EDITOR='nvim'

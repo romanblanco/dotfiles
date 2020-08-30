@@ -1,6 +1,7 @@
 ttf-jetbrains-mono
 sway
 swaylock
+swayidle
 i3status
 alacritty
 xwayland # spotify
@@ -58,4 +59,24 @@ dnsutils
 net-tools
 tree
 ntfs-3g
-htTps://aur.archlinux.org/spotify.git
+https://aur.archlinux.org/spotify.git
+kmon
+
+gqrx # radio
+
+linux-ck
+# https://wiki.archlinux.org/index.php/Unofficial_user_repositories/Repo-ck
+
+# sim
+gammu
+picocom
+
+
+# screen recording
+# wf-recorder -g "$(slurp)"
+https://github.com/ammen99/wf-recorder
+https://github.com/emersion/slurp
+# screenshot
+grim # grim -g "$(slurp -d)" - | wl-copy
+
+wl-clipboard

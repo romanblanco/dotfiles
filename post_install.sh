@@ -26,6 +26,8 @@ USER_HOME=/home/$USER_NAME
   systemctl --user start ipfs.service
   systemctl --user enable syncthing.service
   systemctl --user start syncthing.service
+  systemctl --user enable finance.service
+  systemctl --user start finance.service
 
 # git-prompt and completion
   curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o .git-prompt.sh
