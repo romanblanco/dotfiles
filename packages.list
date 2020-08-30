@@ -1,5 +1,6 @@
 # basic environment
 
+iw
 networkmanager
 networkmanager-openvpn
 openvpn
@@ -52,8 +53,28 @@ libreoffice
 gpsprune
 jupyter-notebook
 
+ranger
+nnn
+mc
+
 cups
 cups-pdf
+avahi
+# systemctl start cups-browsed.service
+# systemctl start org.cups.cupsd.service
+# systemctl start avahi-daemon.service
+# # edit /etc/cups/cupsd.conf
+# http://localhost:631/admin
+# add printer - ipp - http://172.20.10.4:631/ipp/print
+# systemctl restart cups-browsed.service
+# https://wiki.archlinux.org/index.php/CUPS/Printer-specific_problems#Epson
+https://aur.archlinux.org/packages/epson-inkjet-printer-escpr/
+
+# https://wiki.archlinux.org/index.php/SANE/Scanner-specific_problems#Epson
+imagescan # run command `utsushi` to scan
+iscan
+xsane
+https://aur.archlinux.org/imagescan-plugin-networkscan.git
 
 # https://github.com/swaywm/sway/issues/2700#issuecomment-500236109
 https://aur.archlinux.org/redshift-wlr-gamma-control-git.git

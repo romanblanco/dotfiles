@@ -90,6 +90,7 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color'
 alias ls='ls --color -h'
 alias feh='feh --auto-zoom --scale-down --image-bg "#000000"'
+alias gif='wf-recorder -g "$(slurp)" -f "rec-$(date +%Y-%m-%d_%H-%M-%S).mp4"'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'

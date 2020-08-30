@@ -1,4 +1,4 @@
-# lock script
+
 set $lock ~/.config/sway/lock.sh
 
 # modifiers
@@ -23,6 +23,11 @@ input 1130:17:HID_046a:0011 {
 }
 
 input 1118:219:Microsoft_Natural®_Ergonomic_Keyboard_4000 {
+        xkb_layout us
+        xkb_options ctrl:nocaps
+}
+
+input 1118:219:Microsoft_Natural___Ergonomic_Keyboard_4000 {
         xkb_layout us
         xkb_options ctrl:nocaps
 }
@@ -142,6 +147,7 @@ mode "resize" {
 }
 
 # dock toggle
+bindsym XF86Display mode "dock toggle: (d)ock (e)xtended (u)ndock"
 bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
 mode "dock toggle: (d)ock (e)xtended (u)ndock" {
         bindsym d exec swaymsg output LVDS-1 disable && swaymsg output HDMI-A-3 enable bg '#000000' solid_color && swaymsg output HDMI-A-3 transform 270, mode "default"
@@ -166,10 +172,11 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+grave move scratchpad
 bindsym $mod+grave scratchpad show
 bindsym $sup+l exec $lock
+bindsym XF86ScreenSaver exec $lock
 bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
-# audio
+# audio/video
 bindsym $sup+Up exec pactl set-sink-volume @DEFAULT_SINK@ +10%
 bindsym $sup+Down exec pactl set-sink-volume @DEFAULT_SINK@ -10%
 bindsym $sup+m exec pactl set-sink-mute @DEFAULT_SINK@ toggle
@@ -180,6 +187,7 @@ bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
 bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+bindsym XF86WebCam exec vlc v4l2:///dev/video0
 
 #...........
 # Status bar
