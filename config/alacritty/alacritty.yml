@@ -15,6 +15,7 @@ env:
   TERM: alacritty
 
 window:
+  dynamic_title: true
   # Window dimensions in character columns and lines
   # Falls back to size specified by window manager if set to 0x0.
   # (changes require restart)
@@ -32,9 +33,6 @@ window:
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
   decorations: full
-
-# Display tabs using this many cells (changes require restart)
-tabspaces: 8
 
 # When true, bold text is drawn using the bright variant of colors.
 draw_bold_text_with_bright_colors: true
@@ -168,7 +166,7 @@ colors:
 #
 # To completely disable the visual bell, set its duration to 0.
 #
-visual_bell:
+bell:
   animation: EaseOutExpo
   duration: 0
 
@@ -216,7 +214,6 @@ mouse:
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
 
-dynamic_title: true
 
 
 # Style of the cursor

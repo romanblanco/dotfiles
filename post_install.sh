@@ -3,41 +3,49 @@
 USER_NAME=`who | grep 'tty1' | awk '{print $1}'`
 USER_HOME=/home/$USER_NAME
 
-# TODO basic packages
+# basic packages
+pacman -S xorg-server-xwayland xorg-xev sway swaylock swayidle i3status alacritty gammastep ttf-jetbrains-mono ttf-dejavu brightnessctl
+pacman -S slurp wf-recorder grim wl-clipboard
+pacman -S alsa-utils pulseaudio pulseaudio-alsa vlc feh
+pacman -S man wget curl macchanger openssh iproute2 net-tools docker docker-compose
+pacman -S tar zip unzip p7zip unrar
+pacman -S tmux ctags htop bmon tig neovim git emacs ripgrep mc ncdu neofetch kmon tree ruby
+pacman -S firefox firefox-developer-edition chromium keepassxc okular libreoffice
 
 # fzf
-  git clone --depth 1 https://github.com/junegunn/fzf.git $USER_HOME/.fzf
-  $USER_HOME/.fzf/install
+git clone --depth 1 https://github.com/junegunn/fzf.git $USER_HOME/.fzf
+$USER_HOME/.fzf/install
+
+# nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
 # dotfiles
-  rm .ssh -r  # FIXME: nofirst
-  rm .bash_profile .bashrc
-  mkdir .ssh .config .config/alacritty .config/nvim .config/redshift .config/sway .config/sway .config/systemd .config/systemd/user
-  ruby install.rb
+rm .ssh -r # FIXME: nofirst
+rm .bash_profile .bashrc
+mkdir .ssh .config .config/alacritty .config/nvim .config/redshift .config/sway .config/systemd .config/systemd/user
+ruby install.rb
 
 # systemd
-  systemctl --user enable redshift.service
-  systemctl --user start redshift.service
-  systemctl --user enable ipfs.service
-  systemctl --user start ipfs.service
-  systemctl --user enable syncthing.service
-  systemctl --user start syncthing.service
-
-  sudo systemctl start org.cups.cupsd.service
-  sudo systemctl enable org.cups.cupsd.service
+systemctl --user enable redshift.service
+systemctl --user start redshift.service
+systemctl enable docker
+systemctl start docker
 
 # git-prompt and completion
-  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o .git-prompt.sh
-  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o .git-completion.bash
-  chmod +x .git-prompt.sh
-  chmod +x .git-completion.bash
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o .git-prompt.sh
+curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o .git-completion.bash
+chmod +x .git-prompt.sh
+chmod +x .git-completion.bash
 
 # neobundle
-  curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
-  nvim +NeoBundleInstall +qall
+curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
+nvim +NeoBundleInstall +qall
 
-mkdir $USER_HOME/etc $USER_HOME/tmp $USER_HOME/devel $USER_HOME/bin $USER_HOME/data
-chown $USER_NAME -R etc tmp devel bin data .*
+# spacemacs
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+
+mkdir $USER_HOME/etc $USER_HOME/tmp $USER_HOME/devel $USER_HOME/bin
+chown $USER_NAME -R etc tmp devel bin .*
 chmod 600 .ssh/config
 chmod +x .config/sway/lock.sh
 

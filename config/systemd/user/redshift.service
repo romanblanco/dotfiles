@@ -4,7 +4,7 @@ Documentation=http://jonls.dk/redshift/
 After=display-manager.service
 
 [Service]
-ExecStart=/usr/bin/redshift
+ExecStart=/usr/bin/gammastep -m wayland -t 5000:2700 -P -l 55.71:12.54
 Environment=DISPLAY=:0
 Restart=always
 
