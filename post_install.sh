@@ -12,6 +12,16 @@ pacman -S tar zip unzip p7zip unrar
 pacman -S tmux ctags htop bmon tig neovim git emacs ripgrep mc ncdu neofetch kmon tree ruby
 pacman -S firefox firefox-developer-edition chromium keepassxc okular libreoffice
 
+# systemd
+systemctl enable docker
+systemctl start docker
+systemctl enable sshd
+systemctl start sshd
+
+# systemd --user
+systemctl --user enable redshift.service
+systemctl --user start redshift.service
+
 # fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git $USER_HOME/.fzf
 $USER_HOME/.fzf/install
@@ -20,16 +30,10 @@ $USER_HOME/.fzf/install
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
 # dotfiles
-rm .ssh -r # FIXME: nofirst
+rm .ssh -r # FIXME: not on the first run
 rm .bash_profile .bashrc
 mkdir .ssh .config .config/alacritty .config/nvim .config/redshift .config/sway .config/systemd .config/systemd/user
-ruby install.rb
-
-# systemd
-systemctl --user enable redshift.service
-systemctl --user start redshift.service
-systemctl enable docker
-systemctl start docker
+ruby install_dotfiles.rb
 
 # git-prompt and completion
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o .git-prompt.sh

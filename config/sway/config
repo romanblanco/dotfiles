@@ -227,6 +227,7 @@ bar {
 #.......................
 
 # xprop
+# swaymsg -t get_tree
 
 for_window [title="scratchpad"] move scratchpad # FIXME: doesn't work
 for_window [window_role="pop-up"] floating enable
