@@ -1,82 +1,27 @@
-ttf-jetbrains-mono
-sway
-swaylock
-swayidle
-i3status
-alacritty
+https://aur.archlinux.org/spotify.git
 xwayland # spotify
-syncthing
-wget
-curl
-macchanger
-go-ipfs
-openssh
-redshift
-tar
-zip
-unzip
-p7zip
-unrar
-alsa-utils
-pulseaudio
-pulseaudio-alsa
-vlc
-neovim
-ctags
-tmux
-gotop
-git
-tig
-ripgrep
-keepassxc
-firefox
+
 telegram-desktop
-ttf-dejavu
 qt5-wayland # https://wiki.archlinux.org/index.php/Telegram#Wayland_support
-feh
-libreoffice
+
 gpsprune
-wireguard-tools
+
 light # https://raw.githubusercontent.com/haikarainen/light/master/90-backlight.rules
 # sudo usermod -a -G video $USER
-wireguard-arch
+
 openresolv
-tree
-xorg-server-x wayland
-man
-rsync
-inetutils # hostname
-networkmanager
 networkmanager-openvpn
 openvpn
 openresolv
-openssh
-syncthing
-go-ipfs
-wget
-curl
-dnsutils
-net-tools
-tree
-ntfs-3g
-https://aur.archlinux.org/spotify.git
-kmon
 
-gqrx # radio
+wireguard-arch
+wireguard-tools
 
 linux-ck
 # https://wiki.archlinux.org/index.php/Unofficial_user_repositories/Repo-ck
 
-# sim
+# sim card
 gammu
 picocom
 
-
-# screen recording
-# wf-recorder -g "$(slurp)"
-https://github.com/ammen99/wf-recorder
-https://github.com/emersion/slurp
-# screenshot
-grim # grim -g "$(slurp -d)" - | wl-copy
-
-wl-clipboard
+kanshi # display profiles

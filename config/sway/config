@@ -27,7 +27,7 @@ input 16700:8467:Dell_KB216_Wired_Keyboard {
 # swaymsg -t get_outputs
 
 output eDP-1 bg '#000000' solid_color
-output DP-4 bg '#000000' solid_color
+output DP-6 bg '#000000' solid_color
 
 #........
 # Windows
@@ -49,13 +49,13 @@ floating_modifier $mod
 # Workspace screens
 #..................
 
-workspace 1 output DP-4
+workspace 1 output DP-6
 workspace 2 output eDP-1
-workspace 3 output DP-4
-workspace 4 output DP-4
+workspace 3 output DP-6
+workspace 4 output DP-6
 workspace 5 output eDP-1
 workspace 8 output eDP-1
-workspace 9 output DP-4
+workspace 9 output DP-6
 workspace 10 output eDP-1
 
 #.........
@@ -142,23 +142,20 @@ mode "resize" {
 # dock toggle
 bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
 mode "dock toggle: (d)ock (e)xtended (u)ndock" {
-        bindsym d exec swaymsg output eDP-1 disable && swaymsg output DP-4 enable bg '#000000' solid_color && swaymsg output DP-4 transform 270, mode "default"
-        bindsym e exec swaymsg output eDP-1 enable bg '#000000' solid_color pos 0 840 && swaymsg output DP-4 enable bg '#000000' solid_color pos 1920 0 && swaymsg output DP-4 transform 270, mode "default"
-        #  0:0           1920:0
-        #  +             +---------+
-        #                | DP-4    |
-        #                |         |
-        #  0:840         | 1920x   |
-        #  +-------------+ 1080    |
-        #  |            ||         |
-        #  |  eDP-1     || rotate: |
-        #  |  1920x1080 || 270     |
-        #  |            ||         |
-        #  +-----------------------+
-        bindsym u exec swaymsg output eDP-1 enable bg '#000000' solid_color && swaymsg output DP-4 disable, mode "default"
+        bindsym d exec swaymsg output eDP-1 disable && swaymsg output DP-6 enable bg '#000000' solid_color && swaymsg output DP-6, mode "default"
+        bindsym e exec swaymsg output eDP-1 enable bg '#000000' solid_color pos 0 0 && swaymsg output DP-6 enable bg '#000000' solid_color pos 1920 0 && swaymsg output DP-6, mode "default"
+        # 0:0          1920:0
+        #  +----------++-----------------+
+        #  | eDP-1    ||                 |
+        #  | 1920x1080||                 |
+        #  |          ||    DP-6         |
+        #  +----------+|    1680x1050    |
+        #              |                 |
+        #              |                 |
+        #              +-----------------+
+        bindsym u exec swaymsg output eDP-1 enable bg '#000000' solid_color && swaymsg output DP-6 disable, mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
-
 }
 
 # exit sway
@@ -179,6 +176,7 @@ bindsym $mod+grave scratchpad show
 bindsym $sup+l exec $lock
 bindsym $mod+Return exec WINIT_HIDPI_FACTOR=1 alacritty
 bindsym $mod+Shift+q kill
+bindsym Print exec grim -g "$(slurp -d)" - | tee ~/tmp/$(date +'%Y-%m-%d-%H%M%S.png') | wl-copy
 
 # xev - X events (xorg-xev)
 
@@ -234,6 +232,7 @@ for_window [class="(?i)telegram"] layout tabbed
 for_window [class="Spotify"] border none
 for_window [class="Spotify"] layout tabbed
 for_window [title="Gqrx*"] layout tabbed
+for_window [title=".*KeePassXC"] layout tabbed
 
 assign [title=".*Mozilla*"] → 1
 assign [class="Thunderbird"] → 2

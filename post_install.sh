@@ -3,8 +3,6 @@
 USER_NAME=`who | awk '{print $1}'`
 USER_HOME=/home/$USER_NAME
 
-# TODO basic packages
-
 # rbenv
   git clone https://github.com/sstephenson/rbenv.git .rbenv
   git clone https://github.com/sstephenson/ruby-build.git .rbenv/plugins/ruby-build
@@ -17,7 +15,7 @@ USER_HOME=/home/$USER_NAME
   rm .ssh -r
   rm .bash_profile .bashrc
   mkdir .ssh .config .config/i3 .config/nvim
-  ruby install.rb
+  ruby install_dotfiles.rb
 
 # systemd
   systemctl --user enable redshift.service
@@ -42,5 +40,19 @@ USER_HOME=/home/$USER_NAME
 mkdir $USER_HOME/etc $USER_HOME/tmp $USER_HOME/devel $USER_HOME/bin $USER_HOME/data
 chown $USER_NAME:$USER_NAME -R etc tmp devel bin data .*
 chmod 600 .ssh/config
+
+cd bin
+git clone https://aur.archlinux.org/epson-inkjet-printer-escpr.git
+git clone https://aur.archlinux.org/imagescan-plugin-networkscan.git
+git clone https://aur.archlinux.org/spotify.git
+cd epson-inkjet-printer-escpr/
+makepkg -isr
+cd ..
+cd imagescan-plugin-networkscan/
+makepkg -isr
+cd ..
+cd spotify
+makepkg -isr
+cd ..
 
 exit 0
