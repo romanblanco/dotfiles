@@ -11,5 +11,6 @@
 	editor = nvim
 [alias]
 	f = "!git fetch --all --prune && git checkout master && git merge upstream/master --ff-only && git push && echo 'flush_all' | nc localhost 11211"
+  nicediff = "diff --color-words=. --ignore-all-space"
 [commit]
 	template = /home/rblanco/.gitmessage

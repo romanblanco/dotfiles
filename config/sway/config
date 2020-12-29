@@ -24,7 +24,7 @@ input 1130:17:HID_046a:0011 {
         xkb_options ctrl:nocaps
 }
 
-input 1118:219:Microsoft_Natural®_Ergonomic_Keyboard_4000 {
+input 1118:219:Microsoft_Natural___Ergonomic_Keyboard_4000 {
         xkb_layout us
         xkb_numlock enable
         xkb_options ctrl:nocaps

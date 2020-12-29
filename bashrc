@@ -72,6 +72,8 @@ sys_session () {
   tmux split-window -v "${remain} ; kmon"
   # 6: top
   tmux new-window -t sys:6 -n top "${remain} ; htop"
+  # 7: containers
+  tmux new-window -t sys:7 -n containers "${remain} ; ${window_name} 'containers' ; docker run --rm -ti --name=ctop --volume /var/run/docker.sock:/var/run/docker.sock:ro quay.io/vektorlab/ctop:latest"
   tmux select-window -t sys:1
 }
 

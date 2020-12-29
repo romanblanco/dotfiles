@@ -31,11 +31,8 @@ for identification in ${ssh_files[@]} ; do
 done
 
 source $HOME/.bashrc
-tmux has-session -t sys &> /dev/null
-if [ $? -ne 0 ] ; then
-  sys_session
-fi
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-  exec sway
+  startx
+  xrandr --output eDP-1 --mode 1920x1080 --rate 60.01
 fi

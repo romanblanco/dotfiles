@@ -4,12 +4,12 @@ USER_NAME=`who | grep 'tty1' | awk '{print $1}'`
 USER_HOME=/home/$USER_NAME
 
 # basic packages
-pacman -S xorg-server-xwayland xorg-xev sway swaylock swayidle i3status alacritty gammastep ttf-jetbrains-mono ttf-dejavu brightnessctl
+pacman -S xorg-server-xwayland xorg-xev sway swaylock bemenu swayidle i3status alacritty gammastep ttf-jetbrains-mono ttf-dejavu noto-fonts-emoji brightnessctl
 pacman -S slurp wf-recorder grim wl-clipboard
 pacman -S alsa-utils pulseaudio pulseaudio-alsa vlc feh
-pacman -S man wget curl macchanger openssh iproute2 net-tools docker docker-compose
+pacman -S man wget curl jq macchanger openssh iproute2 net-tools docker docker-compose
 pacman -S tar zip unzip p7zip unrar
-pacman -S tmux ctags htop bmon tig neovim git emacs ripgrep mc ncdu neofetch kmon tree ruby
+pacman -S screen tmux ctags htop bmon tig neovim git emacs ripgrep mc ncdu neofetch kmon tree ruby
 pacman -S firefox firefox-developer-edition chromium keepassxc okular libreoffice
 
 # systemd
@@ -34,6 +34,9 @@ rm .ssh -r # FIXME: not on the first run
 rm .bash_profile .bashrc
 mkdir .ssh .config .config/alacritty .config/nvim .config/redshift .config/sway .config/systemd .config/systemd/user
 ruby install_dotfiles.rb
+
+# force a font rescan - https://github.com/alacritty/alacritty/issues/153#issuecomment-630636358
+fc-cache --really-force
 
 # git-prompt and completion
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o .git-prompt.sh
