@@ -1,3 +1,10 @@
+general {
+    colors = true
+    color_good =     '#5af78e'
+    color_degraded = '#f3f99d'
+    color_bad =      '#ff5c57'
+}
+
 order += "volume master"
 order += "wireless _first_"
 order += "ethernet _first_"
