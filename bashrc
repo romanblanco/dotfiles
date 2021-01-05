@@ -48,29 +48,31 @@ sys_session () {
   remain="tmux setw remain-on-exit on"
   watch_cmd="watch --no-title --beep --color --interval 5"
   window_name="printf '\033]2;%s\033\\'"
-  # top
-  tmux -2 new-session -A -s sys -n top -d "${remain} ; htop"
+  # prompt
+  tmux -2 new-session -d -A -s sys -n prompt "neofetch ; ${remain} ; bash -i"
   # sound
   tmux new-window -t sys:2 -n sound "${remain} ; alsamixer --card 0 --view all"
   # 3: network
-  tmux new-window -t sys:3 -n network "${remain} ; ${watch_cmd} nmcli d"
+  tmux new-window -t sys:3 -n network "${remain} ; ${watch_cmd} nmcli --colors yes device"
   tmux split-window -h "${remain} ; ${watch_cmd} netstat -tupn"
-  tmux split-window -v "${remain} ; bash -i"
+  tmux split-window -v "${remain} ; ${watch_cmd} nmcli --colors yes device wifi list"
   tmux select-pane -t 1
-  tmux split-window -v "${remain} ; ping -D -i 3 -W 2 1.1.1.1" # https://stackoverflow.com/a/22073328
+  tmux split-window -v "${remain} ; ping -D -i 3 -W 2 1.1.1.1"
   # 4: hdd
   tmux new-window -t sys:4 -n hdd "${remain} ; ${watch_cmd} lsblk"
   tmux split-window -h "${remain} ; ${watch_cmd} df -h"
-  tmux split-window -v "${remain} ; ncdu ~/"
+  tmux split-window -v "${remain} ; ncdu ~/storage"
   tmux select-pane -t 1
   tmux split-window -v "${remain} ; mc"
   # 5: devctl
   tmux new-window -t sys:5 -n devctl "${remain} ; ${window_name} 'dmesg - kernel logs' ; dmesg --follow"
   tmux split-window -v "${remain} ; ${window_name} 'journalctl - systemd journal' ; journalctl --follow"
   tmux split-window -h "${remain} ; systemctl list-units --user"
-  # 6: prompt
-  tmux new-window -t sys:6 -n prompt "${remain} ; bash -c \'neofetch\' -i ; bash -i"
-  tmux select-window -t sys:6
+  tmux select-pane -t 1
+  tmux split-window -v "${remain} ; kmon"
+  # 6: top
+  tmux new-window -t sys:6 -n top "${remain} ; htop"
+  tmux select-window -t sys:1
 }
 
 sys () {
