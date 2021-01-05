@@ -207,7 +207,10 @@ bar {
 for_window [title="scratchpad"] move scratchpad # FIXME: doesn't work
 for_window [window_role="pop-up"] floating enable
 for_window [class=".*Tor Browser"] floating enable
+for_window [title=".*KeePassXC"] layout tabbed
 for_window [class="Firefox" window_role="browser"] layout tabbed
+for_window [class=".*Developer Edition"] layout tabbed
+for_window [class=".*Developer Edition" window_role="toolbox"] layout tabbed
 for_window [class="(?i)telegram"] layout tabbed
 for_window [class="Spotify"] layout tabbed
 for_window [title="Gqrx*"] layout tabbed
