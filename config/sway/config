@@ -59,7 +59,7 @@ workspace 10 output LVDS-1
 # Windows
 #........
 
-font pango:JetBrains Mono 12px
+font pango:JetBrains Mono 12.4px
 focus_follows_mouse no
 mouse_warping none
 hide_edge_borders smart
