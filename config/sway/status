@@ -60,9 +60,9 @@ disk "/home" {
 }
 
 memory {
-        format = "RAM %used < %available"
+        format = "RAM +%available -%used "
         threshold_degraded = "1G"
-        format_degraded = "RAM %used > %available"
+        format_degraded = "RAM !%available -%used"
 }
 
 volume master {
