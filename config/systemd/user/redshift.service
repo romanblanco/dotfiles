@@ -5,6 +5,8 @@ After=display-manager.service
 
 [Service]
 ExecStart=/usr/bin/redshift -l 55.71:12.54 -t 5500K:2000K
+#ExecStart=/usr/bin/redshift -l 49.2:16.6 -t 5500K:2000K # brno
+#ExecStart=/usr/bin/redshift -l 12.1:-86.2 -t 5500K:2000K # managua
 Environment=DISPLAY=:0
 Restart=always
 

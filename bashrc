@@ -6,11 +6,11 @@ shopt -s checkwinsize
 __prompt_command () {
   local EXIT="$?"
   if [ $EXIT != 0 ] ; then
-    PS1="\[\e[0;31m\]•\[\e[0m\] "
+    PS1="\[\e[0;91m\]\u@\H\[\e[0m\]:"
   else
-    PS1="\[\e[0;32m\]•\[\e[0m\] "
+    PS1="\[\e[0;92m\]\u@\H\[\e[0m\]:"
   fi
-  PS1+='\w/$(__git_ps1 " \[\e[0;32m\]%s\[\e[0m\]") '
+  PS1+='\[\e[0;96m\]\w/\[\e[0m\]$(__git_ps1 " \[\e[0;93m\]%s\[\e[0m\]") '
 }
 
 extract () {

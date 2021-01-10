@@ -1,0 +1,185 @@
+#........
+# Windows
+#........
+
+font pango:JetBrains Mono 14px
+focus_follows_mouse no
+mouse_warping none
+hide_edge_borders smart
+
+# modifiers
+set $mod Mod1
+set $sup Mod4
+floating_modifier $mod
+
+# default window border
+# pixel none
+new_window normal
+
+#.........
+# Keybinds
+#.........
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+colon move right
+
+# switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+b workspace back_and_forth
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+# move focused workspace to monitor
+bindsym $sup+Shift+j move workspace to output left
+bindsym $sup+Shift+colon move workspace to output right
+
+# split and fullscreen
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+f fullscreen toggle
+
+# change container layout
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# change window border
+bindsym $mod+t border normal
+bindsym $mod+y border pixel
+bindsym $mod+u border none
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+# focus the child container
+bindsym $mod+q focus child
+
+# resize window
+bindsym $mod+r mode "resize"
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# dock toggle
+bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
+mode "dock toggle: (d)ock (e)xtended (u)ndock" {
+        bindsym d exec xrandr --output LVDS-1 --off --output VGA-1 --auto --primary, mode "default"
+        bindsym e exec xrandr --output LVDS-1 --auto --right-of VGA-1 --output VGA-1 --auto --primary, mode "default"
+        bindsym u exec xrandr --output LVDS-1 --auto --rotation normal --primary --output VGA-1 --off, mode "default"
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# exit i3
+bindsym $mod+Shift+e mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff"
+mode "exit: (l)ogout (s)uspend (r)eboot (p)oweroff" {
+        bindsym l exit
+        bindsym s exec i3lock -d -c 000000 -I 5 && systemctl suspend, mode "default"
+        bindsym r exec systemctl reboot
+        bindsym p exec systemctl poweroff
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+bindsym $mod+Shift+grave move scratchpad
+bindsym $mod+grave scratchpad show
+bindsym $sup+l exec sleep 1 && xset dpms force off && i3lock -d -c 000000 -I 5
+bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+q kill
+
+# audio
+bindsym $sup+Up exec amixer -D hw:0 set Master 10%+ unmute
+bindsym $sup+Down exec amixer -D hw:0 set Master 10%-
+bindsym $sup+m exec $(amixer -D hw:0 get Master | grep off > /dev/null && amixer -D hw:0 -q set Master unmute) || amixer -D hw:0 -q set Master mute
+bindsym XF86AudioRaiseVolume exec amixer -D hw:0 set Master 10%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -D hw:0 set Master 10%-
+bindsym XF86AudioMute exec $(amixer -D hw:0 get Master | grep off > /dev/null && amixer -D hw:0 -q set Master unmute) || amixer -D hw:0 -q set Master mute
+bindsym XF86AudioMicMute exec amixer set Capture toggle
+bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
+bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
+bindsym XF86AudioPrev exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
+
+# screen
+
+bindsym $sup+Left exec brightnessctl set 10%-
+bindsym $sup+Right exec brightnessctl set 10%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+
+#...........
+# Status bar
+#...........
+
+bar {
+        status_command i3status -c ~/.config/i3/status
+        bindsym button4 nop
+        bindsym button5 nop
+        tray_output primary
+}
+
+#.......................
+# Specific apps settings
+#.......................
+
+for_window [instance="scratchpad"] move scratchpad
+for_window [window_role="pop-up"] floating enable
+for_window [class="Firefox" window_role="browser"] border none layout tabbed
+for_window [class="(?i)telegram"] layout tabbed
+for_window [class="Spotify"] border none
+
+assign [title=".*Mozilla*"] → 1
+assign [class="(?i)telegram"] → 2
+assign [class="(?i)vlc"] → 5
+assign [class="(?i)libreoffice*"] → 5
+assign [class="Steam"] → 5
+assign [class="(?i)Spotify"] → 5
+assign [class="*Developer Edition" window_role="toolbox" ] → 9
+assign [class="top" instance="^top$"] → 10
+
+#..........
+# Autostart
+#..........
+
+exec_always --no-startup-id setxkbmap -option ctrl:nocaps
