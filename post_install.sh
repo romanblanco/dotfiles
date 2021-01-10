@@ -4,8 +4,10 @@ USER_NAME=`who | grep 'tty1' | awk '{print $1}'`
 USER_HOME=/home/$USER_NAME
 
 # basic packages
-pacman -S xorg-server-xwayland xorg-xev sway swaylock bemenu swayidle i3status alacritty gammastep ttf-jetbrains-mono ttf-dejavu noto-fonts-emoji brightnessctl
-pacman -S slurp wf-recorder grim wl-clipboard
+#pacman -S xorg-server-xwayland xorg-xev sway swaylock bemenu swayidle i3status alacritty gammastep ttf-jetbrains-mono ttf-dejavu noto-fonts-emoji brightnessctl
+pacman -S xorg-server xorg-xev i3 i3status i3lock alacritty redshift ttf-jetbrains-mono ttf-dejavu noto-fonts-emoji brightnessctl
+#pacman -S slurp wf-recorder grim wl-clipboard
+# https://gist.github.com/skateman/de4ac914776a5cb767319cf6f98c119e
 pacman -S alsa-utils pulseaudio pulseaudio-alsa vlc feh
 pacman -S man wget curl jq macchanger openssh iproute2 net-tools docker docker-compose
 pacman -S tar zip unzip p7zip unrar
@@ -32,7 +34,7 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 # dotfiles
 rm .ssh -r # FIXME: not on the first run
 rm .bash_profile .bashrc
-mkdir .ssh .config .config/alacritty .config/nvim .config/redshift .config/sway .config/systemd .config/systemd/user
+mkdir .ssh .config .config/alacritty .config/nvim .config/redshift .config/i3 .config/systemd .config/systemd/user
 ruby install_dotfiles.rb
 
 # force a font rescan - https://github.com/alacritty/alacritty/issues/153#issuecomment-630636358

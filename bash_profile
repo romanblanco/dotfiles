@@ -34,5 +34,4 @@ source $HOME/.bashrc
 
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
   startx
-  xrandr --output eDP-1 --mode 1920x1080 --rate 60.01
 fi

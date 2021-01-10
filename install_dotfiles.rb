@@ -12,13 +12,13 @@ def dotfiles
     "gitconfig",
     "gitignore",
     "gitmessage",
-    "config/sway/config",
-    "config/sway/status",
-    "config/sway/lock.sh",
+    "config/i3/config",
+    "config/i3/status",
     "config/systemd/user/redshift.service",
     "ssh/config",
     "spacemacs",
     "tmux.conf",
+    "Xresources"
   ]
 end
 
