@@ -184,10 +184,10 @@ bindsym Print exec grim -g "$(slurp -d)" - | tee ~/tmp/$(date +'%Y-%m-%d-%H%M%S.
 # audio
 bindsym $sup+Up exec amixer set Master 10%+ unmute
 bindsym $sup+Down exec amixer set Master 10%-
-bindsym $sup+m exec $(amixer get Master | grep off > /dev/null && amixer -q set Master unmute) || amixer -q set Master mute
+bindsym $sup+m exec $(amixer -D hw:- get Master | grep off > /dev/null && amixer -D hw:- -q set Master unmute) || amixer -D hw:- -q set Master mute
 bindsym XF86AudioRaiseVolume exec amixer set Master 10%+ unmute
 bindsym XF86AudioLowerVolume exec amixer set Master 10%-
-bindsym XF86AudioMute exec $(amixer get Master | grep off > /dev/null && amixer -q set Master unmute) || amixer -q set Master mute
+bindsym XF86AudioMute $(amixer -D hw:- get Master | grep off > /dev/null && amixer -D hw:- -q set Master unmute) || amixer -D hw:- -q set Master mute
 bindsym XF86AudioMicMute exec amixer set Capture toggle
 bindsym XF86AudioPlay exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
 bindsym XF86AudioNext exec dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next

@@ -216,7 +216,8 @@ systemctl start sshd
 pacman -Syu
 pacman -S xorg-server-xwayland xorg-xev sway swaylock swayidle mako i3status alacritty gammastep ttf-jetbrains-mono ttf-dejavu brightnessctl
 pacman -S slurp wf-recorder grim wl-clipboard
-pacman -S alsa-utils pulseaudio pulseaudio-alsa vlc gqrx feh
+pacman -S alsa-utils vlc gqrx feh
+pacman -S pipewire pipewire-alsa pipewire-pulse xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol # replaces: pulseaudio pulseaudio-alsa
 pacman -S man wget curl rsync syncthing go-ipfs macchanger openssh iproute2 net-tools inetutils dnsutils docker docker-compose
 pacman -S tar zip unzip p7zip unrar
 pacman -S tmux ctags htop kmon bmon tig neovim git emacs ripgrep mc ncdu neofetch kmon tree ruby
