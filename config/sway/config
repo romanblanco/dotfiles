@@ -15,10 +15,6 @@ input 1118:219:Microsoft_Natural___Ergonomic_Keyboard_4000 {
         xkb_options ctrl:nocaps
 }
 
-input 16700:8467:Dell_KB216_Wired_Keyboard {
-        xkb_layout cz
-}
-
 #........
 # Outputs
 #........
@@ -36,8 +32,8 @@ output DP-6 bg '#000000' solid_color
 font pango:JetBrains Mono 12px
 focus_follows_mouse no
 mouse_warping none
+default_border pixel 2
 hide_edge_borders smart
-default_border normal
 
 set $lock ~/.config/sway/lock.sh
 # modifiers
@@ -49,13 +45,15 @@ floating_modifier $mod
 # Workspace screens
 #..................
 
-workspace 1 output DP-6
+# swaymsg -t get_workspaces
+
+workspace 1 output DP-4
 workspace 2 output eDP-1
-workspace 3 output DP-6
-workspace 4 output DP-6
+workspace 3 output DP-5
+workspace 4 output DP-4
 workspace 5 output eDP-1
-workspace 8 output eDP-1
-workspace 9 output DP-6
+workspace 8 output DP-4
+workspace 9 output DP-4
 workspace 10 output eDP-1
 
 #.........
@@ -115,7 +113,7 @@ bindsym $mod+e layout toggle split
 
 # change window border
 bindsym $mod+t border normal
-bindsym $mod+y border pixel
+bindsym $mod+y border pixel 2
 bindsym $mod+u border none
 
 # toggle tiling / floating
@@ -140,20 +138,23 @@ mode "resize" {
 }
 
 # dock toggle
-bindsym $mod+m mode "dock toggle: (d)ock (e)xtended (u)ndock"
-mode "dock toggle: (d)ock (e)xtended (u)ndock" {
-        bindsym d exec swaymsg output eDP-1 disable && swaymsg output DP-6 enable bg '#000000' solid_color && swaymsg output DP-6, mode "default"
-        bindsym e exec swaymsg output eDP-1 enable bg '#000000' solid_color pos 0 0 && swaymsg output DP-6 enable bg '#000000' solid_color pos 1920 0 && swaymsg output DP-6, mode "default"
-        # 0:0          1920:0
-        #  +----------++-----------------+
-        #  | eDP-1    ||                 |
-        #  | 1920x1080||                 |
-        #  |          ||    DP-6         |
-        #  +----------+|    1680x1050    |
-        #              |                 |
-        #              |                 |
-        #              +-----------------+
-        bindsym u exec swaymsg output eDP-1 enable bg '#000000' solid_color && swaymsg output DP-6 disable, mode "default"
+bindsym $mod+m mode "dock toggle: (d)ock (u)ndock"
+mode "dock toggle: (d)ock (u)ndock" {
+        bindsym d exec swaymsg 'output "Unknown 0x0521 0x00000000" enable mode 1920x1080 background "#000000" solid_color position 0 0 transform 0' && \
+                       swaymsg 'output "Acer Technologies K242HL T0FEE0018502" enable mode 1920x1080 background "#000000" solid_color position 1920 0 transform 270' && \
+                       swaymsg 'output "Philips Consumer Electronics Company PHL 223V5 ZV01848008576" enable mode 1920x1080 background "#000000" solid_color position 3000 0 transform 270', mode "default"
+        #  0:0          (0+1920):0   (0+1920+1080):0
+        #  +----------++------------++------------+
+        #  | eDP-1    ||            ||            |
+        #  | 1920x1080||            ||            |
+        #  | 0°       ||  Acer      ||  Philips   |
+        #  +----------+|  1920x1080 ||  1920x1080 |
+        #              |  270°      ||  270°      |
+        #              |            ||            |
+        #              +------------++------------+
+        bindsym u exec swaymsg 'output "Unknown 0x0521 0x00000000" enable bg "#000000" solid_color position 0 0 transform 0' && \
+                       swaymsg 'output "Acer Technologies K242HL T0FEE0018502" disable' && \
+                       swaymsg 'output "Philips Consumer Electronics Company PHL 223V5 ZV01848008576" disable', mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -212,6 +213,8 @@ bindsym XF86Display mode "dock toggle: (d)ock (e)xtended (u)ndock"
 
 bar {
         status_command i3status -c ~/.config/sway/status
+        mode hide
+        modifier Mod4
         bindsym button4 nop
         bindsym button5 nop
         tray_output primary
@@ -232,6 +235,7 @@ for_window [title="Firefox — Sharing Indicator"] floating enable, border none,
 for_window [class="(?i)telegram"] layout tabbed
 for_window [class="Spotify"] border none
 for_window [class="Spotify"] layout tabbed
+for_window [title="Spotify.*"] move window to workspace 5
 for_window [title="Gqrx*"] layout tabbed
 for_window [title=".*KeePassXC"] layout tabbed
 
