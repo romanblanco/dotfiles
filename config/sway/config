@@ -174,7 +174,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+grave move scratchpad
 bindsym $mod+grave scratchpad show
 bindsym $sup+l exec $lock
-bindsym $mod+Return exec WINIT_HIDPI_FACTOR=1 alacritty
+bindsym $mod+Return exec alacritty
 bindsym $mod+Shift+q kill
 bindsym Print exec grim -g "$(slurp -d)" - | tee ~/tmp/$(date +'%Y-%m-%d-%H%M%S.png') | wl-copy
 
@@ -228,11 +228,14 @@ for_window [class="(?i)firefox"] layout tabbed
 for_window [app_id="firefox"] border none
 for_window [app_id="firefox"] layout tabbed
 for_window [window_role="pop-up"] floating enable
+for_window [title="Firefox — Sharing Indicator"] floating enable, border none, move position 0 0
 for_window [class="(?i)telegram"] layout tabbed
 for_window [class="Spotify"] border none
 for_window [class="Spotify"] layout tabbed
 for_window [title="Gqrx*"] layout tabbed
 for_window [title=".*KeePassXC"] layout tabbed
+
+no_focus [title="Firefox — Sharing Indicator"]
 
 assign [title=".*Mozilla*"] → 1
 assign [class="Thunderbird"] → 2

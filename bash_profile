@@ -16,11 +16,12 @@ PATH=$PATH:$GOPATH/bin
 export PATH
 export TERM=screen-256color
 export TERMINAL=alacritty
+export XDG_CURRENT_DESKTOP='sway'
 export PROMPT_COMMAND='history -a'
 export PAGER='less'
 export EDITOR='nvim'
 export VISUAL='nvim'
-export BROWSER='firefox'
+export BROWSER='qutebrowser'
 export LANG=en_US.UTF-8
 export HISTCONTROL=ignoreboth:erasedups
 export HISTSIZE=-1

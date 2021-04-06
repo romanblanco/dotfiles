@@ -220,8 +220,10 @@ pacman -S alsa-utils pulseaudio pulseaudio-alsa vlc gqrx feh
 pacman -S man wget curl rsync syncthing go-ipfs macchanger openssh iproute2 net-tools inetutils dnsutils docker docker-compose
 pacman -S tar zip unzip p7zip unrar
 pacman -S tmux ctags htop kmon bmon tig neovim git emacs ripgrep mc ncdu neofetch kmon tree ruby
-pacman -S firefox firefox-developer-edition chromium keepassxc okular libreoffice
+pacman -S qutebrowser firefox firefox-developer-edition keepassxc okular libreoffice
 pacman -S ntfs-3g xfsprogs
+
+# xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
 
 systemctl enable docker
 systemctl start docker
