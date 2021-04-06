@@ -79,6 +79,7 @@
     map <silent><C-g> :TagbarToggle<CR>
     inoremap jj <ESC>
     nnoremap <silent><leader>u :GundoToggle<CR>
+    tnoremap <ESC> <C-\><C-n>
 " }}}
 
 " PLUGINS {{{
