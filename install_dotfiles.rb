@@ -23,6 +23,7 @@ def dotfiles
     "config/systemd/user/finance.service",
     "config/gqrx/bookmarks.csv",
     "config/gqrx/default.conf",
+    "config/qutebrowser/config.py",
     "ssh/config",
     "tmux.conf",
     "Xresources",
