@@ -220,8 +220,9 @@ pacman -S alsa-utils vlc gqrx feh
 pacman -S pipewire pipewire-alsa pipewire-pulse xdg-desktop-portal xdg-desktop-portal-wlr pavucontrol # replaces: pulseaudio pulseaudio-alsa
 pacman -S man wget curl rsync syncthing go-ipfs macchanger openssh iproute2 net-tools inetutils dnsutils docker docker-compose
 pacman -S tar zip unzip p7zip unrar
-pacman -S tmux ctags htop kmon bmon tig neovim git emacs ripgrep mc ncdu neofetch kmon tree ruby
+pacman -S tmux ctags htop kmon bmon tig neovim git emacs ripgrep jq mc ncdu neofetch kmon tree ruby
 pacman -S qutebrowser firefox firefox-developer-edition keepassxc okular libreoffice
+pacman -S texlive-core texlive-latexextra # texlive-latexextra provides packages (i.e. enumitem)
 pacman -S ntfs-3g xfsprogs
 
 # xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
@@ -261,47 +262,5 @@ pacman -S imagescan # if using imagescan run command `utsushi` to scan
 
 pacman -S iscan xsane
 #| as user install https://aur.archlinux.org/imagescan-plugin-networkscan.git
-
-# Install Apache
-# - https://wiki.archlinux.org/index.php/Apache_HTTP_Server
-# ==============
-
-pacman -S apache
-
-systemctl enable httpd.service
-systemctl start httpd.service
-
-# Install Cgit
-# - https://wiki.archlinux.org/index.php/Cgit#Installation
-# ============
-
-pacman -S cgit
-# update /etc/httpd/conf/httpd.conf:
-# Include conf/extra/cgit.conf
-# LoadModule cgi_module modules/mod_cgi.so
-
-# update /etc/httpd/conf/extra/cgit.conf:
-# ScriptAlias /git "/usr/lib/cgit/cgit.cgi/"
-# Alias /git-css "/usr/share/webapps/cgit/"
-# <Directory "/usr/share/webapps/cgit/">
-#    AllowOverride None
-#    Options None
-#    Require all granted
-# </Directory>
-# <Directory "/usr/lib/cgit/">
-#    AllowOverride None
-#    Options ExecCGI FollowSymlinks
-#    Require all granted
-# </Directory>
-
-# create /etc/cgitrc:
-# css=/git-css/cgit.css
-# logo=/git-css/cgit.png
-# robots=noindex, nofollow
-# virtual-root=/git
-# include=/etc/cgitrepos
-
-# create /etc/cgitrepos:
-# scan-path=/srv/git/
 
 # https://github.com/romanblanco/dotfiles

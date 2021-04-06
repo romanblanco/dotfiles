@@ -43,16 +43,28 @@ chmod 600 .ssh/config
 
 cd bin
 git clone https://aur.archlinux.org/epson-inkjet-printer-escpr.git
+echo "cd ~/bin/epson-inkjet-printer-escpr/"
+echo "makepkg -isr"
 git clone https://aur.archlinux.org/imagescan-plugin-networkscan.git
+echo "cd ~/bin/imagescan-plugin-networkscan/"
+echo "makepkg -isr"
 git clone https://aur.archlinux.org/spotify.git
-cd epson-inkjet-printer-escpr/
-makepkg -isr
-cd ..
-cd imagescan-plugin-networkscan/
-makepkg -isr
-cd ..
-cd spotify
-makepkg -isr
-cd ..
+echo "cd ~/bin/spotify"
+echo "makepkg -isr"
+git clone https://aur.archlinux.org/duf.git
+echo "cd ~/bin/duf"
+echo "makepkg -isr"
+git clone https://aur.archlinux.org/glow.git
+echo "cd ~/bin/glow"
+echo "makepkg -isr"
+git clone https://aur.archlinux.org/nb.git
+echo "cd ~/bin/nb"
+echo "makepkg -isr"
+git clone https://aur.archlinux.org/dog-dns.git
+echo "cd ~/bin/dog-dns"
+echo "makepkg -isr"
+git clone https://aur.archlinux.org/glow.git # markdown
+echo "cd ~/bin/glow"
+echo "makepkg -isr"
 
 exit 0
